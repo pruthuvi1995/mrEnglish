@@ -68,7 +68,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
       if (_subscribeMode == SubscribeMode.PinVerify) {
         bool verifyPin = await _verifyPin(_subscribeData['pinNo']);
         if (verifyPin) {
-          Provider.of<Auth>(context, listen: false).updateSubscription();
+          // Provider.of<Auth>(context, listen: false).updateSubscription();
           setState(() {});
           final url = 'https://mrenglish.tk/api/v1/auth/updateDetails';
           await http.put(
@@ -172,26 +172,19 @@ class _SubscribeFormState extends State<SubscribeForm> {
       );
 
       final responseData = json.decode(response.body);
-      if (responseData['statusDetail'] != 'SUCCESS') {
-        throw HttpException(responseData['error']);
+      if (responseData['data']['statusCode'] != 'S1000') {
+        throw HttpException(responseData['data']['statusDetail']);
       }
-      _referenceNo = responseData['referenceNo'];
-
-      // if (_registerMode == RegisterMode.PinVerify) {
-      //   await Provider.of<Auth>(context, listen: false).signup(
-      //       _registerData['firstName'],
-      //       _registerData['lastName'],
-      //       _registerData['nICNo'],
-      //       _registerData['password'],
-      //       _registerData['phoneNo']);
-      // }
+      _referenceNo = responseData['data']['referenceNo'];
     } on HttpException catch (error) {
-      // if (error.toString().contains('Duplicate field value entered')) {
-      //   errorMessage = 'ඔබ ලබා දුන් ජාතික හැදුනුම්පත් අංකය භාවිතා කොට ඇත.';
-      // } else {
-      //   errorMessage = 'Register වීම අසාර්ථකයි.';
-      // }
-      // _showErrorDialog(errorMessage);
+      if (error.toString().contains('Duplicate field value entered')) {
+        errorMessage = 'ඔබට හිමි ඉල්ලීම් වාර ගණන අවසන්. පසුව උත්සහා කරන්න.';
+      } else if (error.toString().contains('user already registered')) {
+        errorMessage = 'ඔබේ දුරකථන අංකයෙන් දැනටමත් සේවාව ලබා ගනී.';
+      } else {
+        errorMessage = 'Subscribe වීම අසාර්ථකයි.';
+      }
+      _showErrorDialog(errorMessage);
     } catch (error) {
       var errorMessage = 'ඔබව මේ මොහොතේ හඳුනාගත නොහැක. පසුව උත්සහා කරන්න.';
       _showErrorDialog(errorMessage);
@@ -227,7 +220,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
         throw HttpException(responseData['error']);
       }
       _telNo = (responseData['subscriberId']);
-
+      await Provider.of<Auth>(context, listen: false).updatePhoneNumber(_telNo);
       // if (_registerMode == RegisterMode.PinVerify) {
       //   await Provider.of<Auth>(context, listen: false).signup(
       //       _registerData['firstName'],
@@ -323,10 +316,10 @@ class _SubscribeFormState extends State<SubscribeForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: (value) {
-        if (value.isEmpty || value.length < 10) {
+        if (value.isEmpty || value.length < 9) {
           return 'Input the phone number';
         }
-        if (value[1] != '7' || value[2] == '1' || value[2] == '0') {
+        if (value[0] != '7' || value[1] == '1' || value[1] == '0') {
           return 'Input a Dialog, Hutch or Airtel phone number';
         }
       },

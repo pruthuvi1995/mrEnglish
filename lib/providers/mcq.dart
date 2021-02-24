@@ -5,6 +5,7 @@ class Mcq {
   final String qText;
   final List answers;
   final String correctAnswer;
+  final String review;
   String givenAnswer;
   double mark;
 
@@ -13,6 +14,7 @@ class Mcq {
       @required this.qText,
       @required this.answers,
       @required this.correctAnswer,
+      @required this.review,
       this.givenAnswer = '',
       this.mark = 0});
 }

@@ -4,8 +4,10 @@ import '../size_config.dart';
 class Review extends StatelessWidget {
   final bool isCorrect;
   final String correctAnswer;
+  final String review;
+  final String givenAnswer;
 
-  Review(this.isCorrect, this.correctAnswer);
+  Review(this.isCorrect, this.correctAnswer, this.review, this.givenAnswer);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,21 @@ class Review extends StatelessWidget {
                     color: Color(0xff1b5e20)),
               ),
               Text(
-                'Your answer is correct!',
+                'Your given answer is \"$givenAnswer\".',
+                style: TextStyle(
+                  fontSize: getProportionateScreenHeight(18),
+                  color: Color(0xff1b5e20),
+                ),
+              ),
+              Text(
+                'It is correct.',
+                style: TextStyle(
+                  fontSize: getProportionateScreenHeight(18),
+                  color: Color(0xff1b5e20),
+                ),
+              ),
+              Text(
+                review,
                 style: TextStyle(
                   fontSize: getProportionateScreenHeight(18),
                   color: Color(0xff1b5e20),
@@ -52,14 +68,28 @@ class Review extends StatelessWidget {
             width: double.infinity,
             child: Column(children: <Widget>[
               Text(
-                'Your answer is wrong!',
+                'Your given answer is \"$givenAnswer\".',
                 style: TextStyle(
                   fontSize: getProportionateScreenHeight(18),
                   color: Color(0xffb71c1c),
                 ),
               ),
               Text(
-                '$correctAnswer',
+                'It is wrong.',
+                style: TextStyle(
+                  fontSize: getProportionateScreenHeight(18),
+                  color: Color(0xffb71c1c),
+                ),
+              ),
+              Text(
+                'Correct answer: $correctAnswer',
+                style: TextStyle(
+                  fontSize: getProportionateScreenHeight(18),
+                  color: Color(0xffb71c1c),
+                ),
+              ),
+              Text(
+                review,
                 style: TextStyle(
                   fontSize: getProportionateScreenHeight(18),
                   color: Color(0xffb71c1c),

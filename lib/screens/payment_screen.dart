@@ -58,37 +58,98 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Navigator.of(context).popAndPushNamed(routeName);
   }
 
-  Future<void> updateYear(context, String id, String token, String userId,
-      String routeName, String yearDetailsId, Year year) async {
+  Future<void> updateYear(
+      context,
+      String id,
+      String token,
+      String userId,
+      String routeName,
+      String yearDetailsId,
+      Year year,
+      String amount,
+      String phoneNo) async {
+    String data;
     setState(() {
       _isLoading = true;
     });
-    final url1 = 'https://mrenglish.tk/api/v1/yearDetails/$userId/$id';
-
-    var today = new DateTime.now();
-    var activeYear =
-        today.add(new Duration(days: 7)).toString().substring(0, 10);
-    print(activeYear);
-
+    final url = 'https://mrenglish.tk/api/v1/dayDetails/pay';
     try {
-      await http.post(
-        url1,
+      final response = await http.post(
+        url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          HttpHeaders.authorizationHeader: "Bearer $token",
         },
         body: jsonEncode(
           {
-            'activeYear': activeYear,
+            'phoneNo': phoneNo,
+            'amount': amount,
           },
         ),
       );
+      final responseData = json.decode(response.body);
+      data = responseData['data']['statusDetail'];
     } catch (error) {
       print(error);
       throw (error);
     }
 
-    Navigator.of(context).popAndPushNamed(routeName);
+    if (data == "Request was successfully processed.") {
+      final url1 = 'https://mrenglish.tk/api/v1/yearDetails/$userId/$id';
+
+      var today = new DateTime.now();
+      var activeYear =
+          today.add(new Duration(days: 7)).toString().substring(0, 10);
+      print(activeYear);
+
+      try {
+        await http.post(
+          url1,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeYear': activeYear,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else {
+      _showErrorDialog(data);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  void _showErrorDialog(String message) {
+    if (message == 'Insufficient balance.') {
+      message = "ඔබේ දුරකථන අංකයේ ප්‍රමාණවත් මුදලක් නොමැත.";
+    } else {
+      message = 'පසුව උත්සහා කරන්න.';
+    }
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Error 1ක් තියනවා.'),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+                // Navigator.pushNamed(context, SignInScreen.routeName);
+              },
+              child: Text('OK'))
+        ],
+      ),
+    );
   }
 
   @override
@@ -99,6 +160,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Day loadedDay;
     Year loadedYear;
     final userId = Provider.of<Auth>(context, listen: false).userId;
+    final phoneNo = Provider.of<Auth>(context, listen: false).phoneNo;
 
     if (items[1] == 'day') {
       loadedDay = Provider.of<Days>(context, listen: false).findByID(id);
@@ -247,6 +309,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     YearsOverviewScreen.routeName,
                                     loadedYear.yearDetailsId,
                                     loadedYear,
+                                    amount,
+                                    phoneNo,
                                   );
                               },
                               child: Container(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../models/http_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -94,6 +95,7 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String nICNo, String password) async {
     const url = 'https://mrenglish.tk/api/v1/auth/login';
+    const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     try {
       final response = await http.post(
         url,
@@ -107,20 +109,42 @@ class Auth with ChangeNotifier {
           },
         ),
       );
+
       final responseData = json.decode(response.body);
+
       if (!responseData['success']) {
         throw HttpException(responseData['error']);
       }
       _token = responseData['token'];
       _expiryDate = DateTime.parse(responseData['options']['expires']);
       userId = responseData['user']['_id'];
-      isSubscribed = responseData['user']['isSubscribed'];
       phoneNo = responseData['user']['phoneNo'];
       firstName = responseData['user']['firstName'];
       lastName = responseData['user']['lastName'];
       nicNo = responseData['user']['NICNo'];
       mark = double.parse(responseData['user']['mark'].toString());
       noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
+
+      final response1 = await http.post(
+        url1,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          {
+            'phoneNo': phoneNo,
+          },
+        ),
+      );
+
+      final response1Data = json.decode(response1.body);
+      final data = response1Data['data']['statusCode'];
+
+      if (data == 'S1000') {
+        isSubscribed = true;
+      } else {
+        isSubscribed = false;
+      }
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
@@ -146,6 +170,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<bool> tryAutoLogin() async {
+    const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
       return false;
@@ -158,9 +183,10 @@ class Auth with ChangeNotifier {
     if (expiryDate.isBefore(DateTime.now())) {
       return false;
     }
+
     _token = extractedUserData['token'];
     userId = extractedUserData['userId'];
-    isSubscribed = extractedUserData['isSubscribed'];
+
     _expiryDate = expiryDate;
     phoneNo = extractedUserData['phoneNo'];
     firstName = extractedUserData['firstName'];
@@ -168,6 +194,27 @@ class Auth with ChangeNotifier {
     nicNo = extractedUserData['nicNo'];
     mark = extractedUserData['mark'];
     noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
+
+    final response1 = await http.post(
+      url1,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        {
+          'phoneNo': phoneNo,
+        },
+      ),
+    );
+
+    final response1Data = json.decode(response1.body);
+    final data = response1Data['data']['statusCode'];
+
+    if (data == 'S1000') {
+      isSubscribed = true;
+    } else {
+      isSubscribed = false;
+    }
 
     notifyListeners();
     _autoLogout();
@@ -196,6 +243,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> updatePhoneNumber(String phoneNo) async {
+    const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     final prefs = await SharedPreferences.getInstance();
 
     var extractedUserData =
@@ -203,12 +251,33 @@ class Auth with ChangeNotifier {
 
     extractedUserData['phoneNo'] = phoneNo;
 
+    final response1 = await http.post(
+      url1,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        {
+          'phoneNo': phoneNo,
+        },
+      ),
+    );
+
+    final response1Data = json.decode(response1.body);
+    final data = response1Data['data']['statusCode'];
+
+    if (data == 'S1000') {
+      isSubscribed = true;
+    } else {
+      isSubscribed = false;
+    }
+
     final userData = json.encode(
       {
         'token': extractedUserData['token'],
         'userId': extractedUserData['userId'],
         'expiryDate': extractedUserData['expiryDate'],
-        'isSubscribed': extractedUserData['isSubscribed'],
+        'isSubscribed': isSubscribed,
         'phoneNo': extractedUserData['phoneNo'],
         'firstName': extractedUserData['firstName'],
         'lastName': extractedUserData['lastName'],
@@ -222,49 +291,70 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateSubscription() async {
-    isSubscribed = !isSubscribed;
-    final prefs = await SharedPreferences.getInstance();
+  // Future<void> updateSubscription() async {
+  //   isSubscribed = !isSubscribed;
+  //   final prefs = await SharedPreferences.getInstance();
 
-    var extractedUserData =
-        json.decode(prefs.getString('userData')) as Map<String, Object>;
+  //   var extractedUserData =
+  //       json.decode(prefs.getString('userData')) as Map<String, Object>;
 
-    extractedUserData['isSubscribed'] = isSubscribed;
+  //   extractedUserData['isSubscribed'] = isSubscribed;
 
-    final userData = json.encode(
-      {
-        'token': extractedUserData['token'],
-        'userId': extractedUserData['userId'],
-        'expiryDate': extractedUserData['expiryDate'],
-        'isSubscribed': extractedUserData['isSubscribed'],
-        'phoneNo': extractedUserData['phoneNo'],
-        'firstName': extractedUserData['firstName'],
-        'lastName': extractedUserData['lastName'],
-        'nicNo': extractedUserData['nicNo'],
-        'mark': extractedUserData['mark'],
-        'noOfFinishedLessons': extractedUserData['noOfFinishedLessons'],
-      },
-    );
-    prefs.setString('userData', userData);
+  //   final userData = json.encode(
+  //     {
+  //       'token': extractedUserData['token'],
+  //       'userId': extractedUserData['userId'],
+  //       'expiryDate': extractedUserData['expiryDate'],
+  //       'isSubscribed': extractedUserData['isSubscribed'],
+  //       'phoneNo': extractedUserData['phoneNo'],
+  //       'firstName': extractedUserData['firstName'],
+  //       'lastName': extractedUserData['lastName'],
+  //       'nicNo': extractedUserData['nicNo'],
+  //       'mark': extractedUserData['mark'],
+  //       'noOfFinishedLessons': extractedUserData['noOfFinishedLessons'],
+  //     },
+  //   );
+  //   prefs.setString('userData', userData);
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 
   Future<void> updateMark(double mark) async {
     mark = mark * 2;
+    const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     final prefs = await SharedPreferences.getInstance();
 
     var extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
     extractedUserData['mark'] = mark;
+    final response1 = await http.post(
+      url1,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        {
+          'phoneNo': extractedUserData['phoneNo'],
+        },
+      ),
+    );
+
+    final response1Data = json.decode(response1.body);
+    final data = response1Data['data']['statusCode'];
+
+    if (data == 'S1000') {
+      isSubscribed = true;
+    } else {
+      isSubscribed = false;
+    }
 
     final userData = json.encode(
       {
         'token': extractedUserData['token'],
         'userId': extractedUserData['userId'],
         'expiryDate': extractedUserData['expiryDate'],
-        'isSubscribed': extractedUserData['isSubscribed'],
+        'isSubscribed': isSubscribed,
         'phoneNo': extractedUserData['phoneNo'],
         'firstName': extractedUserData['firstName'],
         'lastName': extractedUserData['lastName'],
@@ -279,14 +369,36 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> getMe() async {
+    const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     final prefs = await SharedPreferences.getInstance();
 
     final extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
+    final response1 = await http.post(
+      url1,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        {
+          'phoneNo': extractedUserData['phoneNo'],
+        },
+      ),
+    );
+
+    final response1Data = json.decode(response1.body);
+    final data = response1Data['data']['statusCode'];
+
+    if (data == 'S1000') {
+      isSubscribed = true;
+    } else {
+      isSubscribed = false;
+    }
+
     _token = extractedUserData['token'];
     userId = extractedUserData['userId'];
-    isSubscribed = extractedUserData['isSubscribed'];
+    isSubscribed = isSubscribed;
     phoneNo = extractedUserData['phoneNo'];
     firstName = extractedUserData['firstName'];
     lastName = extractedUserData['lastName'];

@@ -30,7 +30,7 @@ class _BodyUnsubscribeScreenState extends State<BodyUnsubscribeScreen> {
     setState(() {
       _isLoading = true;
     });
-    Provider.of<Auth>(context, listen: false).updateSubscription();
+    // Provider.of<Auth>(context, listen: false).updateSubscription();
     setState(() {});
     final url = 'https://mrenglish.tk/api/v1/auth/updateDetails';
     try {

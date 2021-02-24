@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:mr_english/size_config.dart';
+import '../size_config.dart';
 
 import '../providers/day.dart';
 import '../providers/days.dart';
@@ -306,6 +306,7 @@ class _McqPaperState extends State<McqPaper> {
           qText: element['qText'],
           answers: element['answers'],
           correctAnswer: element['correctAnswer'],
+          review: element['review'],
           mark: element['mark'],
         ));
       });
@@ -317,6 +318,7 @@ class _McqPaperState extends State<McqPaper> {
           qText: element['qText'],
           answers: element['answers'],
           correctAnswer: element['correctAnswer'],
+          review: element['review'],
           mark: element['mark'],
         ));
       });
@@ -343,23 +345,28 @@ class _McqPaperState extends State<McqPaper> {
                       ),
                       Container(
                         height: getProportionateScreenHeight(430),
-                        child: Column(
-                          children: <Widget>[
-                            _showAnswer
-                                ? Review(
-                                    isCorrect(), mcqQ[_qIndex].correctAnswer)
-                                : Container(
-                                    child: mcqQ[_qIndex].type == 'TnF'
-                                        ? Text('පිළිතුර තෝරන්න.')
-                                        : Text(
-                                            'හිස්තැනට වඩාත්ම ගැළපෙන  පිළිතුර තෝරන්න.')),
-                            Question(mcqQ[_qIndex].qText),
-                            ...(mcqQ[_qIndex].answers as List).map(
-                              (answer) {
-                                return Answer(answer, _clickAnswer);
-                              },
-                            ).toList()
-                          ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              _showAnswer
+                                  ? Review(
+                                      isCorrect(),
+                                      mcqQ[_qIndex].correctAnswer,
+                                      mcqQ[_qIndex].review,
+                                      mcqQ[_qIndex].givenAnswer,
+                                    )
+                                  : Container(
+                                      child: mcqQ[_qIndex].type == 'TF'
+                                          ? Text('හරිද වැරදිද යන්න තෝරන්න.')
+                                          : Text('නිවැරිදි පිළිතුර තෝරන්න.')),
+                              Question(mcqQ[_qIndex].qText),
+                              ...(mcqQ[_qIndex].answers as List).map(
+                                (answer) {
+                                  return Answer(answer, _clickAnswer);
+                                },
+                              ).toList()
+                            ],
+                          ),
                         ),
                       ),
                     ],
