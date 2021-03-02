@@ -6,7 +6,7 @@ class Lesson {
   final String dayId;
   final String description;
   final String lesson;
-  final String imageUrl;
+  final String lessonNo;
   final List mcqTrail;
   final List mcqLesson;
   final String videoURL;
@@ -17,7 +17,7 @@ class Lesson {
     @required this.dayId,
     @required this.description,
     @required this.lesson,
-    @required this.imageUrl,
+    @required this.lessonNo,
     @required this.mcqTrail,
     @required this.mcqLesson,
     @required this.videoURL,

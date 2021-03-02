@@ -186,7 +186,7 @@ class _BodyUnsubscribeScreenState extends State<BodyUnsubscribeScreen> {
                         : Column(
                             children: [
                               Text(
-                                'Unsubscribe වීමේ ක්‍රියාවලිය සම්පුර්ණවීම සඳහා ඔබ subscribe වීම සඳහා ලබා දුන් දුරකථනයෙන්  ++++++++ ලෙස type කර ++++++ට message 1ක් දමන්න.',
+                                'Unsubscribe වීමේ ක්‍රියාවලිය සම්පුර්ණවීම සඳහා ඔබ subscribe වීම සඳහා ලබා දුන් දුරකථනයෙන්  unreg mrenglish ලෙස type කර 77177 ට message 1ක් දමන්න.',
                                 style: TextStyle(
                                   color: kPrimaryColor,
                                   fontSize: getProportionateScreenWidth(17),
@@ -222,7 +222,7 @@ class _BodyUnsubscribeScreenState extends State<BodyUnsubscribeScreen> {
                                     'Ok',
                                     style: TextStyle(
                                         fontSize:
-                                            getProportionateScreenHeight(15),
+                                            getProportionateScreenHeight(25),
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center,

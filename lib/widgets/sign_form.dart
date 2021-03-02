@@ -86,7 +86,7 @@ class _SignFormState extends State<SignForm> {
         child: Column(children: <Widget>[
           buildNICNoFormField(),
           SizedBox(
-            height: getProportionateScreenHeight(30),
+            height: getProportionateScreenHeight(25),
           ),
           buildPasswordFormField(),
           SizedBox(
@@ -102,9 +102,7 @@ class _SignFormState extends State<SignForm> {
           //     style: TextStyle(decoration: TextDecoration.underline),
           //   ),
           // ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
+
           FormError(errors: errors),
           SizedBox(
             height: getProportionateScreenHeight(20),
@@ -124,8 +122,8 @@ class _SignFormState extends State<SignForm> {
       keyboardType: TextInputType.name,
       onSaved: (value) => _loginData['nICNo'] = value,
       decoration: InputDecoration(
-        labelText: 'NIC no',
-        hintText: 'Enter your NIC no',
+        labelText: 'NIC no ( ජාතික හැඳුනුම්පත් අංකය )',
+        hintText: 'Enter the NIC no',
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: (value) {
@@ -148,7 +146,7 @@ class _SignFormState extends State<SignForm> {
       onSaved: (value) => _loginData['password'] = value,
       decoration: InputDecoration(
         labelText: 'password',
-        hintText: 'Enter your password',
+        hintText: 'Enter the password',
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
     );

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/http_exception.dart';
 import '../providers/auth.dart';
 
@@ -78,23 +80,26 @@ class _SubscribeFormState extends State<SubscribeForm> {
               HttpHeaders.authorizationHeader: "Bearer ${details[2]}",
             },
             body: jsonEncode(
-              {'isSubscribed': !details[1]},
+              {
+                'isSubscribed': true,
+                'phoneNo': _telNo,
+              },
             ),
           );
 
           await Provider.of<Auth>(context, listen: false)
               .updatePhoneNumber(_telNo);
           setState(() {});
-          await http.put(
-            url,
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-              HttpHeaders.authorizationHeader: "Bearer ${details[2]}",
-            },
-            body: jsonEncode(
-              {'phoneNumber': _telNo},
-            ),
-          );
+          // await http.put(
+          //   url,
+          //   headers: <String, String>{
+          //     'Content-Type': 'application/json; charset=UTF-8',
+          //     HttpHeaders.authorizationHeader: "Bearer ${details[2]}",
+          //   },
+          //   body: jsonEncode(
+          //     {'phoneNumber': _telNo},
+          //   ),
+          // );
         }
       } else if (_subscribeMode == SubscribeMode.PhoneNo) {
         print(_subscribeMode);
@@ -201,6 +206,13 @@ class _SubscribeFormState extends State<SubscribeForm> {
     //   _isLoading = true;
     // });
     const url = 'https://mrenglish.tk/api/v1/dayDetails/verify';
+    const url2 = 'https://mrenglish.tk/api/v1/auth/updateDetails';
+
+    final prefs = await SharedPreferences.getInstance();
+    final extractedUserData =
+        json.decode(prefs.getString('userData')) as Map<String, Object>;
+    String _token = extractedUserData['token'];
+
     Map<String, String> data = {
       "referenceNo": _referenceNo,
       "otp": pin,
@@ -216,26 +228,33 @@ class _SubscribeFormState extends State<SubscribeForm> {
       );
 
       final responseData = json.decode(response.body);
-      if (responseData['statusDetail'] != 'SUCCESS') {
-        throw HttpException(responseData['error']);
+
+      if (responseData['data']['statusCode'] != 'S1000') {
+        throw HttpException(responseData['statusDetail']);
       }
-      _telNo = (responseData['subscriberId']);
-      await Provider.of<Auth>(context, listen: false).updatePhoneNumber(_telNo);
-      // if (_registerMode == RegisterMode.PinVerify) {
-      //   await Provider.of<Auth>(context, listen: false).signup(
-      //       _registerData['firstName'],
-      //       _registerData['lastName'],
-      //       _registerData['nICNo'],
-      //       _registerData['password'],
-      //       _registerData['phoneNo']);
-      // }
+
+      _telNo = (responseData['data']['subscriberId']);
+
+      // await Provider.of<Auth>(context, listen: false).updatePhoneNumber(_telNo);
+      // print('5555555555555555555');
+      // await http.put(
+      //   url2,
+      //   headers: <String, String>{
+      //     'Content-Type': 'application/json; charset=UTF-8',
+      //     HttpHeaders.authorizationHeader: "Bearer $_token",
+      //   },
+      //   body: jsonEncode(
+      //     {'phoneNo': _telNo},
+      //   ),
+      // );
+      // print('6666666666666666');
     } on HttpException catch (error) {
       // if (error.toString().contains('Duplicate field value entered')) {
       //   errorMessage = 'ඔබ ලබා දුන් ජාතික හැදුනුම්පත් අංකය භාවිතා කොට ඇත.';
       // } else {
       //   errorMessage = 'Register වීම අසාර්ථකයි.';
       // }
-      // _showErrorDialog(errorMessage);
+      _showErrorDialog(error.toString());
       return false;
     } catch (error) {
       var errorMessage = 'ඔබව මේ මොහොතේ හඳුනාගත නොහැක. පසුව උත්සහා කරන්න.';
@@ -316,10 +335,10 @@ class _SubscribeFormState extends State<SubscribeForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: (value) {
-        if (value.isEmpty || value.length < 9) {
+        if (value.isEmpty || value.length < 10 || value[0] != '0') {
           return 'Input the phone number';
         }
-        if (value[0] != '7' || value[1] == '1' || value[1] == '0') {
+        if (value[1] != '7' || value[2] == '1' || value[2] == '0') {
           return 'Input a Dialog, Hutch or Airtel phone number';
         }
       },

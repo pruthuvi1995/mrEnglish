@@ -13,25 +13,30 @@ class BodySignInScreen extends StatelessWidget {
         width: double.infinity,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
+            horizontal: getProportionateScreenHeight(20),
           ),
           child: SingleChildScrollView(
             child: Column(children: <Widget>[
-              SizedBox(height: SizeConfig.screenHeight * 0.05),
+              SizedBox(
+                height: getProportionateScreenHeight(30),
+              ),
               Text(
                 'Welcome Back',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: getProportionateScreenWidth(28),
+                  fontSize: getProportionateScreenHeight(40),
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 'ඔබේ ජාතික හැඳුනුම්පත් අංකය හා password එක ඇතුළත් කර Login වන්න.',
                 textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: kPrimaryColor,
+                  fontSize: getProportionateScreenHeight(20),
+                ),
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.08),
-              SizedBox(height: SizeConfig.screenHeight * 0.08),
+              SizedBox(height: getProportionateScreenHeight(70)),
               SignForm(),
               SizedBox(height: getProportionateScreenHeight(20)),
               NoAccountText()

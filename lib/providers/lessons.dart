@@ -35,13 +35,14 @@ class Lessons with ChangeNotifier {
             description: lessonData['description'],
             lesson: lessonData['lesson'],
             dayId: lessonData['day']['_id'],
-            imageUrl: lessonData['imageURL'],
+            lessonNo: lessonData['imageURL'],
             mcqTrail: lessonData['mcqTrail'],
             mcqLesson: lessonData['mcqLesson'],
             videoURL: lessonData['videoURL']));
       });
 
       _items = loadedLessons;
+      _items.sort((a, b) => a.lessonNo.compareTo(b.lessonNo));
       // print(_items);
       notifyListeners();
     } catch (error) {

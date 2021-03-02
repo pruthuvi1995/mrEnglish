@@ -63,118 +63,120 @@ class _PaperScreenState extends State<PaperScreen> {
           : Container(
               width: double.infinity,
               // height: height * .4,
-              child: Column(children: [
-                Text(
-                  'sdfdsafdsfsdfsdf',
-                  style: TextStyle(
-                    fontSize: getProportionateScreenHeight(20),
-                    fontWeight: FontWeight.bold,
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  Text(
+                    loadedPaper.title,
+                    style: TextStyle(
+                      fontSize: getProportionateScreenHeight(20),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Container(
-                  height: getProportionateScreenHeight(675),
-                  child: SingleChildScrollView(
-                    child: Column(children: <Widget>[
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question01,
-                          loadedPaper.descriptionQ01,
-                          '1st paper - 1st question',
-                          '01'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question02,
-                          loadedPaper.descriptionQ02,
-                          '1st paper - 2nd question',
-                          '02'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question03,
-                          loadedPaper.descriptionQ03,
-                          '1st paper - 3rd question',
-                          '03'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question04,
-                          loadedPaper.descriptionQ04,
-                          '1st paper - 4th question',
-                          '04'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question05,
-                          loadedPaper.descriptionQ05,
-                          '1st paper - 5th question',
-                          '05'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question06,
-                          loadedPaper.descriptionQ06,
-                          '1st paper - 6th question',
-                          '06'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question07,
-                          loadedPaper.descriptionQ07,
-                          '1st paper - 7th question',
-                          '07'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question08,
-                          loadedPaper.descriptionQ08,
-                          '1st paper - 8th question',
-                          '08'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question09,
-                          loadedPaper.descriptionQ09,
-                          '2nd paper - 1st question',
-                          '09'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question10,
-                          loadedPaper.descriptionQ10,
-                          '2nd paper - 2nd question',
-                          '10'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question11,
-                          loadedPaper.descriptionQ11,
-                          '2nd paper - 3rd question',
-                          '11'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question12,
-                          loadedPaper.descriptionQ12,
-                          '2nd paper - 4th question',
-                          '12'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question13,
-                          loadedPaper.descriptionQ13,
-                          '2nd paper - 5th question',
-                          '13'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question14,
-                          loadedPaper.descriptionQ14,
-                          '2nd paper - 6th question',
-                          '14'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question15,
-                          loadedPaper.descriptionQ15,
-                          '2nd paper - 7th question',
-                          '15'),
-                      buildGestureDetector(
-                          context,
-                          loadedPaper.question15,
-                          loadedPaper.descriptionQ16,
-                          '2nd paper - 8th question',
-                          '16'),
-                    ]),
+                  Container(
+                    height: getProportionateScreenHeight(675),
+                    child: SingleChildScrollView(
+                      child: Column(children: <Widget>[
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question01,
+                            loadedPaper.descriptionQ01,
+                            '1st paper - 1st question',
+                            '01'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question02,
+                            loadedPaper.descriptionQ02,
+                            '1st paper - 2nd question',
+                            '02'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question03,
+                            loadedPaper.descriptionQ03,
+                            '1st paper - 3rd question',
+                            '03'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question04,
+                            loadedPaper.descriptionQ04,
+                            '1st paper - 4th question',
+                            '04'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question05,
+                            loadedPaper.descriptionQ05,
+                            '1st paper - 5th question',
+                            '05'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question06,
+                            loadedPaper.descriptionQ06,
+                            '1st paper - 6th question',
+                            '06'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question07,
+                            loadedPaper.descriptionQ07,
+                            '1st paper - 7th question',
+                            '07'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question08,
+                            loadedPaper.descriptionQ08,
+                            '1st paper - 8th question',
+                            '08'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question09,
+                            loadedPaper.descriptionQ09,
+                            '2nd paper - 1st question',
+                            '09'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question10,
+                            loadedPaper.descriptionQ10,
+                            '2nd paper - 2nd question',
+                            '10'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question11,
+                            loadedPaper.descriptionQ11,
+                            '2nd paper - 3rd question',
+                            '11'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question12,
+                            loadedPaper.descriptionQ12,
+                            '2nd paper - 4th question',
+                            '12'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question13,
+                            loadedPaper.descriptionQ13,
+                            '2nd paper - 5th question',
+                            '13'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question14,
+                            loadedPaper.descriptionQ14,
+                            '2nd paper - 6th question',
+                            '14'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question15,
+                            loadedPaper.descriptionQ15,
+                            '2nd paper - 7th question',
+                            '15'),
+                        buildGestureDetector(
+                            context,
+                            loadedPaper.question15,
+                            loadedPaper.descriptionQ16,
+                            '2nd paper - 8th question',
+                            '16'),
+                      ]),
+                    ),
                   ),
-                ),
-              ]),
+                ]),
+              ),
             ),
     );
   }
@@ -223,11 +225,12 @@ class _PaperScreenState extends State<PaperScreen> {
               Container(
                 margin: EdgeInsets.only(top: getProportionateScreenHeight(10)),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       title,
                       style: TextStyle(
-                        fontSize: getProportionateScreenHeight(17),
+                        fontSize: getProportionateScreenHeight(20),
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
                       ),

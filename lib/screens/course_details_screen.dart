@@ -82,6 +82,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
 
   Card buildLessonCard(String title, String description, String navigation,
       bool isSubscribed, String token, String image) {
+    print('111111111111111111');
     return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(getProportionateScreenHeight(15)),
@@ -133,7 +134,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                         Text(
                           description,
                           style: TextStyle(
-                            fontSize: getProportionateScreenHeight(13),
+                            fontSize: getProportionateScreenHeight(15),
                             color: Colors.white,
                           ),
                           softWrap: true,
@@ -180,7 +181,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                         child: Text(
                           'Unsubscribe',
                           style: TextStyle(
-                              fontSize: getProportionateScreenHeight(15),
+                              fontSize: getProportionateScreenHeight(17.5),
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
@@ -212,7 +213,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                         child: Text(
                           'Join class',
                           style: TextStyle(
-                              fontSize: getProportionateScreenHeight(15),
+                              fontSize: getProportionateScreenHeight(17.5),
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
@@ -251,7 +252,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                         child: Text(
                           'Subscribe',
                           style: TextStyle(
-                              fontSize: getProportionateScreenHeight(15),
+                              fontSize: getProportionateScreenHeight(17.5),
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
@@ -268,9 +269,8 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final loadedCourses = Provider.of<Courses>(context, listen: false);
-    var isSubscribed = Provider.of<Auth>(context, listen: false).isSubscribed;
+    var isSubscribed = Provider.of<Auth>(context, listen: true).isSubscribed;
     final token = Provider.of<Auth>(context, listen: false).token;
-    print(isSubscribed);
 
     return Scaffold(
       appBar: AppBar(
@@ -279,7 +279,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
           style: TextStyle(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: getProportionateScreenHeight(17),
+            fontSize: getProportionateScreenHeight(20),
           ),
         ),
       ),

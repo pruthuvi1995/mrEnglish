@@ -82,6 +82,8 @@ class _McqPaperState extends State<McqPaper> {
 
   Future<void> updateDatabase(Day loadedDay, double mark, int index) async {
     double totalDayMark = loadedDay.totalMark;
+    print(totalDayMark);
+
     setState(() {
       _isLoading = true;
     });
@@ -92,7 +94,6 @@ class _McqPaperState extends State<McqPaper> {
         totalDayMark = totalDayMark - loadedDay.lesson1Mark + mark;
       }
       totalDayMark = roundDouble(totalDayMark, 2);
-
       Provider.of<Days>(context, listen: false).findByDetailsIdAndUpdateL1(
           loadedDay.dayDetailsId, mark, totalDayMark);
 
@@ -163,7 +164,8 @@ class _McqPaperState extends State<McqPaper> {
         totalDayMark = totalDayMark - loadedDay.lesson2Mark + mark;
       }
       totalDayMark = roundDouble(totalDayMark, 2);
-
+      print(totalDayMark);
+      print('555555555555');
       Provider.of<Days>(context, listen: false)
           .findByDetailsIdAndUpdateL2(loadedDay.dayDetailsId, mark, totalMark);
 

@@ -57,7 +57,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
           style: TextStyle(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: getProportionateScreenHeight(17),
+            fontSize: getProportionateScreenHeight(20),
           ),
         ),
       ),
@@ -70,19 +70,19 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
               child: SingleChildScrollView(
                 child: Column(children: <Widget>[
                   Card(
-                    margin: EdgeInsets.all(getProportionateScreenHeight(10)),
+                    // margin: EdgeInsets.all(getProportionateScreenHeight(10)),
                     child: Column(
                       children: [
                         Text('Overall Performance',
                             style: TextStyle(
                                 color: Colors.grey,
-                                fontSize: getProportionateScreenHeight(20),
+                                fontSize: getProportionateScreenHeight(25),
                                 fontWeight: FontWeight.bold)),
                         Padding(
                           padding:
-                              EdgeInsets.all(getProportionateScreenHeight(8)),
+                              EdgeInsets.all(getProportionateScreenHeight(3)),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               loadedDay.isCompletedDay
                                   ? Text(
@@ -101,7 +101,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                                               getProportionateScreenHeight(20),
                                           fontWeight: FontWeight.bold),
                                     ),
-                              SizedBox(width: getProportionateScreenHeight(20)),
+                              SizedBox(width: getProportionateScreenHeight(10)),
                               Row(
                                 children: <Widget>[
                                   Text(
@@ -138,6 +138,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                         loadedDay.isCompletedLesson1,
                         loadedDay.lesson1Mark,
                         loadedLesson[0].id,
+                        loadedLesson[0].lessonNo,
                         1,
                       ),
                     )
@@ -152,6 +153,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedLesson[0],
                             loadedDay.isCompletedLesson1,
                             loadedDay.lesson1Mark,
+                            loadedLesson[0].lessonNo,
                             loadedLesson[0].id,
                             1,
                           ),
@@ -165,6 +167,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedDay.isCompletedLesson2,
                             loadedDay.lesson2Mark,
                             loadedLesson[1].id,
+                            loadedLesson[1].lessonNo,
                             2,
                           ),
                         )
@@ -182,6 +185,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedDay.isCompletedLesson1,
                             loadedDay.lesson1Mark,
                             loadedLesson[0].id,
+                            loadedLesson[0].lessonNo,
                             1,
                           ),
                         ),
@@ -194,6 +198,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedDay.isCompletedLesson2,
                             loadedDay.lesson2Mark,
                             loadedLesson[1].id,
+                            loadedLesson[1].lessonNo,
                             2,
                           ),
                         ),
@@ -206,6 +211,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedDay.isCompletedLesson3,
                             loadedDay.lesson3Mark,
                             loadedLesson[2].id,
+                            loadedLesson[2].lessonNo,
                             3,
                           ),
                         )
@@ -217,14 +223,21 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
     );
   }
 
-  Card buildLessonCard(BuildContext context, String dayId, lesson,
-      bool isCompleted, double mark, String lessonId, int lessonIndex) {
+  Card buildLessonCard(
+      BuildContext context,
+      String dayId,
+      lesson,
+      bool isCompleted,
+      double mark,
+      String lessonId,
+      String lessonNo,
+      int lessonIndex) {
     return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(getProportionateScreenHeight(10)),
         ),
         elevation: 4,
-        margin: EdgeInsets.all(getProportionateScreenHeight(20)),
+        margin: EdgeInsets.all(getProportionateScreenHeight(10)),
         child: Column(
           children: [
             Stack(
@@ -317,6 +330,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                           dayId,
                           lessonId,
                           lessonIndex,
+                          lessonNo,
                         ],
                       );
                     },

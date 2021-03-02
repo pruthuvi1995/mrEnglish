@@ -16,12 +16,12 @@ class BodyRegisterScreen extends StatelessWidget {
           ),
           child: SingleChildScrollView(
             child: Column(children: <Widget>[
-              SizedBox(height: SizeConfig.screenHeight * 0.05),
+              SizedBox(height: getProportionateScreenHeight(30)),
               Text(
                 'Welcome',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: getProportionateScreenWidth(28),
+                  fontSize: getProportionateScreenHeight(40),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -29,15 +29,12 @@ class BodyRegisterScreen extends StatelessWidget {
                 'ඔබේ දත්ත ඇතුළත් කර register වන්න.',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: getProportionateScreenWidth(17),
+                  fontSize: getProportionateScreenHeight(20),
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.08),
-              SizedBox(height: SizeConfig.screenHeight * 0.08),
+              SizedBox(height: getProportionateScreenHeight(70)),
               RegisterForm(),
-              SizedBox(height: getProportionateScreenHeight(20)),
-              // NoAccountText()
             ]),
           ),
         ),

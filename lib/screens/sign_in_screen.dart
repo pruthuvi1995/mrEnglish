@@ -16,7 +16,7 @@ class SignInScreen extends StatelessWidget {
           style: TextStyle(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: getProportionateScreenHeight(17),
+            fontSize: getProportionateScreenHeight(20),
           ),
           textAlign: TextAlign.center,
         ),

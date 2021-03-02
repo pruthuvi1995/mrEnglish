@@ -25,20 +25,23 @@ class PaperVideoScreen extends StatelessWidget {
         child: Column(children: <Widget>[
           Container(
             width: double.infinity,
-            height: getProportionateScreenHeight(250),
+            // height: getProportionateScreenHeight(250),
             child: Card(
-              child: Column(children: <Widget>[
-                YoutubePlayer(
-                  controller: _controller,
-                  bottomActions: [
-                    CurrentPosition(),
-                    ProgressBar(isExpanded: true),
-                    PlayPauseButton(),
-                  ],
-                  showVideoProgressIndicator: true,
-                  progressIndicatorColor: Colors.redAccent,
-                ),
-              ]),
+              child: SingleChildScrollView(
+                child: Column(children: <Widget>[
+                  YoutubePlayer(
+                    controller: _controller,
+                    bottomActions: [
+                      CurrentPosition(),
+                      ProgressBar(isExpanded: true),
+                      PlayPauseButton(),
+                      // FullScreenButton(),
+                    ],
+                    showVideoProgressIndicator: true,
+                    progressIndicatorColor: Colors.redAccent,
+                  ),
+                ]),
+              ),
             ),
           ),
         ]),

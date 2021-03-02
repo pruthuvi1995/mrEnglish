@@ -1,5 +1,5 @@
-import 'package:mr_english/screens/subscribe_screen.dart';
-import 'package:mr_english/screens/unsubscribe_screen.dart';
+import './screens/subscribe_screen.dart';
+import './screens/unsubscribe_screen.dart';
 
 import './screens/course_details_screen.dart';
 
@@ -34,6 +34,7 @@ import './screens/about_us_screen.dart';
 import 'screens/syllabus_screen.dart';
 import './screens/day_lesson_question_screen.dart';
 import './screens/profile_screen.dart';
+import 'package:flutter/services.dart';
 
 // import './screens/auth_screen.dart.dart';
 
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return MultiProvider(
         providers: [
           ChangeNotifierProvider.value(

@@ -234,7 +234,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       'මතක තබා ගැනීමට පහසු අකුරු හෝ ඉලක්කම් 8කට වඩා වැඩි password  එක දෙවරක් ඇතුලත් කරන්න. මෙය මතක තබා ගැනීම අනිවාර්ය වේ.'),
                 ),
               SizedBox(
-                height: getProportionateScreenHeight(15),
+                height: getProportionateScreenHeight(30),
               ),
               Form(
                   key: _formKey,

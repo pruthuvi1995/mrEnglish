@@ -132,8 +132,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void _showErrorDialog(String message) {
     if (message == 'Insufficient balance.') {
       message = "ඔබේ දුරකථන අංකයේ ප්‍රමාණවත් මුදලක් නොමැත.";
+    } else if (message ==
+        'Subscriber is not registered to use this application.') {
+      message = "ඔබ සේවාවෙන් ඉවත් වී ඇත. නැවත සේවාවට subscribe කරන්න.";
     } else {
-      message = 'පසුව උත්සහා කරන්න.';
+      message = 'පසුව උත්සහා කරන්න.....';
     }
     showDialog(
       context: context,
@@ -141,12 +144,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
         title: Text('Error 1ක් තියනවා.'),
         content: Text(message),
         actions: <Widget>[
-          FlatButton(
-              onPressed: () {
-                Navigator.of(ctx).pop();
-                // Navigator.pushNamed(context, SignInScreen.routeName);
-              },
-              child: Text('OK'))
+          message == "ඔබ සේවාවෙන් ඉවත් වී ඇත. නැවත සේවාවට subscribe කරන්න."
+              ? FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushReplacementNamed('/');
+                    Provider.of<Auth>(context, listen: false).logout();
+
+                    // Navigator.pushNamed(context, SignInScreen.routeName);
+                  },
+                  child: Text('OK......'))
+              : FlatButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                    // Navigator.pushNamed(context, SignInScreen.routeName);
+                  },
+                  child: Text('OK'))
         ],
       ),
     );

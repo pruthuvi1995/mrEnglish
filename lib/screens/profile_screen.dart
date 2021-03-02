@@ -39,7 +39,7 @@ class ProfileScreen extends StatelessWidget {
           child: Column(children: [
         buildDetailsCard('Name', name),
         buildDetailsCard('NIC Number', nicNo),
-        buildDetailsCard('Phone Number', phoneNo),
+        // buildDetailsCard('Phone Number', phoneNo),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
