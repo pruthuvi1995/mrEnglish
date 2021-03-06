@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import '../constants.dart';
@@ -10,6 +11,11 @@ import '../screens/day_details_screen.dart';
 import '../providers/day.dart';
 
 class DayItem extends StatelessWidget {
+  double roundDouble(double value, int places) {
+    double mod = pow(10.0, places);
+    return ((value * mod).round().toDouble() / mod);
+  }
+
   @override
   Widget build(BuildContext context) {
     final day = Provider.of<Day>(context);
@@ -76,7 +82,7 @@ class DayItem extends StatelessWidget {
           footer: GridTileBar(
             backgroundColor: kPrimaryColor,
             leading: Text(
-              '${day.totalMark * 100}%',
+              '${roundDouble(day.totalMark, 1) * 100}%',
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,

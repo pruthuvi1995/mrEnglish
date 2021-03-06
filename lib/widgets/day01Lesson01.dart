@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class Day01Part01 extends StatelessWidget {
+class Day01Lesson01 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

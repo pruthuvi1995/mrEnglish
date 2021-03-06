@@ -415,7 +415,11 @@ class Auth with ChangeNotifier {
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
     int count = int.parse(extractedUserData['noOfFinishedLessons'].toString());
-    extractedUserData['noOfFinishedLessons'] = count + 1;
+
+    count = count + 1;
+    extractedUserData['noOfFinishedLessons'] = count;
+    noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
+    print(extractedUserData['noOfFinishedLessons']);
 
     final userData = json.encode(
       {
@@ -464,8 +468,8 @@ class Auth with ChangeNotifier {
       isSubscribed = true;
     }
 
-    int count = int.parse(extractedUserData['noOfFinishedLessons'].toString());
-    extractedUserData['noOfFinishedLessons'] = count + 1;
+    // int count = int.parse(extractedUserData['noOfFinishedLessons'].toString());
+    // extractedUserData['noOfFinishedLessons'] = count + 1;
 
     final userData = json.encode(
       {

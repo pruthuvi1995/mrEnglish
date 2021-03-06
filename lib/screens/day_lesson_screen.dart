@@ -29,9 +29,9 @@ class DayLessonScreen extends StatelessWidget {
         Provider.of<Lessons>(context, listen: false).findByID(dayId[1]);
     Widget dayLesson = DayLessonText(loadedLesson.lesson);
 
-    final height = MediaQuery.of(context).size.height -
-        appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+    // final height = MediaQuery.of(context).size.height -
+    //     appBar.preferredSize.height -
+    //     MediaQuery.of(context).padding.top;
 
     YoutubePlayerController _controller = YoutubePlayerController(
       initialVideoId: loadedLesson.videoURL,
@@ -50,13 +50,13 @@ class DayLessonScreen extends StatelessWidget {
             // height: height * .4,
             child: Card(
               child: Column(children: <Widget>[
-                Text(
-                  loadedLesson.title,
-                  style: TextStyle(
-                    fontSize: getProportionateScreenHeight(25),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                // Text(
+                //   loadedLesson.title,
+                //   style: TextStyle(
+                //     fontSize: getProportionateScreenHeight(25),
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
                 YoutubePlayer(
                   controller: _controller,
                   bottomActions: [
@@ -71,9 +71,9 @@ class DayLessonScreen extends StatelessWidget {
             ),
           ),
           Container(
-              height: getProportionateScreenHeight(310), child: dayLesson),
+              height: getProportionateScreenHeight(360), child: dayLesson),
           Container(
-            height: height * .1,
+            // height: height * .1,
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(
@@ -82,17 +82,18 @@ class DayLessonScreen extends StatelessWidget {
                 );
               },
               child: Container(
-                margin: EdgeInsets.all(height * .01),
-                padding: EdgeInsets.all(height * .01),
+                margin: EdgeInsets.all(getProportionateScreenHeight(10)),
+                padding: EdgeInsets.all(getProportionateScreenHeight(10)),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(height * .02),
+                  borderRadius:
+                      BorderRadius.circular(getProportionateScreenHeight(15)),
                   color: kPrimaryColor,
                 ),
                 width: double.infinity,
                 child: Text(
-                  'Finished lesson',
+                  'Done. I need the paper.',
                   style: TextStyle(
-                    fontSize: height * .035,
+                    fontSize: getProportionateScreenHeight(20),
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.center,

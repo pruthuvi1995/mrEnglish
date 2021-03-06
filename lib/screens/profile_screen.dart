@@ -29,7 +29,8 @@ class ProfileScreen extends StatelessWidget {
     String name = '$firstName $lastName';
     String stringMark = '${mark.toString()}%';
     mark = roundDouble(mark, 2);
-
+    print(mark);
+    print(noOfFinishedLessons);
     return Scaffold(
       appBar: AppBar(
         title: Text('My profile'),

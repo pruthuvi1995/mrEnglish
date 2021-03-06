@@ -82,7 +82,7 @@ class _McqPaperState extends State<McqPaper> {
 
   Future<void> updateDatabase(Day loadedDay, double mark, int index) async {
     double totalDayMark = loadedDay.totalMark;
-    print(totalDayMark);
+    mark = roundDouble(mark, 2);
 
     setState(() {
       _isLoading = true;
@@ -94,28 +94,32 @@ class _McqPaperState extends State<McqPaper> {
         totalDayMark = totalDayMark - loadedDay.lesson1Mark + mark;
       }
       totalDayMark = roundDouble(totalDayMark, 2);
+
       Provider.of<Days>(context, listen: false).findByDetailsIdAndUpdateL1(
           loadedDay.dayDetailsId, mark, totalDayMark);
 
       Provider.of<Auth>(context, listen: false).updateMark(totalDayMark);
 
       if (loadedDay.noOfLessons == 1) {
-        if (!loadedDay.isCompletedDay)
+        if (!loadedDay.isCompletedDay) {
           Provider.of<Auth>(context, listen: false).updateCD();
-        Provider.of<Days>(context, listen: false)
-            .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+          Provider.of<Days>(context, listen: false)
+              .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+        }
       } else if (loadedDay.noOfLessons == 2 && loadedDay.isCompletedLesson2) {
-        if (!loadedDay.isCompletedDay)
+        if (!loadedDay.isCompletedDay) {
           Provider.of<Auth>(context, listen: false).updateCD();
-        Provider.of<Days>(context, listen: false)
-            .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+          Provider.of<Days>(context, listen: false)
+              .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+        }
       } else if (loadedDay.noOfLessons == 3 &&
           loadedDay.isCompletedLesson2 &&
           loadedDay.isCompletedLesson3) {
-        if (!loadedDay.isCompletedDay)
+        if (!loadedDay.isCompletedDay) {
           Provider.of<Auth>(context, listen: false).updateCD();
-        Provider.of<Days>(context, listen: false)
-            .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+          Provider.of<Days>(context, listen: false)
+              .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+        }
       }
       await Provider.of<Auth>(context, listen: false).getMe();
 
@@ -149,7 +153,10 @@ class _McqPaperState extends State<McqPaper> {
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",
           },
           body: jsonEncode(
-            {'mark': totalMark * 2, 'noOfFinishedLessons': noOfCompletedDays},
+            {
+              'mark': loadedDay.totalMark * 2,
+              'noOfFinishedLessons': noOfCompletedDays
+            },
           ),
         );
       } catch (error) {
@@ -164,25 +171,26 @@ class _McqPaperState extends State<McqPaper> {
         totalDayMark = totalDayMark - loadedDay.lesson2Mark + mark;
       }
       totalDayMark = roundDouble(totalDayMark, 2);
-      print(totalDayMark);
-      print('555555555555');
-      Provider.of<Days>(context, listen: false)
-          .findByDetailsIdAndUpdateL2(loadedDay.dayDetailsId, mark, totalMark);
+
+      Provider.of<Days>(context, listen: false).findByDetailsIdAndUpdateL2(
+          loadedDay.dayDetailsId, mark, totalDayMark);
 
       Provider.of<Auth>(context, listen: false).updateMark(totalDayMark);
 
       if (loadedDay.noOfLessons == 2 && loadedDay.isCompletedLesson1) {
-        if (!loadedDay.isCompletedDay)
+        if (!loadedDay.isCompletedDay) {
           Provider.of<Auth>(context, listen: false).updateCD();
-        Provider.of<Days>(context, listen: false)
-            .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+          Provider.of<Days>(context, listen: false)
+              .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+        }
       } else if (loadedDay.noOfLessons == 3 &&
           loadedDay.isCompletedLesson1 &&
           loadedDay.isCompletedLesson3) {
-        if (!loadedDay.isCompletedDay)
+        if (!loadedDay.isCompletedDay) {
           Provider.of<Auth>(context, listen: false).updateCD();
-        Provider.of<Days>(context, listen: false)
-            .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+          Provider.of<Days>(context, listen: false)
+              .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+        }
       }
       await Provider.of<Auth>(context, listen: false).getMe();
 
@@ -217,7 +225,10 @@ class _McqPaperState extends State<McqPaper> {
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",
           },
           body: jsonEncode(
-            {'mark': totalMark * 2, 'noOfFinishedLessons': noOfCompletedDays},
+            {
+              'mark': loadedDay.totalMark * 2,
+              'noOfFinishedLessons': noOfCompletedDays
+            },
           ),
         );
       } catch (error) {
@@ -242,10 +253,11 @@ class _McqPaperState extends State<McqPaper> {
       if (loadedDay.noOfLessons == 3 &&
           loadedDay.isCompletedLesson1 &&
           loadedDay.isCompletedLesson2) {
-        if (!loadedDay.isCompletedDay)
+        if (!loadedDay.isCompletedDay) {
           Provider.of<Auth>(context, listen: false).updateCD();
-        Provider.of<Days>(context, listen: false)
-            .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+          Provider.of<Days>(context, listen: false)
+              .findByDetailsIdAndUpdateCDay(loadedDay.dayDetailsId);
+        }
       }
       await Provider.of<Auth>(context, listen: false).getMe();
 
@@ -280,7 +292,10 @@ class _McqPaperState extends State<McqPaper> {
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",
           },
           body: jsonEncode(
-            {'mark': totalMark * 2, 'noOfFinishedLessons': noOfCompletedDays},
+            {
+              'mark': loadedDay.totalMark * 2,
+              'noOfFinishedLessons': noOfCompletedDays
+            },
           ),
         );
       } catch (error) {
@@ -290,8 +305,8 @@ class _McqPaperState extends State<McqPaper> {
       Provider.of<Auth>(context, listen: false).getMe();
     }
     Navigator.of(context).pop();
-    Navigator.of(context)
-        .popAndPushNamed(DayDetailsScreen.routeName, arguments: dayId[0]);
+    // Navigator.of(context)
+    // .pushNamed(DayDetailsScreen.routeName, arguments: dayId[0]);
   }
 
   @override
@@ -306,6 +321,7 @@ class _McqPaperState extends State<McqPaper> {
         mcqQ.add(Mcq(
           type: element['type'],
           qText: element['qText'],
+          imageUrl: element['imageUrl'],
           answers: element['answers'],
           correctAnswer: element['correctAnswer'],
           review: element['review'],
@@ -318,6 +334,7 @@ class _McqPaperState extends State<McqPaper> {
         mcqQ.add(Mcq(
           type: element['type'],
           qText: element['qText'],
+          imageUrl: element['imageUrl'],
           answers: element['answers'],
           correctAnswer: element['correctAnswer'],
           review: element['review'],
@@ -337,8 +354,8 @@ class _McqPaperState extends State<McqPaper> {
                   child: Column(
                     children: <Widget>[
                       Image.asset(
-                        'assets/images/hasanjana.jpg',
-                        fit: BoxFit.cover,
+                        mcqQ[_qIndex].imageUrl,
+                        fit: BoxFit.fitHeight,
                         height: getProportionateScreenHeight(140),
                         width: double.infinity,
                       ),

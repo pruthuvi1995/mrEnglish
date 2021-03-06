@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import '../providers/lessons.dart';
 import './trail_paper_screen.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,11 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
 
   Future<void> _refreshLessons(BuildContext context) async {
     await Provider.of<Lessons>(context, listen: false).fetchAndSetLessons();
+  }
+
+  double roundDouble(double value, int places) {
+    double mod = pow(10.0, places);
+    return ((value * mod).round().toDouble() / mod);
   }
 
   @override
@@ -114,7 +121,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                                       width: getProportionateScreenHeight(10)),
                                   Chip(
                                     label: Text(
-                                      '${loadedDay.totalMark * 100}%',
+                                      '${roundDouble(loadedDay.totalMark, 1) * 100}%',
                                       style: TextStyle(
                                           fontSize:
                                               getProportionateScreenHeight(20)),
@@ -136,7 +143,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                         dayId,
                         loadedLesson[0],
                         loadedDay.isCompletedLesson1,
-                        loadedDay.lesson1Mark,
+                        roundDouble(loadedDay.lesson1Mark, 2),
                         loadedLesson[0].id,
                         loadedLesson[0].lessonNo,
                         1,
@@ -152,9 +159,9 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             dayId,
                             loadedLesson[0],
                             loadedDay.isCompletedLesson1,
-                            loadedDay.lesson1Mark,
-                            loadedLesson[0].lessonNo,
+                            roundDouble(loadedDay.lesson1Mark, 2),
                             loadedLesson[0].id,
+                            loadedLesson[0].lessonNo,
                             1,
                           ),
                         ),
@@ -165,7 +172,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             dayId,
                             loadedLesson[1],
                             loadedDay.isCompletedLesson2,
-                            loadedDay.lesson2Mark,
+                            roundDouble(loadedDay.lesson2Mark, 2),
                             loadedLesson[1].id,
                             loadedLesson[1].lessonNo,
                             2,
@@ -183,7 +190,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             dayId,
                             loadedLesson[0],
                             loadedDay.isCompletedLesson1,
-                            loadedDay.lesson1Mark,
+                            roundDouble(loadedDay.lesson1Mark, 2),
                             loadedLesson[0].id,
                             loadedLesson[0].lessonNo,
                             1,
@@ -196,7 +203,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             dayId,
                             loadedLesson[1],
                             loadedDay.isCompletedLesson2,
-                            loadedDay.lesson2Mark,
+                            roundDouble(loadedDay.lesson2Mark, 2),
                             loadedLesson[1].id,
                             loadedLesson[1].lessonNo,
                             2,
@@ -209,7 +216,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             dayId,
                             loadedLesson[2],
                             loadedDay.isCompletedLesson3,
-                            loadedDay.lesson3Mark,
+                            roundDouble(loadedDay.lesson3Mark, 2),
                             loadedLesson[2].id,
                             loadedLesson[2].lessonNo,
                             3,
@@ -224,14 +231,15 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
   }
 
   Card buildLessonCard(
-      BuildContext context,
-      String dayId,
-      lesson,
-      bool isCompleted,
-      double mark,
-      String lessonId,
-      String lessonNo,
-      int lessonIndex) {
+    BuildContext context,
+    String dayId,
+    lesson,
+    bool isCompleted,
+    double mark,
+    String lessonId,
+    String lessonNo,
+    int lessonIndex,
+  ) {
     return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(getProportionateScreenHeight(10)),
@@ -324,6 +332,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                   fit: FlexFit.tight,
                   child: GestureDetector(
                     onTap: () {
+                      print(lessonId);
                       Navigator.of(context).pushNamed(
                         TrailPaperScreen.routeName,
                         arguments: [
