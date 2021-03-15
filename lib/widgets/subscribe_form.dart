@@ -288,7 +288,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
               if (_subscribeMode == SubscribeMode.PhoneNo)
                 Container(
                   child: Text(
-                      'ඔබ ළඟ දැනට ඇති Dialog, Hutch හෝ Airtel දුරකථන අංකයක් පමණක් ඇතුළත් කරන්න. වෙනත් දුරකථන ජාල වලංගු නොවේ. 07xxxxxxxx ආකාරයට අංකය ඇතුළත් කිරීම අනිවාර්ය වේ. මේ සඳහා කිසිදු දෛනික ගාස්තුවක් අය නොකරේ.'),
+                      'ඔබ ළඟ දැනට ඇති Dialog, Hutch හෝ Airtel දුරකථන අංකයක් පමණක් ඇතුළත් කරන්න. වෙනත් දුරකථන ජාල වලංගු නොවේ. 07xxxxxxxx ආකාරයට අංකය ඇතුළත් කිරීම අනිවාර්ය වේ. මේ සඳහා කිසිදු දෛනික ගාස්තුවක් අය නොකරේ. නමුත් ඔබ ලබා ගන්නා පාඩම අනුව ඔබ කැමතිනම් පමණක් rs.5 + බදු මුදලක් හෝ ඊට වඩා වැඩි මුදලක් ඔබෙන් අය කර ගනු ලැබේ.'),
                 ),
               if (_subscribeMode == SubscribeMode.PinVerify)
                 Container(
