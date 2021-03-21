@@ -82,7 +82,6 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
 
   Card buildLessonCard(String title, String description, String navigation,
       bool isSubscribed, String token, String image) {
-    print('111111111111111111');
     return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(getProportionateScreenHeight(15)),
@@ -134,7 +133,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                         Text(
                           description,
                           style: TextStyle(
-                            fontSize: getProportionateScreenHeight(15),
+                            fontSize: getProportionateScreenWidth(12),
                             color: Colors.white,
                           ),
                           softWrap: true,
@@ -290,24 +289,26 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
             )
           : RefreshIndicator(
               onRefresh: () => _refreshCourses(context),
-              child: Column(children: <Widget>[
-                buildLessonCard(
-                  loadedCourses.items[0].title,
-                  loadedCourses.items[0].description,
-                  YearsOverviewScreen.routeName,
-                  isSubscribed,
-                  token,
-                  'assets/images/paperDiscussionIcon.jpg',
-                ),
-                buildLessonCard(
-                  loadedCourses.items[1].title,
-                  loadedCourses.items[1].description,
-                  DaysOverviewScreen.routeName,
-                  isSubscribed,
-                  token,
-                  'assets/images/englishGrammerIcon.jpeg',
-                ),
-              ]),
+              child: SingleChildScrollView(
+                child: Column(children: <Widget>[
+                  buildLessonCard(
+                    loadedCourses.items[0].title,
+                    loadedCourses.items[0].description,
+                    YearsOverviewScreen.routeName,
+                    isSubscribed,
+                    token,
+                    'assets/images/paperDiscussionIcon.jpg',
+                  ),
+                  buildLessonCard(
+                    loadedCourses.items[1].title,
+                    loadedCourses.items[1].description,
+                    DaysOverviewScreen.routeName,
+                    isSubscribed,
+                    token,
+                    'assets/images/englishGrammerIcon.jpeg',
+                  ),
+                ]),
+              ),
             ),
     );
   }
