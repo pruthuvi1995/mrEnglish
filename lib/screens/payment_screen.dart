@@ -26,36 +26,107 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   var _isLoading = false;
 
-  Future<void> updateDay(context, String id, String token, String userId,
-      String routeName, String dayDetailsId, Day day) async {
+  // Future<void> updateDay(context, String id, String token, String userId,
+  //     String routeName, String dayDetailsId, Day day) async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //   final url1 = 'https://mrenglish.tk/api/v1/dayDetails/$userId/$id';
+
+  //   var today = new DateTime.now();
+  //   var activeDay =
+  //       today.add(new Duration(days: 7)).toString().substring(0, 10);
+
+  //   try {
+  //     await http.post(
+  //       url1,
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //         HttpHeaders.authorizationHeader: "Bearer $token",
+  //       },
+  //       body: jsonEncode(
+  //         {
+  //           'activeDay': activeDay,
+  //         },
+  //       ),
+  //     );
+  //   } catch (error) {
+  //     print(error);
+  //     throw (error);
+  //   }
+
+  //   Navigator.of(context).popAndPushNamed(routeName);
+  // }
+
+  Future<void> updateDay(
+      context,
+      String id,
+      String token,
+      String userId,
+      String routeName,
+      String dayDetailsId,
+      Day day,
+      String amount,
+      String phoneNo) async {
+    String data;
     setState(() {
       _isLoading = true;
     });
-    final url1 = 'https://mrenglish.tk/api/v1/dayDetails/$userId/$id';
-
-    var today = new DateTime.now();
-    var activeDay =
-        today.add(new Duration(days: 7)).toString().substring(0, 10);
-
+    final url = 'https://mrenglish.tk/api/v1/dayDetails/pay';
     try {
-      await http.post(
-        url1,
+      final response = await http.post(
+        url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          HttpHeaders.authorizationHeader: "Bearer $token",
         },
         body: jsonEncode(
           {
-            'activeDay': activeDay,
+            'phoneNo': phoneNo,
+            'amount': amount,
           },
         ),
       );
+      final responseData = json.decode(response.body);
+      data = responseData['data']['statusDetail'];
     } catch (error) {
       print(error);
       throw (error);
     }
 
-    Navigator.of(context).popAndPushNamed(routeName);
+    if (data == "Request was successfully processed.") {
+      final url1 = 'https://mrenglish.tk/api/v1/dayDetails/$userId/$id';
+
+      var today = new DateTime.now();
+      var activeDay =
+          today.add(new Duration(days: 7)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.post(
+          url1,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeDay': activeDay,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else {
+      _showErrorDialog(data);
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   Future<void> updateYear(
@@ -305,14 +376,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               onTap: () {
                                 if (items[1] == 'day') {
                                   updateDay(
-                                    context,
-                                    id,
-                                    loadedDay.authToken,
-                                    userId,
-                                    DaysOverviewScreen.routeName,
-                                    loadedDay.dayDetailsId,
-                                    loadedDay,
-                                  );
+                                      context,
+                                      id,
+                                      loadedDay.authToken,
+                                      userId,
+                                      DaysOverviewScreen.routeName,
+                                      loadedDay.dayDetailsId,
+                                      loadedDay,
+                                      amount,
+                                      phoneNo);
                                 } else
                                   updateYear(
                                     context,
