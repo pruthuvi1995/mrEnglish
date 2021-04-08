@@ -26,7 +26,7 @@ class Review extends StatelessWidget {
             ),
             child: Column(children: <Widget>[
               Text(
-                'Congralulation...',
+                'Congratulation...',
                 style: TextStyle(
                     fontSize: getProportionateScreenHeight(18),
                     color: Color(0xff1b5e20)),

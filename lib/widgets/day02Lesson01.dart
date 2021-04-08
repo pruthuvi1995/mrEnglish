@@ -27,7 +27,7 @@ class Day02Lesson01 extends StatelessWidget {
           Divider(),
           //para
           Text(
-            'singular nouns (ඒක වචන නාමපද) plural forms (බහු වචන නාම පද) බවට හැරවීමේ එකම ක්‍රමය singular naunහි අගට s අකුර යෙදීම බව බොහෝ දෙනාගේ අදහසයි. නමුත් English language ගැන යම් අවබෝධයක් ඇති අයෙක් මෙහි නීති හතක් ඇති බව වටහා ගත යුතුය. මෙම පාඩමේදී එම ක්‍රම හතම ඉතාමත් සරලව පැහැදිලි කර ඇත.',
+            'singular nouns (ඒක වචන නාමපද) plural forms (බහු වචන නාම පද) බවට හැරවීමේ එකම ක්‍රමය singular nounහි අගට s අකුර යෙදීම බව බොහෝ දෙනාගේ අදහසයි. නමුත් English language ගැන යම් අවබෝධයක් ඇති අයෙක් මෙහි නීති හතක් ඇති බව වටහා ගත යුතුය. මෙම පාඩමේදී එම ක්‍රම හතම ඉතාමත් සරලව පැහැදිලි කර ඇත.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

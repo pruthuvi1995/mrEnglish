@@ -480,7 +480,7 @@ class Day04Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '   Longer (වඩා දිගයි) - comparative',
+            '   Longer (වඩාත් දිගයි) - comparative',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -1100,7 +1100,7 @@ class Day04Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  (ඔහු සමඟ කතා කරනවිට ඉක්මනින් කියන්න.)',
+            '  (ඔහු සමඟ කතා කරනවිට ඉක්මනින් කතා කරන්න.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -1128,7 +1128,7 @@ class Day04Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  (මට ලියුම අද තැපැල් කරන්න අවශ්‍යයි.)',
+            '  (මට ලියුමක් අද තැපැල් කරන්න අවශ්‍යයි.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,

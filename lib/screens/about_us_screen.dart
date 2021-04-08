@@ -36,7 +36,7 @@ class AboutUsScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Malitha Wlipitiya is a national school teacher, english grammar - spoken instructor & author. A graduate from Rajarata university of Sri Lanka.   Founder of Golden talks English Academy.',
+                'Malitha Welipitiya is a national school teacher, English Grammar - Spoken instructor & author. A graduate from Rajarata university of Sri Lanka.   Founder of Golden Talks English Academy.',
                 style: TextStyle(
                   fontSize: getProportionateScreenHeight(15),
                   color: kPrimaryColor,

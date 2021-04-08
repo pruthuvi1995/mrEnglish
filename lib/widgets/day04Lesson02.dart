@@ -25,7 +25,7 @@ class Day04Lesson02 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'යම් ස්ථානයක යම් දෙයක් හෝ යම් ස්ථානයක යම් කෙනෙක් සිටින බව ප්‍රකාශ කිරීමට there is/ there are යොදයි. මෙම grammer කොටස ඉංග්‍රීසි විභාග සඳහා පෙනී සිටින ඔබ හට ඉතාමත් වැදගත් වනු ඇත. යම් රුපයක් විස්තර කිරීමේදී මේ there is/ there are ක්‍රමය ඉතා වැදගත් වේ.',
+            'යම් ස්ථානයක යම් දෙයක් හෝ යම් ස්ථානයක යම් කෙනෙක් සිටින බව ප්‍රකාශ කිරීමට there is/ there are යොදයි. මෙම grammar කොටස ඉංග්‍රීසි විභාග සඳහා පෙනී සිටින ඔබ හට ඉතාමත් වැදගත් වනු ඇත. යම් රුපයක් විස්තර කිරීමේදී මේ there is/ there are ක්‍රමය ඉතා වැදගත් වේ.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -292,7 +292,7 @@ class Day04Lesson02 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'ඉහත අකාරයේ ප්‍රකාශ අතීත හා අනාගත කාලයෙන් කතා කිරීමේදී be verbs පමණක් වෙනස් වේ. be verbs ගැන ඔබට සම්පුර්ණ අවබෝධයක් අවශ්‍යනම් අපගේ be verbs පාඩම් මාලාව කියවන්න.',
+            'ඉහත ආකාරයේ ප්‍රකාශ අතීත හා අනාගත කාලයෙන් කතා කිරීමේදී be verbs පමණක් වෙනස් වේ. be verbs ගැන ඔබට සම්පුර්ණ අවබෝධයක් අවශ්‍යනම් අපගේ be verbs පාඩම් මාලාව කියවන්න.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
