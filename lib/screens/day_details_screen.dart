@@ -367,7 +367,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                   child: Container(
                     alignment: Alignment.center,
                     child: Text(
-                      '${mark * 100} %',
+                      '${mark * 200} %',
                       style: TextStyle(
                         fontSize: getProportionateScreenHeight(18),
                         color: Colors.black,
