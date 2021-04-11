@@ -42,10 +42,10 @@ class DaysGrid extends StatelessWidget {
             ),
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 4 / 3,
+        crossAxisCount: 1,
+        childAspectRatio: 3 / 1,
         crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        mainAxisSpacing: 2,
       ),
     );
   }

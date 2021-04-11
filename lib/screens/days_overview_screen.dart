@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../providers/lessons.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
@@ -33,8 +34,12 @@ class _DaysOverviewScreenState extends State<DaysOverviewScreen> {
       });
 
       Provider.of<Days>(context).fetchAndSetDays().then((_) {
-        setState(() {
-          _isLoading = false;
+        Provider.of<Lessons>(context, listen: false)
+            .fetchAndSetLessons()
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
         });
       });
 
@@ -46,6 +51,7 @@ class _DaysOverviewScreenState extends State<DaysOverviewScreen> {
 
   Future<void> _refreshDays(BuildContext context) async {
     await Provider.of<Days>(context, listen: false).fetchAndSetDays();
+    await Provider.of<Lessons>(context, listen: false).fetchAndSetLessons();
   }
 
   @override

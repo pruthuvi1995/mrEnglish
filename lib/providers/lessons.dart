@@ -71,4 +71,14 @@ class Lessons with ChangeNotifier {
     });
     return selectedLessons;
   }
+
+  // List<String> findByDayIDGetTitle(String id) {
+  //   final List<String> selectedLessons = [];
+  //   _items.forEach((element) {
+  //     if (element.dayId == id) {
+  //       selectedLessons.add(element.title);
+  //     }
+  //   });
+  //   return selectedLessons;
+  // }
 }
