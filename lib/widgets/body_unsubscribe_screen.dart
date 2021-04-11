@@ -120,7 +120,7 @@ class _BodyUnsubscribeScreenState extends State<BodyUnsubscribeScreen> {
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               getProportionateScreenHeight(15)),
-                                          color: kPrimaryColor1,
+                                          color: Colors.green,
                                         ),
                                         padding: EdgeInsets.all(
                                             getProportionateScreenHeight(10)),
@@ -162,7 +162,7 @@ class _BodyUnsubscribeScreenState extends State<BodyUnsubscribeScreen> {
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               getProportionateScreenHeight(15)),
-                                          color: kPrimaryColor,
+                                          color: Colors.red,
                                         ),
                                         padding: EdgeInsets.all(
                                             getProportionateScreenHeight(10)),

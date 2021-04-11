@@ -53,7 +53,7 @@ class Day04Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'මෙහි අරුත ඔහු මහතා ළමයෙකු යන්නයි. \" ළමයා \" යන්න \"මහත\"  යන්නෙන් විස්තර කෙරේ. boy යන්න noun එකයි. එය විස්තර කරන්නේ fat යන්නෙන් බැවින් එය adjective එක වේ.',
+            'මෙහි අරුත ඔහු මහත ළමයෙකු යන්නයි. \" ළමයා \" යන්න \"මහත\"  යන්නෙන් විස්තර කෙරේ. boy යන්න noun එකයි. එය විස්තර කරන්නේ fat යන්නෙන් බැවින් එය adjective එක වේ.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -564,7 +564,7 @@ class Day04Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'Positive adjective එක y වලින් අවසන් වන විට comparative ලිවීමේදී ඉවත් කර ier ද superlative ලිවීමේදී y ඉවත් කර iest ද යෙදේ.',
+            'Positive adjective එක y වලින් අවසන් වන විට comparative ලිවීමේදී y ඉවත් කර ier ද superlative ලිවීමේදී y ඉවත් කර iest ද යෙදේ.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -606,7 +606,7 @@ class Day04Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'ඉහත ළමුන් තෙදෙනාගේ කොන්ඩවල දිගට අදාළ උදාහරණය ගමු.',
+            'ඉහත ළමුන් තිදෙනාගේ කොන්ඩවල දිගට අදාළ උදාහරණය ගමු.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -946,7 +946,7 @@ class Day04Lesson01 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'Adverbs යනු ක්‍රියා විශේෂණ වේ. බොහෝ ය පවසන පරිදි adverbs මගින් verbs විස්තර කරන බව පැවසුවද ඊටවඩා ගැබුරින් adverbs ගැන අධ්‍යනය කළ යුතුය.',
+            'Adverbs යනු ක්‍රියා විශේෂණ වේ. බොහෝ අය පවසන පරිදි adverbs මගින් verbs විස්තර කරන බව පැවසුවද ඊටවඩා ගැබුරින් adverbs ගැන අධ්‍යනය කළ යුතුය.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

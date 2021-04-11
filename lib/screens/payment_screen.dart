@@ -271,7 +271,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             )
           : Container(
               margin: EdgeInsets.only(top: getProportionateScreenHeight(110)),
-              height: getProportionateScreenHeight(450),
+              height: getProportionateScreenHeight(460),
               child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius:
@@ -318,7 +318,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               height: getProportionateScreenHeight(7),
                             ),
                             Text(
-                              'මෙම සේවාව ලබා ගැනීමට ඔබ Register වීමේදී ලබා දුන් දුරකථන අංකයෙන් Rs.${amount}ක මුදලක් අය කරගනු ලැබේ.ඒ සඳහා ඔබ කැමතිද?',
+                              'මෙම සේවාව ලබා ගැනීමට ඔබ Register වීමේදී ලබා දුන් දුරකථන අංකයෙන් Rs.${amount}ක මුදලක් අය කරගනු ලැබේ. Active කිරීම දින 7ක් සඳහා පමණක් වලංගු වේ.ඒ සඳහා ඔබ කැමතිද?',
                               style: TextStyle(
                                 fontSize: getProportionateScreenHeight(13),
                                 color: kPrimaryColor,
@@ -353,7 +353,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                       getProportionateScreenHeight(15)),
-                                  color: kPrimaryColor1,
+                                  color: Colors.red,
                                 ),
                                 padding: EdgeInsets.all(
                                     getProportionateScreenHeight(10)),
@@ -408,7 +408,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                       getProportionateScreenHeight(15)),
-                                  color: kPrimaryColor,
+                                  color: Color(0xFF14a96b),
                                 ),
                                 padding: EdgeInsets.all(
                                     getProportionateScreenHeight(10)),

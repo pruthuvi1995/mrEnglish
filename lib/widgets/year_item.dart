@@ -93,15 +93,15 @@ class YearItem extends StatelessWidget {
                 ? Text(
                     'Active',
                     style: TextStyle(
-                      color: Colors.green,
-                      fontSize: getProportionateScreenHeight(17),
+                      color: Colors.white,
+                      fontSize: getProportionateScreenWidth(17),
                     ),
                   )
                 : Text(
                     'Not Active',
                     style: TextStyle(
-                      color: Colors.red,
-                      fontSize: getProportionateScreenHeight(17),
+                      color: Colors.white,
+                      fontSize: getProportionateScreenWidth(17),
                     ),
                   ),
           ),

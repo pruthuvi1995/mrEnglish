@@ -279,7 +279,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                         Text(
                           lesson.title,
                           style: TextStyle(
-                              fontSize: getProportionateScreenHeight(18),
+                              fontSize: getProportionateScreenWidth(18),
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.start,
@@ -291,7 +291,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                         Text(
                           lesson.description,
                           style: TextStyle(
-                            fontSize: getProportionateScreenHeight(13),
+                            fontSize: getProportionateScreenWidth(13),
                             color: Colors.white,
                           ),
                           softWrap: true,

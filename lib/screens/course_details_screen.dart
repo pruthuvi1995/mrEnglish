@@ -173,7 +173,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                               getProportionateScreenHeight(15)),
-                          color: kPrimaryColor1,
+                          color: Colors.red,
                         ),
                         padding:
                             EdgeInsets.all(getProportionateScreenHeight(10)),
@@ -205,7 +205,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                               getProportionateScreenHeight(15)),
-                          color: kPrimaryColor,
+                          color: Color(0xFF14a96b),
                         ),
                         padding:
                             EdgeInsets.all(getProportionateScreenHeight(10)),
