@@ -516,7 +516,7 @@ class Day07Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'dry(වියලනවා) -> dries',
+            'cry(වියලනවා) -> cries',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

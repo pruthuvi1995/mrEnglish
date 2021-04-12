@@ -18,6 +18,7 @@ import 'package:http/http.dart' as http;
 import '../constants.dart';
 
 import '../size_config.dart';
+import 'instructions_screen.dart';
 
 class CourseDetailsScreen extends StatefulWidget {
   static const String routeName = '/course-details';
@@ -231,12 +232,13 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                     fit: FlexFit.tight,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(SubscribeScreen.routeName, arguments: [
-                          navigation,
-                          isSubscribed,
-                          token,
-                        ]);
+                        Navigator.of(context).popAndPushNamed(
+                            SubscribeScreen.routeName,
+                            arguments: [
+                              navigation,
+                              isSubscribed,
+                              token,
+                            ]);
                         // subscribeOnTap(navigation, isSubscribed, token);
                       },
                       child: Container(
@@ -291,13 +293,29 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
               onRefresh: () => _refreshCourses(context),
               child: SingleChildScrollView(
                 child: Column(children: <Widget>[
-                  buildLessonCard(
-                    loadedCourses.items[0].title,
-                    loadedCourses.items[0].description,
-                    YearsOverviewScreen.routeName,
-                    isSubscribed,
-                    token,
-                    'assets/images/paperDiscussionIcon.jpg',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(InstructionsScreen.routeName);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(getProportionateScreenHeight(10)),
+                      padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                            getProportionateScreenHeight(15)),
+                        color: kPrimaryColor,
+                      ),
+                      width: double.infinity,
+                      child: Text(
+                        'Instructions - උපදෙස්',
+                        style: TextStyle(
+                          fontSize: getProportionateScreenWidth(20),
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                   buildLessonCard(
                     loadedCourses.items[1].title,
@@ -306,6 +324,14 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                     isSubscribed,
                     token,
                     'assets/images/englishGrammerIcon.jpeg',
+                  ),
+                  buildLessonCard(
+                    loadedCourses.items[0].title,
+                    loadedCourses.items[0].description,
+                    YearsOverviewScreen.routeName,
+                    isSubscribed,
+                    token,
+                    'assets/images/paperDiscussionIcon.jpg',
                   ),
                 ]),
               ),

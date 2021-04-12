@@ -59,7 +59,7 @@ class _DaysOverviewScreenState extends State<DaysOverviewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Basic English within 60 days',
+          'Basic English within 40 days',
           style: TextStyle(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,

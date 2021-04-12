@@ -117,7 +117,7 @@ class AboutUsScreen extends StatelessWidget {
               ),
               Divider(),
               Text(
-                'Call: 071-8305757',
+                'Contact: 071-8305757/ 076-0855757',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: getProportionateScreenHeight(15),
@@ -125,7 +125,7 @@ class AboutUsScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                'Whatsapp: 076-0855757',
+                'Whatsapp: 071-8305757',
                 style: TextStyle(
                   fontSize: getProportionateScreenHeight(15),
                   color: kPrimaryColor,

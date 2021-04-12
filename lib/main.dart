@@ -1,3 +1,5 @@
+import 'package:mr_english/screens/instructions_screen.dart';
+
 import './screens/subscribe_screen.dart';
 import './screens/unsubscribe_screen.dart';
 
@@ -20,6 +22,7 @@ import './screens/years_overview_screen.dart';
 
 import './screens/sign_in_screen.dart';
 import './screens/splash_screen.dart';
+import 'screens/before_trail_paper_screen.dart';
 import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -117,6 +120,9 @@ class MyApp extends StatelessWidget {
               UnsubscribeScreen.routeName: (ctx) => UnsubscribeScreen(),
               IssueCertificateScreen.routeName: (ctx) =>
                   IssueCertificateScreen(),
+              InstructionsScreen.routeName: (ctx) => InstructionsScreen(),
+              BeforeTrailPaperScreen.routeName: (ctx) =>
+                  BeforeTrailPaperScreen(),
             },
           ),
         ));

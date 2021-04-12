@@ -377,7 +377,7 @@ class _McqPaperState extends State<McqPaper> {
                                   : Container(
                                       child: mcqQ[_qIndex].type == 'TF'
                                           ? Text('හරිද වැරදිද යන්න තෝරන්න.')
-                                          : Text('නිවැරිදි පිළිතුර තෝරන්න.')),
+                                          : Text('නිවැරදි පිළිතුර තෝරන්න.')),
                               Question(mcqQ[_qIndex].qText),
                               ...(mcqQ[_qIndex].answers as List).map(
                                 (answer) {

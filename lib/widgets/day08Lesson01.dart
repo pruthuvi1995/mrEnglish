@@ -519,7 +519,7 @@ class Day08Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'මෙම ක්‍රමය වැඩිදුරටත් පුරුදු වීමට ඔබ ගිය සතියේ නොකරපු දේවල් කරන්න. ',
+            'මෙම ක්‍රමය වැඩිදුරටත් පුරුදු වීමට ඔබ ගිය සතියේ නොකරපු දේවල් ලියන්න. ',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

@@ -9,6 +9,7 @@ import '../constants.dart';
 import '../providers/days.dart';
 
 import '../size_config.dart';
+import 'before_trail_paper_screen.dart';
 
 class DayDetailsScreen extends StatefulWidget {
   static const String routeName = '/day-details';
@@ -334,7 +335,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                     onTap: () {
                       print(lessonId);
                       Navigator.of(context).pushNamed(
-                        TrailPaperScreen.routeName,
+                        BeforeTrailPaperScreen.routeName,
                         arguments: [
                           dayId,
                           lessonId,
