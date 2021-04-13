@@ -242,7 +242,7 @@ class Auth with ChangeNotifier {
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
 
-  Future<void> updatePhoneNumber(String phoneNo) async {
+  Future<void> updatePhoneNumber(String phoneNoNew) async {
     const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     isSubscribed = !isSubscribed;
     final prefs = await SharedPreferences.getInstance();
@@ -250,7 +250,7 @@ class Auth with ChangeNotifier {
     var extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
-    extractedUserData['phoneNo'] = phoneNo;
+    extractedUserData['phoneNo'] = phoneNoNew;
     extractedUserData['isSubscribed'] = isSubscribed;
 
     final response1 = await http.post(
@@ -260,7 +260,7 @@ class Auth with ChangeNotifier {
       },
       body: jsonEncode(
         {
-          'phoneNo': phoneNo,
+          'phoneNo': phoneNoNew,
         },
       ),
     );
@@ -289,7 +289,7 @@ class Auth with ChangeNotifier {
       },
     );
     prefs.setString('userData', userData);
-
+    phoneNo = extractedUserData['phoneNo'];
     notifyListeners();
   }
 

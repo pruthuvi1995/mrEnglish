@@ -243,6 +243,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     String id = items[0];
     Day loadedDay;
     Year loadedYear;
+
     final userId = Provider.of<Auth>(context, listen: false).userId;
     final phoneNo = Provider.of<Auth>(context, listen: false).phoneNo;
 
