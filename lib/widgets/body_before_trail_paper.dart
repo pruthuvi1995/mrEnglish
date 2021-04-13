@@ -21,7 +21,7 @@ class BodyBeforeTrailPaperScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'මෙම පාඩම ඉගැන්වීමට පෙර මෙම පාඩම සම්බන්ධයෙන් ඔබ ළඟ දැනට ඇති දැනුම පරික්ෂා කිරීම සඳහා කෙටි trail paper එකක් ලබා දෙනු ලැබේ. එහි ලකුණු මෙම පාඩමට ඔබට ලබාගත හැකි ලකුණු සඳහා එකතු නොකරේ. ඉන්පසුව වැලිපිටිය sir ගේ පාඩම ලබා ගත හැක.',
+            'මෙම පාඩම ඉගැන්වීමට පෙර මෙම පාඩම සම්බන්ධයෙන් ඔබ ළඟ දැනට ඇති දැනුම පරික්ෂා කිරීම සඳහා කෙටි trial paper එකක් ලබා දෙනු ලැබේ. එහි ලකුණු මෙම පාඩමට ඔබට ලබාගත හැකි ලකුණු සඳහා එකතු නොකරේ. ඉන්පසුව වැලිපිටිය sir ගේ පාඩම ලබා ගත හැක.',
             style: TextStyle(
               color: kPrimaryColor,
               fontSize: getProportionateScreenWidth(17),

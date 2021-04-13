@@ -246,7 +246,7 @@ class Day09Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  I won\'t go to the Colombo',
+            '  I won\'t go to Colombo',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,

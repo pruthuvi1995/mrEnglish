@@ -14,7 +14,7 @@ class TrailPaperScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Trail Paper',
+          'Trial Paper',
           style: TextStyle(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,

@@ -755,7 +755,7 @@ class Day09Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'Nishadi is not a clever child. But she can dance well. Yesterday morning when I met her, she was dancing well. Her mother and father were looking at her. At this moment she is practicing for a dancing competition. Nishadi\'s brother is singing a song. Next week she will be going to Kandy to participate in the competition. Her friends won\'t be singing songs.',
+            'Nishadi is not a clever child. But she can dance well. Yesterday morning when I met her, she was dancing well. Her mother and father were looking at her. At this moment she is practising for a dancing competition. Nishadi\'s brother is singing a song. Next week she will be going to Kandy to participate in the competition. Her friends won\'t be singing songs.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
