@@ -19,6 +19,7 @@ import '../constants.dart';
 
 import '../size_config.dart';
 import 'instructions_screen.dart';
+import 'notification_screeen.dart';
 
 class CourseDetailsScreen extends StatefulWidget {
   static const String routeName = '/course-details';
@@ -317,6 +318,30 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                       ),
                     ),
                   ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.of(context)
+                  //         .pushNamed(NotificationScreen.routeName);
+                  //   },
+                  //   child: Container(
+                  //     margin: EdgeInsets.all(getProportionateScreenHeight(10)),
+                  //     padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(
+                  //           getProportionateScreenHeight(15)),
+                  //       color: kPrimaryColor,
+                  //     ),
+                  //     width: double.infinity,
+                  //     child: Text(
+                  //       'Notifications',
+                  //       style: TextStyle(
+                  //         fontSize: getProportionateScreenWidth(20),
+                  //         color: Colors.white,
+                  //       ),
+                  //       textAlign: TextAlign.center,
+                  //     ),
+                  //   ),
+                  // ),
                   buildLessonCard(
                     loadedCourses.items[1].title,
                     loadedCourses.items[1].description,

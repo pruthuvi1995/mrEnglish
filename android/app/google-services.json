@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "296888510336",
+    "project_id": "mrenglishpushnotification",
+    "storage_bucket": "mrenglishpushnotification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296888510336:android:04e963bf89d5cc08210365",
+        "android_client_info": {
+          "package_name": "tk.mrenglish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296888510336-doru134im01638jn8hb81viobki3ui0e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7e-ZuJQ2ekS6pBc8yi6rXpkYGUy8sMJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296888510336-doru134im01638jn8hb81viobki3ui0e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

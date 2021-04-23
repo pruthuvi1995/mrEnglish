@@ -101,7 +101,9 @@ class Days with ChangeNotifier {
       _items = loadedDays;
 
       _items.sort((a, b) => a.dayNo.compareTo(b.dayNo));
-
+      _items.forEach((element) {
+        print(element.dayDetailsId);
+      });
       notifyListeners();
     } catch (error) {
       print(error);
@@ -124,6 +126,10 @@ class Days with ChangeNotifier {
   Day findByID(String id) {
     return _items.firstWhere((day) => day.id == id);
   }
+
+  // Day findByDayIDAndUserID(String id) {
+  //   return _items.firstWhere((day) => day.id == id);
+  // }
 
   Day findByDetailsIdAndUpdateL1(String id, double mark, double totalMark) {
     Day findedDay = _items.firstWhere((day) => day.dayDetailsId == id);

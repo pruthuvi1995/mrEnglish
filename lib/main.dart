@@ -1,4 +1,5 @@
 import 'package:mr_english/screens/instructions_screen.dart';
+import 'package:mr_english/screens/notification_screeen.dart';
 
 import './screens/subscribe_screen.dart';
 import './screens/unsubscribe_screen.dart';
@@ -123,6 +124,7 @@ class MyApp extends StatelessWidget {
               InstructionsScreen.routeName: (ctx) => InstructionsScreen(),
               BeforeTrailPaperScreen.routeName: (ctx) =>
                   BeforeTrailPaperScreen(),
+              NotificationScreen.routeName: (ctx) => NotificationScreen(),
             },
           ),
         ));

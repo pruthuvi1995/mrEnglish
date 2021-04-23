@@ -93,7 +93,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
       throw (error);
     }
 
-    if (data == "Request was successfully processed.") {
+    print('1111111111111111');
+    print(dayDetailsId);
+    print('1111111111111111');
+
+    if (data == "Request was successfully processed." && dayDetailsId == null) {
       final url1 = 'https://mrenglish.tk/api/v1/dayDetails/$userId/$id';
 
       var today = new DateTime.now();
@@ -103,6 +107,35 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       try {
         await http.post(
+          url1,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeDay': activeDay,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else if (data == "Request was successfully processed." &&
+        dayDetailsId != null) {
+      final url1 = 'https://mrenglish.tk/api/v1/dayDetails/$dayDetailsId';
+
+      var today = new DateTime.now();
+      var activeDay =
+          today.add(new Duration(days: 7)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.put(
           url1,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -169,7 +202,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       var today = new DateTime.now();
       var activeYear =
-          today.add(new Duration(days: 7)).toString().substring(0, 10);
+          today.add(new Duration(days: 14)).toString().substring(0, 10);
       print(activeYear);
 
       try {
