@@ -3,50 +3,53 @@ import 'package:flutter/material.dart';
 import '../providers/message.dart';
 
 class MessagingWidget extends StatefulWidget {
+  final List<Message> message;
+
+  MessagingWidget(this.message);
+
   @override
-  _MessagingWidgetState createState() => _MessagingWidgetState();
+  _MessagingWidgetState createState() => _MessagingWidgetState(message);
 }
 
 class _MessagingWidgetState extends State<MessagingWidget> {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  final List<Message> messages = [];
+  final List<Message> messages;
+
+  _MessagingWidgetState(this.messages);
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  // final List<Message> messages = [];
 
   @override
-  void initState() {
-    print('123456');
+  // void initState() {
+  //   super.initState();
+  //   _firebaseMessaging.configure(
+  //     onMessage: (Map<String, dynamic> message) async {
+  //       print("onMessage: $message");
+  //       final notification = message['notification'];
+  //       setState(() {
+  //         messages.add(Message(
+  //             title: notification['title'], body: notification['body']));
+  //       });
+  //     },
+  //     onLaunch: (Map<String, dynamic> message) async {
+  //       print("onLaunch: $message");
 
-    super.initState();
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        print("onMessage: $message");
-        final notification = message['notification'];
-        setState(() {
-          messages.add(Message(
-              title: notification['title'], body: notification['body']));
-        });
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
-
-        final notification = message['data'];
-        setState(() {
-          messages.add(Message(
-            title: '${notification['title']}',
-            body: '${notification['body']}',
-          ));
-        });
-      },
-      onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
-      },
-    );
-    _firebaseMessaging.requestNotificationPermissions(
-        const IosNotificationSettings(sound: true, badge: true, alert: true));
-  }
+  //       final notification = message['data'];
+  //       setState(() {
+  //         messages.add(Message(
+  //             title: notification['title'], body: notification['body']));
+  //       });
+  //     },
+  //     onResume: (Map<String, dynamic> message) async {
+  //       print("onResume: $message");
+  //     },
+  //   );
+  //   _firebaseMessaging.requestNotificationPermissions(
+  //       const IosNotificationSettings(sound: true, badge: true, alert: true));
+  // }
 
   @override
   Widget build(BuildContext context) => ListView(
-        children: messages.map(buildMessage).toList().reversed,
+        children: messages.map(buildMessage).toList(),
       );
 
   Widget buildMessage(Message message) => ListTile(

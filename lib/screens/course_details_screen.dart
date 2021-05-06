@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mr_english/screens/subscribe_screen.dart';
 import 'package:mr_english/screens/unsubscribe_screen.dart';
 
@@ -16,7 +17,8 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../constants.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
+import '../providers/message.dart';
 import '../size_config.dart';
 import 'instructions_screen.dart';
 import 'notification_screeen.dart';
@@ -30,10 +32,45 @@ class CourseDetailsScreen extends StatefulWidget {
 
 class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   var _isInit = true;
-
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FlutterLocalNotificationsPlugin fltNotification;
   var _isLoading = false;
 
   @override
+  void initState() {
+    notificationPermission();
+    super.initState();
+    // _firebaseMessaging.configure(
+    //   onMessage: (Map<String, dynamic> message) async {
+    //     print("onMessage: $message");
+    //     final notification = message['notification'];
+    //     setState(() {
+    //       messages.add(Message(
+    //           title: notification['title'], body: notification['body']));
+    //     });
+    //   },
+    //   onLaunch: (Map<String, dynamic> message) async {
+    //     print("onLaunch: $message");
+
+    //     final notification = message['data'];
+    //     setState(() {
+    //       messages.add(Message(
+    //           title: notification['title'], body: notification['body']));
+    //     });
+    //   },
+    //   onResume: (Map<String, dynamic> message) async {
+    //     print("onResume: $message");
+    //   },
+    // );
+    // _firebaseMessaging.requestNotificationPermissions(
+    //     const IosNotificationSettings(sound: true, badge: true, alert: true));
+  }
+
+  void getToken() async {
+    print('1234567');
+    print(await messaging.getToken());
+  }
+
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
@@ -270,6 +307,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    getToken();
     final loadedCourses = Provider.of<Courses>(context, listen: false);
     var isSubscribed = Provider.of<Auth>(context, listen: true).isSubscribed;
     final token = Provider.of<Auth>(context, listen: false).token;
@@ -320,8 +358,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                   ),
                   // GestureDetector(
                   //   onTap: () {
-                  //     Navigator.of(context)
-                  //         .pushNamed(NotificationScreen.routeName);
+                  //     // Navigator.of(context).pushNamed(
+                  //     //     NotificationScreen.routeName,
+                  //     //     arguments: messages);
                   //   },
                   //   child: Container(
                   //     margin: EdgeInsets.all(getProportionateScreenHeight(10)),
@@ -361,6 +400,39 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                 ]),
               ),
             ),
+    );
+  }
+
+  void initMessaging() {
+    var androiInit = AndroidInitializationSettings('ic_launcher');
+    var iosInit = IOSInitializationSettings();
+    var initSetting = InitializationSettings(android: androiInit, iOS: iosInit);
+    fltNotification = FlutterLocalNotificationsPlugin();
+    fltNotification.initialize(initSetting);
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      showNotification();
+    });
+  }
+
+  void showNotification() async {
+    var androidDetails = AndroidNotificationDetails(
+        'channelId', 'channelName', 'channelDescription');
+    var iosDetails = IOSNotificationDetails();
+    var generalNotificationDetails =
+        NotificationDetails(android: androidDetails, iOS: iosDetails);
+    await fltNotification.show(0, 'title', 'body', generalNotificationDetails,
+        payload: 'Notification');
+  }
+
+  void notificationPermission() async {
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
     );
   }
 }

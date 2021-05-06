@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mr_english/screens/instructions_screen.dart';
 import 'package:mr_english/screens/notification_screeen.dart';
 
@@ -42,7 +44,12 @@ import 'package:flutter/services.dart';
 
 // import './screens/auth_screen.dart.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -129,4 +136,10 @@ class MyApp extends StatelessWidget {
           ),
         ));
   }
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
 }

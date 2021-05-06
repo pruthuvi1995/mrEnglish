@@ -65,12 +65,12 @@ class _BodyState extends State<BodySplashScren> {
                     Spacer(
                       flex: 4,
                     ),
-                    DefaultButton(
-                      text: 'Continue',
-                      press: () => {
-                        Navigator.pushNamed(context, SignInScreen.routeName),
-                      },
-                    ),
+                    // DefaultButton(
+                    //   text: 'Continue',
+                    //   press: () => {
+                    //     Navigator.pushNamed(context, SignInScreen.routeName),
+                    //   },
+                    // ),
                     Spacer(),
                   ]),
                 )),

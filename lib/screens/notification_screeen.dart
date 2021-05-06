@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../providers/message.dart';
 import '../widgets/messaging_widget.dart';
 
 import '../constants.dart';
@@ -11,7 +12,7 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dayId = ModalRoute.of(context).settings.arguments as List;
+    final messages = ModalRoute.of(context).settings.arguments as List<Message>;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -23,7 +24,7 @@ class NotificationScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: MessagingWidget(),
+      body: MessagingWidget(messages),
     );
   }
 }
