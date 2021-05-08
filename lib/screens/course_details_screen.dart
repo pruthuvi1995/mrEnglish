@@ -326,7 +326,21 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
       drawer: AppDrawer(),
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'මඳ වේලාවක් රැදී සිටින්න.',
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: getProportionateScreenWidth(15),
+                    ),
+                  ),
+                  SizedBox(height: getProportionateScreenWidth(15)),
+                  CircularProgressIndicator(),
+                ],
+              ),
             )
           : RefreshIndicator(
               onRefresh: () => _refreshCourses(context),

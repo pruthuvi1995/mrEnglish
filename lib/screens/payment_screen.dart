@@ -301,7 +301,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
       ),
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'මඳ වේලාවක් රැදී සිටින්න.',
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: getProportionateScreenWidth(15),
+                    ),
+                  ),
+                  SizedBox(height: getProportionateScreenWidth(15)),
+                  CircularProgressIndicator(),
+                ],
+              ),
             )
           : Container(
               margin: EdgeInsets.only(top: getProportionateScreenHeight(110)),

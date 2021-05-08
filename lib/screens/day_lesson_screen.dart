@@ -91,9 +91,9 @@ class DayLessonScreen extends StatelessWidget {
                 ),
                 width: double.infinity,
                 child: Text(
-                  'Done. I need the paper.',
+                  'පාඩම බලා අවසන්. paper 1 ලබා දෙන්න.',
                   style: TextStyle(
-                    fontSize: getProportionateScreenHeight(20),
+                    fontSize: getProportionateScreenWidth(15),
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.center,

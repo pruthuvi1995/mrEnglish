@@ -422,21 +422,47 @@ class _McqPaperState extends State<McqPaper> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         type == 'trail'
-                            ? Text(
-                                'You get ${roundDouble(totalMark, 2) * 100}% for the given trail paper.Let\'s start the lesson.',
-                                style: TextStyle(
-                                  fontSize: getProportionateScreenHeight(18),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
+                            ? Column(
+                                children: [
+                                  Text(
+                                    'You get ${roundDouble(totalMark, 2) * 100}% for the given trail paper.Let\'s start the lesson.',
+                                    style: TextStyle(
+                                      fontSize:
+                                          getProportionateScreenHeight(18),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Text(
+                                    'ඔබ trial paper 1 සඳහා ${roundDouble(totalMark, 2) * 100}% ලකුණු ප්‍රමාණයක් ලබාගෙන ඇත. පාඩම ආරම්භ කරමු.',
+                                    style: TextStyle(
+                                      fontSize:
+                                          getProportionateScreenHeight(18),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               )
-                            : Text(
-                                'You get ${roundDouble(totalMark, 2) * 100}% for the given paper. The lesson is over.',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
+                            : Column(
+                                children: [
+                                  Text(
+                                    'You get ${roundDouble(totalMark, 2) * 100}% for the given paper. The lesson is over.',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Text(
+                                    'ඔබ paper 1 සඳහා ${roundDouble(totalMark, 2) * 100}% ලකුණු ප්‍රමාණයක් ලබාගෙන ඇත. පාඩම අවසානයි.',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               ),
                         SizedBox(
                           height: getProportionateScreenHeight(18),

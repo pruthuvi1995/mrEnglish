@@ -132,7 +132,7 @@ class Day11Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'මෙහි කලින් සිදුවීම \'අපි උයන්න පටන්ගෙන තිබුණා\' යන්නයි.මේ නිසා past perfect යෙදිය යුතුය.මෙහි කලින් සිදුවීම \'මම මගේ ලියකියවිලි රැක ගත්තා \' යන්නයි.එය past perfect වලින් යෙදේ.පසුව වූ සිදුවීම simple past tense වලින් යෙදේ.',
+            'මෙහි කලින් සිදුවීම \'මම මගේ ලියකියවිලි රැක ගත්තා \' යන්නයි.එය past perfect වලින් යෙදේ.පසුව වූ සිදුවීම simple past tense වලින් යෙදේ.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -201,8 +201,51 @@ class Day11Lesson01 extends StatelessWidget {
               color: Colors.black,
             ),
           ),
+
           Text(
-            'I / You / We / They / He / She / It + had decided to organize a cricket match.',
+            'I had decided to organize a cricket match.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'You had decided to organize a cricket match.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'We had decided to organize a cricket match.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'They had decided to organize a cricket match.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'He had decided to organize a cricket match.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'She had decided to organize a cricket match.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'It had decided to organize a cricket match.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -292,7 +335,49 @@ class Day11Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'I / You / We / They / He / She / It + hadn\'t grown flowers',
+            'I hadn\'t grown flowers',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'You hadn\'t grown flowers',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'We hadn\'t grown flowers',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'They hadn\'t grown flowers',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'He hadn\'t grown flowers',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'She hadn\'t grown flowers',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'It hadn\'t grown flowers',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -512,8 +597,51 @@ class Day11Lesson01 extends StatelessWidget {
               color: Colors.black,
             ),
           ),
+
           Text(
-            'I / You / We / They / He / She / It +  will have built a house',
+            'I will have built a house',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'You will have built a house',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'We will have built a house',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'They will have built a house',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'He will have built a house',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'She will have built a house',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'It will have built a house',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
