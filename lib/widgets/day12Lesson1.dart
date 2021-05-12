@@ -678,7 +678,7 @@ class Day12Lesson01 extends StatelessWidget {
           ),
 
           Text(
-            'John works in a fish market. There, he has been selling fish for three years. Before that, he had been selling vegetables for one year. Now he is going to stop selling fish. Then he will start selling fruit. John will be selling vegetables for eight months. But he will not have been selling vegetables.',
+            'John works in a fish market. There, he has been selling fish for three years. Before that, he had been selling vegetables for one year. Now he is going to stop selling fish. Then he will start selling fruit. John will have been selling vegetables for eight months. But he will not have been selling vegetables.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,

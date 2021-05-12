@@ -26,6 +26,7 @@ import './screens/years_overview_screen.dart';
 import './screens/sign_in_screen.dart';
 import './screens/splash_screen.dart';
 import 'screens/before_trail_paper_screen.dart';
+import 'screens/course_list_screen.dart';
 import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -95,7 +96,7 @@ class MyApp extends StatelessWidget {
             theme: theme(),
             // home: CourseDetailsScreen(),
             home: auth.isAuth
-                ? CourseDetailsScreen()
+                ? CourseListScreen()
                 : FutureBuilder(
                     future: auth.tryAutoLogin(),
                     builder: (ctx, authResultSnapshot) =>
@@ -106,6 +107,7 @@ class MyApp extends StatelessWidget {
                   ),
 
             routes: {
+              CourseDetailsScreen.routeName: (ctx) => CourseDetailsScreen(),
               DaysOverviewScreen.routeName: (ctx) => DaysOverviewScreen(),
               YearsOverviewScreen.routeName: (ctx) => YearsOverviewScreen(),
               DayDetailsScreen.routeName: (ctx) => DayDetailsScreen(),

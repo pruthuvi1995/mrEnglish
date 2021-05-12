@@ -29,9 +29,9 @@ class DayLessonScreen extends StatelessWidget {
         Provider.of<Lessons>(context, listen: false).findByID(dayId[1]);
     Widget dayLesson = DayLessonText(loadedLesson.lesson);
 
-    // final height = MediaQuery.of(context).size.height -
-    //     appBar.preferredSize.height -
-    //     MediaQuery.of(context).padding.top;
+    final height = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
 
     YoutubePlayerController _controller = YoutubePlayerController(
       initialVideoId: loadedLesson.videoURL,
@@ -47,7 +47,7 @@ class DayLessonScreen extends StatelessWidget {
         child: Column(children: <Widget>[
           Container(
             width: double.infinity,
-            // height: height * .4,
+            height: height * .4,
             child: Card(
               child: Column(children: <Widget>[
                 // Text(
@@ -71,9 +71,11 @@ class DayLessonScreen extends StatelessWidget {
             ),
           ),
           Container(
-              height: getProportionateScreenHeight(360), child: dayLesson),
+            height: height * .5,
+            child: dayLesson,
+          ),
           Container(
-            // height: height * .1,
+            height: height * .1,
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(
