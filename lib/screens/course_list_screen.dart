@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mr_english/screens/subscribe_screen.dart';
 import 'package:mr_english/screens/unsubscribe_screen.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../providers/auth.dart';
 import '../providers/courses.dart';
@@ -21,7 +23,9 @@ import '../constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../providers/message.dart';
 import '../size_config.dart';
+import 'course01_details_screen.dart';
 import 'instructions_screen.dart';
+import 'issue_certificate_screen.dart';
 import 'notification_screeen.dart';
 
 class CourseListScreen extends StatefulWidget {
@@ -36,7 +40,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   FlutterLocalNotificationsPlugin fltNotification;
   var _isLoading = false;
-  var _page = 'ourCourses';
+  var _page = 'Our Courses';
 
   @override
   void initState() {
@@ -121,19 +125,25 @@ class _CourseListScreenState extends State<CourseListScreen> {
     Navigator.of(context).pushNamed(navigation);
   }
 
-  Widget buildCircle(String page) {
+  Widget buildCircle(String page, double height) {
+    var iconStyle;
+    if (page == 'Our Courses')
+      iconStyle = Icons.library_books;
+    else if (page == 'Instructions')
+      iconStyle = Icons.info_outlined;
+    else if (page == 'My Profile') iconStyle = Icons.people_outline;
     return Column(
       children: [
-        Text('Our courses'),
+        Text(page),
         Container(
-          width: 75,
-          height: 75,
+          width: getProportionateScreenWidth(height * .08),
+          height: getProportionateScreenWidth(height * .08),
           decoration: new BoxDecoration(
             color: kPrimaryColor,
             shape: BoxShape.circle,
           ),
-          padding: EdgeInsets.all(getProportionateScreenWidth(5)),
-          margin: EdgeInsets.all(getProportionateScreenWidth(10)),
+          padding: EdgeInsets.all(height * .001),
+          margin: EdgeInsets.all(height * .001),
           child: GestureDetector(
             onTap: () {
               setState(() {
@@ -141,7 +151,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
               });
             },
             child: Icon(
-              Icons.library_books,
+              iconStyle,
               size: getProportionateScreenWidth(35),
               color: Colors.white,
             ),
@@ -158,21 +168,28 @@ class _CourseListScreenState extends State<CourseListScreen> {
           borderRadius: BorderRadius.circular(getProportionateScreenWidth(20)),
         ),
         elevation: 6,
-        margin: EdgeInsets.all(getProportionateScreenWidth(5)),
+        margin: EdgeInsets.only(
+            left: getProportionateScreenWidth(25),
+            right: getProportionateScreenWidth(25),
+            top: getProportionateScreenWidth(10)),
         child: Column(
           children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: getProportionateScreenWidth(20),
+            Padding(
+              padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: getProportionateScreenWidth(15),
+                ),
               ),
             ),
             GestureDetector(
               onTap: () {
                 Navigator.of(context)
-                    .pushNamed(UnsubscribeScreen.routeName, arguments: [
-                  navigation,
-                  token,
+                    .pushNamed(Course01DetailsScreen.routeName, arguments: [
+                  title,
+                  description,
+                  uTubeUrl,
                 ]);
 
                 // subscribeOnTap(navigation, isSubscribed, token);
@@ -189,11 +206,11 @@ class _CourseListScreenState extends State<CourseListScreen> {
                       BorderRadius.circular(getProportionateScreenHeight(15)),
                   color: kPrimaryColor,
                 ),
-                padding: EdgeInsets.all(getProportionateScreenWidth(5)),
+                padding: EdgeInsets.all(getProportionateScreenWidth(10)),
                 child: Text(
-                  'More details',
+                  'වැඩි විස්තර සඳහා',
                   style: TextStyle(
-                      fontSize: getProportionateScreenWidth(20),
+                      fontSize: getProportionateScreenWidth(15),
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
@@ -204,23 +221,85 @@ class _CourseListScreenState extends State<CourseListScreen> {
         ));
   }
 
+  final appBar = AppBar(
+    title: Text(
+      'Mr English',
+      style: TextStyle(
+        color: kPrimaryColor,
+        fontWeight: FontWeight.bold,
+        fontSize: getProportionateScreenHeight(17),
+      ),
+    ),
+  );
+
+  double roundDouble(double value, int places) {
+    double mod = pow(10.0, places);
+    return ((value * mod).round().toDouble() / mod);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final firstName = Provider.of<Auth>(context, listen: false).firstName;
+    final lastName = Provider.of<Auth>(context, listen: false).lastName;
+    final nicNo = Provider.of<Auth>(context, listen: false).nicNo;
+    var mark = Provider.of<Auth>(context, listen: false).mark;
+    final noOfFinishedLessons =
+        Provider.of<Auth>(context, listen: false).noOfFinishedLessons;
+    String name = '$firstName $lastName';
+    String stringMark = '${mark.toString()}%';
+    mark = roundDouble(mark, 2);
     getToken();
     final loadedCourses = Provider.of<Courses>(context, listen: false);
-    var isSubscribed = Provider.of<Auth>(context, listen: true).isSubscribed;
     final token = Provider.of<Auth>(context, listen: false).token;
+
+    final height = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
+    YoutubePlayerController _controller1 = YoutubePlayerController(
+      initialVideoId: 'OD5Vo7U_GP4',
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+
+    YoutubePlayerController _controller2 = YoutubePlayerController(
+      initialVideoId: '7lknBCHMvPA',
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+
+    YoutubePlayerController _controller3 = YoutubePlayerController(
+      initialVideoId: 'Sa_4Ruu8cUM',
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+
+    YoutubePlayerController _controller4 = YoutubePlayerController(
+      initialVideoId: 'sEvTMwq9_i4',
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+
+    YoutubePlayerController _controller5 = YoutubePlayerController(
+      initialVideoId: '4mMNb7_-PNQ',
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Our Courses',
-          style: TextStyle(
-            color: kPrimaryColor,
-            fontWeight: FontWeight.bold,
-            fontSize: getProportionateScreenHeight(20),
-          ),
-        ),
+        backgroundColor: kPrimaryColor,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       drawer: AppDrawer(),
       body: _isLoading
@@ -243,54 +322,293 @@ class _CourseListScreenState extends State<CourseListScreen> {
             )
           : RefreshIndicator(
               onRefresh: () => _refreshCourses(context),
-              child: SingleChildScrollView(
-                child: Column(children: <Widget>[
-                  Row(
+              child: Column(children: <Widget>[
+                Container(
+                    height: height * .25,
+                    width: double.infinity,
+                    decoration: new BoxDecoration(
+                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Hi...........',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: height * .05,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'Have a nice day!',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: height * .05,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    )),
+                Container(
+                  height: height * .15,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      buildCircle('ourCourses'),
-                      buildCircle('instructions'),
+                      buildCircle('Our Courses', height),
+                      buildCircle('Instructions', height),
+                      buildCircle('My Profile', height),
                     ],
                   ),
-                  if (_page == 'ourCourses')
-                    Column(
-                      children: [
-                        buildLessonCard(
-                          loadedCourses.items[1].title,
-                          loadedCourses.items[1].description,
-                          DaysOverviewScreen.routeName,
-                          token,
-                          'URL for course 01',
+                ),
+                if (_page == 'Our Courses')
+                  Container(
+                    height: height * .6,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            'ලබා ගත හැකි පාඨමාලා',
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(15),
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                          buildLessonCard(
+                            loadedCourses.items[1].title,
+                            loadedCourses.items[1].description,
+                            DaysOverviewScreen.routeName,
+                            token,
+                            'URL for course 01',
+                          ),
+                          buildLessonCard(
+                            loadedCourses.items[0].title,
+                            loadedCourses.items[0].description,
+                            YearsOverviewScreen.routeName,
+                            token,
+                            'URL for course 02',
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                else if (_page == 'Instructions')
+                  Container(
+                    height: height * .6,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: SingleChildScrollView(
+                            child: Column(children: <Widget>[
+                              Text(
+                                'App 1 භාවිතා කිරීමට පෙර පහත උපදෙස් හොදින් බලන්න.',
+                                style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(17),
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Divider(),
+                              Text(
+                                'App 1 install කරගන්නේ කොහොමද?',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: getProportionateScreenWidth(15),
+                                  color: Colors.black,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              Divider(),
+                              YoutubePlayer(
+                                controller: _controller1,
+                                bottomActions: [
+                                  CurrentPosition(),
+                                  ProgressBar(isExpanded: true),
+                                  PlayPauseButton(),
+                                  // FullScreenButton(),
+                                ],
+                                showVideoProgressIndicator: true,
+                                progressIndicatorColor: Colors.redAccent,
+                              ),
+                              Divider(),
+                              Text(
+                                'App 1ට register වන්නේ කොහොමද?',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: getProportionateScreenWidth(15),
+                                  color: Colors.black,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              Divider(),
+                              YoutubePlayer(
+                                controller: _controller2,
+                                bottomActions: [
+                                  CurrentPosition(),
+                                  ProgressBar(isExpanded: true),
+                                  PlayPauseButton(),
+                                  // FullScreenButton(),
+                                ],
+                                showVideoProgressIndicator: true,
+                                progressIndicatorColor: Colors.redAccent,
+                              ),
+                              Divider(),
+                              Text(
+                                'App 1 subscribe කරන්නේ කොහොමද?',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: getProportionateScreenWidth(15),
+                                  color: Colors.black,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              Divider(),
+                              YoutubePlayer(
+                                controller: _controller3,
+                                bottomActions: [
+                                  CurrentPosition(),
+                                  ProgressBar(isExpanded: true),
+                                  PlayPauseButton(),
+                                  // FullScreenButton(),
+                                ],
+                                showVideoProgressIndicator: true,
+                                progressIndicatorColor: Colors.redAccent,
+                              ),
+                              Divider(),
+                              Text(
+                                'Past paper course 1 follow කරන්නේ කොහොමද?',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: getProportionateScreenWidth(15),
+                                  color: Colors.black,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              Divider(),
+                              YoutubePlayer(
+                                controller: _controller4,
+                                bottomActions: [
+                                  CurrentPosition(),
+                                  ProgressBar(isExpanded: true),
+                                  PlayPauseButton(),
+                                  // FullScreenButton(),
+                                ],
+                                showVideoProgressIndicator: true,
+                                progressIndicatorColor: Colors.redAccent,
+                              ),
+                              Divider(),
+                              Text(
+                                'Basic English course 1 follow කරන්නේ කොහොමද?',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: getProportionateScreenWidth(15),
+                                  color: Colors.black,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              Divider(),
+                              YoutubePlayer(
+                                controller: _controller5,
+                                bottomActions: [
+                                  CurrentPosition(),
+                                  ProgressBar(isExpanded: true),
+                                  PlayPauseButton(),
+                                  // FullScreenButton(),
+                                ],
+                                showVideoProgressIndicator: true,
+                                progressIndicatorColor: Colors.redAccent,
+                              ),
+                            ]),
+                          ),
                         ),
-                        buildLessonCard(
-                          loadedCourses.items[0].title,
-                          loadedCourses.items[0].description,
-                          YearsOverviewScreen.routeName,
-                          token,
-                          'URL for course 02',
-                        ),
-                      ],
-                    )
-                  else if (_page == 'instructions')
-                    Column(
-                      children: [
-                        buildLessonCard(
-                          'instruction01',
-                          loadedCourses.items[1].description,
-                          DaysOverviewScreen.routeName,
-                          token,
-                          'URL for course 01',
-                        ),
-                        buildLessonCard(
-                          'instruction02',
-                          loadedCourses.items[0].description,
-                          YearsOverviewScreen.routeName,
-                          token,
-                          'URL for course 02',
-                        ),
-                      ],
-                    )
-                ]),
-              ),
+                      ),
+                    ),
+                  )
+                else if (_page == 'My Profile')
+                  Container(
+                    height: height * .6,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            'මගේ විස්තර',
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(15),
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                          Container(
+                              child: Column(children: [
+                            buildDetailsCard('Name', name),
+                            buildDetailsCard('NIC Number', nicNo),
+                            // buildDetailsCard('Phone Number', phoneNo),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                buildBigCard('Total', 'Mark', stringMark),
+                                buildBigCard('Completed', 'Days',
+                                    noOfFinishedLessons.toString()),
+                              ],
+                            ),
+                            if (noOfFinishedLessons == 40)
+                              Container(
+                                margin: EdgeInsets.only(
+                                    top: getProportionateScreenHeight(10),
+                                    left: getProportionateScreenHeight(10),
+                                    right: getProportionateScreenHeight(10)),
+                                child: RaisedButton(
+                                  color: kPrimaryColor,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(
+                                        IssueCertificateScreen.routeName);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(15),
+                                        child: Text(
+                                          'සහතික පත්‍රය ලබා ගැනීමට.',
+                                          style: TextStyle(
+                                            fontSize:
+                                                getProportionateScreenHeight(
+                                                    18),
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        width: double.infinity,
+                                        padding: EdgeInsets.only(
+                                            bottom:
+                                                getProportionateScreenHeight(
+                                                    15)),
+                                        child: Text(
+                                          'Click here',
+                                          style: TextStyle(
+                                            fontSize:
+                                                getProportionateScreenHeight(
+                                                    18),
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                          ])),
+                        ],
+                      ),
+                    ),
+                  )
+              ]),
             ),
     );
   }
@@ -325,6 +643,78 @@ class _CourseListScreenState extends State<CourseListScreen> {
       criticalAlert: false,
       provisional: false,
       sound: true,
+    );
+  }
+
+  Container buildBigCard(String title1, String title2, String value) {
+    return Container(
+      margin: EdgeInsets.only(
+          top: getProportionateScreenHeight(20),
+          right: getProportionateScreenHeight(10),
+          left: getProportionateScreenHeight(10)),
+      height: getProportionateScreenHeight(200),
+      width: getProportionateScreenWidth(150),
+      child: Card(
+        elevation: 6,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title1,
+              style: TextStyle(fontSize: getProportionateScreenHeight(17)),
+            ),
+            Text(
+              title2,
+              style: TextStyle(fontSize: getProportionateScreenHeight(17)),
+            ),
+            Text(
+              value,
+              style: TextStyle(fontSize: getProportionateScreenHeight(40)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container buildDetailsCard(String title, String name) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: getProportionateScreenHeight(10),
+      ),
+      width: getProportionateScreenWidth(300),
+      child: Card(
+        elevation: 6,
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              color: kPrimaryColor,
+              padding: EdgeInsets.all(getProportionateScreenHeight(10)),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: getProportionateScreenHeight(17),
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(getProportionateScreenHeight(10)),
+              child: Text(
+                name,
+                style: TextStyle(
+                  fontSize: getProportionateScreenHeight(17),
+                  color: kPrimaryColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

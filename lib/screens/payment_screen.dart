@@ -93,10 +93,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
       throw (error);
     }
 
-    print('1111111111111111');
-    print(dayDetailsId);
-    print('1111111111111111');
-
     if (data == "Request was successfully processed." && dayDetailsId == null) {
       final url1 = 'https://mrenglish.tk/api/v1/dayDetails/$userId/$id';
 
@@ -197,16 +193,46 @@ class _PaymentScreenState extends State<PaymentScreen> {
       throw (error);
     }
 
-    if (data == "Request was successfully processed.") {
+    if (data == "Request was successfully processed." &&
+        yearDetailsId == null) {
       final url1 = 'https://mrenglish.tk/api/v1/yearDetails/$userId/$id';
 
       var today = new DateTime.now();
       var activeYear =
-          today.add(new Duration(days: 14)).toString().substring(0, 10);
+          today.add(new Duration(days: 7)).toString().substring(0, 10);
       print(activeYear);
 
       try {
         await http.post(
+          url1,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeYear': activeYear,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else if (data == "Request was successfully processed." &&
+        yearDetailsId != null) {
+      final url1 = 'https://mrenglish.tk/api/v1/yearDetails/$yearDetailsId';
+
+      var today = new DateTime.now();
+      var activeYear =
+          today.add(new Duration(days: 7)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.put(
           url1,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',

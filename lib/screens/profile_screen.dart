@@ -19,7 +19,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final phoneNo = Provider.of<Auth>(context, listen: false).phoneNo;
     final firstName = Provider.of<Auth>(context, listen: false).firstName;
     final lastName = Provider.of<Auth>(context, listen: false).lastName;
     final nicNo = Provider.of<Auth>(context, listen: false).nicNo;
@@ -29,8 +28,7 @@ class ProfileScreen extends StatelessWidget {
     String name = '$firstName $lastName';
     String stringMark = '${mark.toString()}%';
     mark = roundDouble(mark, 2);
-    print(mark);
-    print(noOfFinishedLessons);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('My profile'),

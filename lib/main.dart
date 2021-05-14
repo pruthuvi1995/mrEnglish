@@ -26,6 +26,7 @@ import './screens/years_overview_screen.dart';
 import './screens/sign_in_screen.dart';
 import './screens/splash_screen.dart';
 import 'screens/before_trail_paper_screen.dart';
+import 'screens/course01_details_screen.dart';
 import 'screens/course_list_screen.dart';
 import 'theme.dart';
 import 'package:flutter/material.dart';
@@ -108,6 +109,7 @@ class MyApp extends StatelessWidget {
 
             routes: {
               CourseDetailsScreen.routeName: (ctx) => CourseDetailsScreen(),
+              Course01DetailsScreen.routeName: (ctx) => Course01DetailsScreen(),
               DaysOverviewScreen.routeName: (ctx) => DaysOverviewScreen(),
               YearsOverviewScreen.routeName: (ctx) => YearsOverviewScreen(),
               DayDetailsScreen.routeName: (ctx) => DayDetailsScreen(),
