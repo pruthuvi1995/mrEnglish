@@ -129,8 +129,8 @@ class _CourseListScreenState extends State<CourseListScreen> {
     var iconStyle;
     if (page == 'Our Courses')
       iconStyle = Icons.library_books;
-    else if (page == 'Instructions')
-      iconStyle = Icons.info_outlined;
+    else if (page == 'Help')
+      iconStyle = Icons.support_agent_outlined;
     else if (page == 'My Profile') iconStyle = Icons.people_outline;
     return Column(
       children: [
@@ -257,7 +257,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
         MediaQuery.of(context).padding.top;
 
     YoutubePlayerController _controller1 = YoutubePlayerController(
-      initialVideoId: 'OD5Vo7U_GP4',
+      initialVideoId: 'w8LfuX4BrOY',
       flags: YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -265,7 +265,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
     );
 
     YoutubePlayerController _controller2 = YoutubePlayerController(
-      initialVideoId: '7lknBCHMvPA',
+      initialVideoId: 'OD69bEBZzRU',
       flags: YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -359,7 +359,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       buildCircle('Our Courses', height),
-                      buildCircle('Instructions', height),
+                      buildCircle('Help', height),
                       buildCircle('My Profile', height),
                     ],
                   ),
@@ -395,7 +395,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                       ),
                     ),
                   )
-                else if (_page == 'Instructions')
+                else if (_page == 'Help')
                   Container(
                     height: height * .6,
                     child: SingleChildScrollView(
