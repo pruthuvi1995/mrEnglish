@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class Day16Lesson01 extends StatelessWidget {
+class Day17Lesson02 extends StatelessWidget {
   double titleSize = getProportionateScreenHeight(20);
   double size = getProportionateScreenHeight(18);
   @override
@@ -15,7 +15,7 @@ class Day16Lesson01 extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Divider(),
           Text(
-            'Introduction',
+            'May',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: titleSize,
@@ -25,7 +25,260 @@ class Day16Lesson01 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'ඉංග්‍රීසි භාෂාවේදී යමක් කරමුද (යෝජනාවක්) යන්න දැක්වීමට Let\'s හෝ shall we යොදා ගනී.',
+            'ඉංග්‍රීසි භාෂාවේ may යන්න අවස්ථා කිහිපයකදී යොදා ගනී.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'permisiion ලබා ගැනීම සඳහා ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Example: ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '  May I come in?',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            'යමක් සිදුවීමේ හැකියාව දැක්වීමට',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Example: ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '  It may happen again.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  (සමහරවිට එය නැවත සිදු වේවී.)',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            'සුභ පැතීමක් සඳහා',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Example: ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '  Noble triple gems may protect you.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  (ඔබට තෙරුවන් සරණයි.)',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            'permission ලබා ගැනීම සඳහා may යොදා ගැනීමේදී එයට පිළිතුරු ලබාදෙන අයුරු සලකා බලමු.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Question: May I leave this room?',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Answer: Yes, you may හෝ No, you may not.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'ඉහත කරුණ පිළිබඳව දැඩි අවධානයක් යොමු කරන්න. මොකද paper වල dialogue ලිවීමේදී ඉහත කරුණු ඉතා වැදගත් වේ.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Negative form',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'may -> may not',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.green,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'may සමඟ don\'t, doesn\'t, didn\'t යොදන්නේ නැත.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'They don\'t may have enough information at this moment.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'මෙය වැරදිය. නිවැරිදි අකාරය වන්නේ,',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'They may not have enough information at this moment.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -33,7 +286,7 @@ class Day16Lesson01 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'Let\'s',
+            'Might',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: titleSize,
@@ -43,7 +296,7 @@ class Day16Lesson01 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'මෙහි let\'s යන්නෙන් දක්වන්නේ let us යන්නයි. එනම් එහි අපි යන suject එක සැඟවී ඇත. Let\'s යොදාගෙන අපි වාක්‍යයක් සැදීමේදී පහත ක්‍රමය භාවිතා කරයි.',
+            'මෙහි විවිධ යෙදීම් පැවතුනද ඔබගේ විභාග අවශ්‍යතාවයට ගැළපෙන කොටස පමණක් සඳහන් කරමි.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -57,161 +310,7 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'Let\'s + verb + object',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'Example: ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  අපි තේ බොමුද?',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            'මෙහි',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  අපි - subject',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  තේ - object',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  බොමුද? - verb',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  Let\'s drink a cup of tea.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '  ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            'Example: ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  අපි චිත්‍රපටියක් බලමුද?',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            'මෙහි',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  අපි - subject',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  චිත්‍රපටියක් - object',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  බලමුද? - verb',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '  Let\'s watch a movie.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'මෙහිදී සෑම විටම \'අපි කරමුද\' යන්න අදහස් වන බැවින් කතෘ ලෙස වෙනත් noun එකක් නොයෙදේ. ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'අපි යමක් නොකරමු යන්නටද යොදා ගැනේ.',
+            'අනාගතයේ හෝ වර්තමානයේ යමක් සිදුවීම පිළිබඳව විශ්වාසයක් තැබිය නොහැකිනම් (not sure) might යොදයි.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -232,70 +331,14 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  අපි රණ්ඩු නොකරමු.',
+            '  It looks nice, but it might be expensive.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
             ),
           ),
           Text(
-            '  Let\'s not fight.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '  Let\'s don\'t fight.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'ඉහත ආකාර දෙකම නිවැරිදි වේ.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'Let\'s වෙනුවට Let us ලෙසද භාවිතා වන අවස්ථා ඇත.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'Example: ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  Let us start the project.',
+            '(එක ගොඩක් හොදයි වගේ පේනවා. හැබැයි ගොඩක් ගණන් ඇති.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -303,7 +346,7 @@ class Day16Lesson01 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'Shall we',
+            'May vs might',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: titleSize,
@@ -313,7 +356,21 @@ class Day16Lesson01 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'Shall we යන්නෙන්ද Let\'s අර්ථයම ලැබේ.',
+            'යමක් unsure බව දැක්වීමට ඉහතින් දක්වා ඇති ක්‍රම දෙකම භාවිතා කල හැකිය. නමුත් පොඩි පොඩි වෙනස්කම් ඇත.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'may වලට වඩා might හී frequency (සිදුවීම) අඩුය.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -334,14 +391,14 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  අපි ටිකක් කලින් එහාට යමුද?',
+            'I may go there.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
             ),
           ),
           Text(
-            '  Shall we go there a little bit early?',
+            '  (සමහරවිට මම එහෙ යාවි.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -355,7 +412,28 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'ඔබගේ පහසුව උදෙසා එකම Let\'s and shall we වාක්‍ය ආකාර දෙකෙන්ම දක්වා ඇත.',
+            '  I might go there.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  සමහරවිට මම එහෙ යාවි.(නමුත් may තරම් sure නැත.)',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'තවත් අවස්ථාවක් සලකමු.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -376,21 +454,14 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  අපි ධර්ම දේශනයක් අහමුද?',
+            '  I may dance with my wife.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
             ),
           ),
           Text(
-            '  Let\'s listen to a Dhamma sermon?',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '  Shall we listen to a Dhamma sermon?',
+            '  (සමහරවිට මම මගේ බිරිඳ සමඟ නටනවා.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -404,50 +475,60 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'Example: ',
+            '(ඒ සඳහා තමාගේ කැමැත්තක් ඇති බවත් එදිනෙදා ජීවිතයේදී එය සිදු කරන බවත් අදහස් වේ.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            '  අපි මේ පෝයට සිල් සමාදන් වෙමුද?',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '  Let\'s observe \'sil\' on poya day?',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '  Shall we observe \'sil\' on poya day?',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            'Predictions',
+            '',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
+            ),
+          ),
+          Text(
+            '  I might dance with my wife.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  (සමහරවිට මම මගේ බිරිඳ සමඟ නටනවා.)',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '(නමුත් තමාගේ එතරම් කැමැත්තක් නැති බවත් බිරිඳගේ බල කිරීමට එය සිදු කරන බවත් අර්ථවත් වේ.)',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Divider(),
+          Text(
+            'Ought to',
+            style: TextStyle(
               fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
+              fontSize: titleSize,
               color: Colors.black,
+              decoration: TextDecoration.underline,
             ),
           ),
+          Divider(),
           Text(
-            'will හා shall යන අවස්ථා 2ම predictions (අනාවැකි) ප්‍රකාශ කිරීමට යොදා ගනී.',
+            'English languahe හි ought to යන්න ටිකක් කලාතුරකින් දක්නට ලැබේ. මෙහි අර්ථය should යන්නට සමාන වුවද should තරම් තද නැත. මෙයට අතීත කාලයක් නොමැත.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -468,14 +549,14 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  There will be strong winds tomorrow.',
+            '  I ought to listen carefully.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
             ),
           ),
           Text(
-            '  (හෙට අධික සුලන් තිබේවි.)',
+            '  (මම සවන් දිය යුතුය.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -496,14 +577,14 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  We shall need another room when the guest comes.',
+            '  We ought to leave now.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
             ),
           ),
           Text(
-            '  (අමුත්තා ආපුවම අපිට වෙනත් කාමරයක් අවශ්‍ය වේවි.)',
+            '  (අපි දැන් මෙතනින් යා යුතුය.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -517,22 +598,35 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'Offers ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            '',
+            'Example: ',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            'උදව්වක් වැනි දෙයක් ප්‍රධානය කිරීමේදී shall යොදයි. ',
+            '  People ought to be a bit nicer to us.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  (මිනිස්සු ටිකත් අප ගැන කාරුණික විය යුතුය.)',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '  ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            'Negative form හීදී ought not to ලෙස යොදයි.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -553,56 +647,14 @@ class Day16Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  Shall I clean your kitchen.',
+            '  I ought not to say everything to my wife.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
             ),
           ),
           Text(
-            '  (මම ඔබේ කුස්සිය පිරිසිදු කරන්නම්.)',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '  ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            'I සහා we සමඟ will වෙනුවට shall යෙදිය හැකිය.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'Example: ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  We shall never forget your advice until death.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '  (මියෙන තෙක් ඔබ දුන් අවවාද අපි කවදාවත් අමතක නොකරාවි.)',
+            '  (මම සියල්ල බිරිඳට නොකියව යුතුය.)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,

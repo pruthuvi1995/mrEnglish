@@ -22,29 +22,31 @@ class PaperVideoScreen extends StatelessWidget {
         title: Text(videoId[1]),
       ),
       body: Center(
-        child: Column(children: <Widget>[
-          Container(
-            width: double.infinity,
-            // height: getProportionateScreenHeight(250),
-            child: Card(
-              child: SingleChildScrollView(
-                child: Column(children: <Widget>[
-                  YoutubePlayer(
-                    controller: _controller,
-                    bottomActions: [
-                      CurrentPosition(),
-                      ProgressBar(isExpanded: true),
-                      PlayPauseButton(),
-                      // FullScreenButton(),
-                    ],
-                    showVideoProgressIndicator: true,
-                    progressIndicatorColor: Colors.redAccent,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                // height: getProportionateScreenHeight(250),
+                child: Card(
+                  child: SingleChildScrollView(
+                    child: Column(children: <Widget>[
+                      YoutubePlayer(
+                        controller: _controller,
+                        bottomActions: [
+                          CurrentPosition(),
+                          ProgressBar(isExpanded: true),
+                          PlayPauseButton(),
+                          // FullScreenButton(),
+                        ],
+                        showVideoProgressIndicator: true,
+                        progressIndicatorColor: Colors.redAccent,
+                      ),
+                    ]),
                   ),
-                ]),
+                ),
               ),
-            ),
-          ),
-        ]),
+            ]),
       ),
     );
   }

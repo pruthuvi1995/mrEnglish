@@ -74,7 +74,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
           setState(() {});
           final url = 'https://mrenglish.tk/api/v1/auth/updateDetails';
           await http.put(
-            url,
+            Uri.parse(url),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               HttpHeaders.authorizationHeader: "Bearer ${details[2]}",
@@ -169,7 +169,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
     String body = jsonEncode(data);
     try {
       final http.Response response = await http.post(
-        url,
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -220,7 +220,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
     String body = jsonEncode(data);
     try {
       final http.Response response = await http.post(
-        url,
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

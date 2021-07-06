@@ -35,7 +35,7 @@ class _BodyUnsubscribeScreenState extends State<BodyUnsubscribeScreen> {
     final url = 'https://mrenglish.tk/api/v1/auth/updateDetails';
     try {
       await http.put(
-        url,
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Bearer $token",

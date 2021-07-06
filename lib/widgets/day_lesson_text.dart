@@ -16,14 +16,14 @@ import 'day09Lesson01.dart';
 import 'day09Lesson02.dart';
 import 'day10Lesson01.dart';
 import 'day11Lesson01.dart';
-import 'day12Lesson1.dart';
+import 'day12Lesson01.dart';
 import 'day13Lesson01.dart';
 import 'day14Lesson01.dart';
 import 'day15Lesson01.dart';
 import 'day16Lesson01.dart';
 import 'day16Lesson02.dart';
 import 'day17Lesson01.dart';
-import 'day17Lesson12.dart';
+import 'day17Lesson02.dart';
 import 'day18Lesson01.dart';
 import 'day18Lesson02.dart';
 import 'day19Lesson01.dart';
@@ -31,7 +31,7 @@ import 'day20Lesson01.dart';
 import 'day20Lesson02.dart';
 import 'day21Lesson01.dart';
 import 'day22Lesson01.dart';
-import 'day22Lesson02.dart';
+
 import 'day23Lesson01.dart';
 import 'day24Lesson01.dart';
 import 'day25Lesson01.dart';
@@ -126,14 +126,14 @@ class DayLessonText extends StatelessWidget {
       return Day21Lesson01();
     else if (lesson == 'day22Lesson01')
       return Day22Lesson01();
-    else if (lesson == 'day22Lesson02')
-      return Day22Lesson02();
     else if (lesson == 'day23Lesson01')
       return Day23Lesson01();
     else if (lesson == 'day24Lesson01')
       return Day24Lesson01();
     else if (lesson == 'day25Lesson01')
       return Day25Lesson01();
+    else if (lesson == 'day25Lesson02')
+      return Day25Lesson02();
     else if (lesson == 'day26Lesson01')
       return Day26Lesson01();
     else if (lesson == 'day27Lesson01')

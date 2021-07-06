@@ -8,6 +8,7 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+//  String language = 'Sinhala'
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -129,7 +129,7 @@ class _McqPaperState extends State<McqPaper> {
 
       try {
         await http.put(
-          url1,
+          Uri.parse(url1),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",
@@ -147,7 +147,7 @@ class _McqPaperState extends State<McqPaper> {
             Provider.of<Auth>(context, listen: false).noOfFinishedLessons;
 
         await http.put(
-          url2,
+          Uri.parse(url2),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",
@@ -200,7 +200,7 @@ class _McqPaperState extends State<McqPaper> {
 
       try {
         await http.put(
-          url1,
+          Uri.parse(url1),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",
@@ -219,7 +219,7 @@ class _McqPaperState extends State<McqPaper> {
             Provider.of<Auth>(context, listen: false).noOfFinishedLessons;
 
         await http.put(
-          url2,
+          Uri.parse(url2),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",
@@ -267,7 +267,7 @@ class _McqPaperState extends State<McqPaper> {
 
       try {
         await http.put(
-          url1,
+          Uri.parse(url1),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",
@@ -286,7 +286,7 @@ class _McqPaperState extends State<McqPaper> {
             Provider.of<Auth>(context, listen: false).noOfFinishedLessons;
 
         await http.put(
-          url2,
+          Uri.parse(url2),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer ${loadedDay.authToken}",

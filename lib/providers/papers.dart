@@ -17,7 +17,7 @@ class Papers with ChangeNotifier {
     final url = 'https://mrenglish.tk/api/v1/papers';
     try {
       final response = await http.get(
-        url,
+        Uri.parse(url),
         headers: {HttpHeaders.authorizationHeader: "Bearer $authToken"},
       );
 

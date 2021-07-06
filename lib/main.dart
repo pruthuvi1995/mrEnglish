@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:mr_english/screens/instructions_screen.dart';
-import 'package:mr_english/screens/notification_screeen.dart';
+import './screens/instructions_screen.dart';
+import './screens/notification_screeen.dart';
+import './screens/sample_essay_question_screen.dart';
 
 import './screens/subscribe_screen.dart';
 import './screens/unsubscribe_screen.dart';
@@ -136,6 +137,8 @@ class MyApp extends StatelessWidget {
               BeforeTrailPaperScreen.routeName: (ctx) =>
                   BeforeTrailPaperScreen(),
               NotificationScreen.routeName: (ctx) => NotificationScreen(),
+              SampleEssayQuestionScreen.routeName: (ctx) =>
+                  SampleEssayQuestionScreen(),
             },
           ),
         ));

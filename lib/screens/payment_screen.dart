@@ -75,7 +75,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final url = 'https://mrenglish.tk/api/v1/dayDetails/pay';
     try {
       final response = await http.post(
-        url,
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -103,7 +103,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       try {
         await http.post(
-          url1,
+          Uri.parse(url1),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer $token",
@@ -132,7 +132,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       try {
         await http.put(
-          url1,
+          Uri.parse(url1),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer $token",
@@ -175,7 +175,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final url = 'https://mrenglish.tk/api/v1/dayDetails/pay';
     try {
       final response = await http.post(
-        url,
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -199,12 +199,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       var today = new DateTime.now();
       var activeYear =
-          today.add(new Duration(days: 7)).toString().substring(0, 10);
+          today.add(new Duration(days: 21)).toString().substring(0, 10);
       print(activeYear);
 
       try {
         await http.post(
-          url1,
+          Uri.parse(url1),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer $token",
@@ -228,12 +228,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       var today = new DateTime.now();
       var activeYear =
-          today.add(new Duration(days: 7)).toString().substring(0, 10);
+          today.add(new Duration(days: 21)).toString().substring(0, 10);
       // print(activeYear);
 
       try {
         await http.put(
-          url1,
+          Uri.parse(url1),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: "Bearer $token",
@@ -272,7 +272,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text('Error 1ක් තියනවා.'),
-        content: Text(message),
+        content: message ==
+                "ඔබ සේවාවෙන් ඉවත් වී ඇත. නැවත සේවාවට subscribe කරන්න."
+            ? Text(message)
+            : Text(
+                '$message. ප්‍රධාන screen එක වෙත ගොස් ගැටළු කොටසෙහි දක්වා ඇති පියවර අනුගමනය කරන්න.'),
         actions: <Widget>[
           message == "ඔබ සේවාවෙන් ඉවත් වී ඇත. නැවත සේවාවට subscribe කරන්න."
               ? FlatButton(
@@ -302,6 +306,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     String id = items[0];
     Day loadedDay;
     Year loadedYear;
+    String dayCount;
 
     final userId = Provider.of<Auth>(context, listen: false).userId;
     final phoneNo = Provider.of<Auth>(context, listen: false).phoneNo;
@@ -309,9 +314,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
     if (items[1] == 'day') {
       loadedDay = Provider.of<Days>(context, listen: false).findByID(id);
       amount = loadedDay.amount;
+      dayCount = '7';
     } else {
       loadedYear = Provider.of<Years>(context, listen: false).findByID(id);
       amount = loadedYear.amount;
+      dayCount = '21';
     }
 
     return Scaffold(
@@ -392,7 +399,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               height: getProportionateScreenHeight(7),
                             ),
                             Text(
-                              'මෙම සේවාව ලබා ගැනීමට ඔබ Register වීමේදී ලබා දුන් දුරකථන අංකයෙන් Rs.${amount}ක මුදලක් අය කරගනු ලැබේ. Active කිරීම දින 7ක් සඳහා පමණක් වලංගු වේ.ඒ සඳහා ඔබ කැමතිද?',
+                              'මෙම සේවාව ලබා ගැනීමට ඔබ Register වීමේදී ලබා දුන් දුරකථන අංකයෙන් Rs.$amountක මුදලක් අය කරගනු ලැබේ. Active කිරීම දින $dayCountක් සඳහා පමණක් වලංගු වේ.ඒ සඳහා ඔබ කැමතිද?',
                               style: TextStyle(
                                 fontSize: getProportionateScreenHeight(13),
                                 color: kPrimaryColor,

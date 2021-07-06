@@ -10,6 +10,7 @@ import '../providers/days.dart';
 
 import '../size_config.dart';
 import 'before_trail_paper_screen.dart';
+import 'day_lesson_screen.dart';
 
 class DayDetailsScreen extends StatefulWidget {
   static const String routeName = '/day-details';
@@ -162,6 +163,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                         loadedLesson[0].id,
                         loadedLesson[0].lessonNo,
                         1,
+                        loadedDay.dayNo,
                       ),
                     )
                   else if (loadedDay.noOfLessons == 2)
@@ -178,6 +180,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedLesson[0].id,
                             loadedLesson[0].lessonNo,
                             1,
+                            loadedDay.dayNo,
                           ),
                         ),
                         InkWell(
@@ -191,6 +194,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedLesson[1].id,
                             loadedLesson[1].lessonNo,
                             2,
+                            loadedDay.dayNo,
                           ),
                         )
                       ],
@@ -209,6 +213,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedLesson[0].id,
                             loadedLesson[0].lessonNo,
                             1,
+                            loadedDay.dayNo,
                           ),
                         ),
                         InkWell(
@@ -222,6 +227,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedLesson[1].id,
                             loadedLesson[1].lessonNo,
                             2,
+                            loadedDay.dayNo,
                           ),
                         ),
                         InkWell(
@@ -235,6 +241,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             loadedLesson[2].id,
                             loadedLesson[2].lessonNo,
                             3,
+                            loadedDay.dayNo,
                           ),
                         )
                       ],
@@ -254,6 +261,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
     String lessonId,
     String lessonNo,
     int lessonIndex,
+    int dayNo,
   ) {
     return Card(
         shape: RoundedRectangleBorder(
@@ -347,16 +355,27 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                   fit: FlexFit.tight,
                   child: GestureDetector(
                     onTap: () {
-                      print(lessonId);
-                      Navigator.of(context).pushNamed(
-                        BeforeTrailPaperScreen.routeName,
-                        arguments: [
-                          dayId,
-                          lessonId,
-                          lessonIndex,
-                          lessonNo,
-                        ],
-                      );
+                      if (dayNo <= 40 || dayNo >= 35)
+                        Navigator.of(context).pushNamed(
+                          DayLessonScreen.routeName,
+                          arguments: [
+                            dayId,
+                            lessonId,
+                            lessonIndex,
+                            lessonNo,
+                            dayNo,
+                          ],
+                        );
+                      else
+                        Navigator.of(context).pushNamed(
+                          BeforeTrailPaperScreen.routeName,
+                          arguments: [
+                            dayId,
+                            lessonId,
+                            lessonIndex,
+                            lessonNo,
+                          ],
+                        );
                     },
                     child: Container(
                       alignment: Alignment.center,

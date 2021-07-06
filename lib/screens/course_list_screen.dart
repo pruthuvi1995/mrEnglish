@@ -73,7 +73,6 @@ class _CourseListScreenState extends State<CourseListScreen> {
   }
 
   void getToken() async {
-    print('1234567');
     print(await messaging.getToken());
   }
 
@@ -129,9 +128,11 @@ class _CourseListScreenState extends State<CourseListScreen> {
     var iconStyle;
     if (page == 'Our Courses')
       iconStyle = Icons.library_books;
-    else if (page == 'Help')
+    else if (page == 'උපදෙස්')
       iconStyle = Icons.support_agent_outlined;
-    else if (page == 'My Profile') iconStyle = Icons.people_outline;
+    else if (page == 'My Profile')
+      iconStyle = Icons.people_outline;
+    else if (page == 'ගැටළු') iconStyle = Icons.help;
     return Column(
       children: [
         Text(page),
@@ -359,8 +360,9 @@ class _CourseListScreenState extends State<CourseListScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       buildCircle('Our Courses', height),
-                      buildCircle('Help', height),
+                      buildCircle('උපදෙස්', height),
                       buildCircle('My Profile', height),
+                      buildCircle('ගැටළු', height),
                     ],
                   ),
                 ),
@@ -395,7 +397,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                       ),
                     ),
                   )
-                else if (_page == 'Help')
+                else if (_page == 'උපදෙස්')
                   Container(
                     height: height * .6,
                     child: SingleChildScrollView(
@@ -604,6 +606,169 @@ class _CourseListScreenState extends State<CourseListScreen> {
                                 ),
                               )
                           ])),
+                        ],
+                      ),
+                    ),
+                  )
+                else if (_page == 'ගැටළු')
+                  Container(
+                    padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+                    height: height * .6,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            'App 1 භාවිතා කරන විට ඔබට පැමිණි ගැටළුව',
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(17),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Divider(),
+                          Container(
+                            color: Colors.green,
+                            padding:
+                                EdgeInsets.all(getProportionateScreenWidth(5)),
+                            child: Text(
+                              'app එක  කිරීමේදී මතුවන ගැටළු පහත පියවර අනුගමනය කරමින් විසදා ගන්න. එකේ නොහැකිනම් පහත අංකයට whatsapp ඔස්සේ අප වෙත එවන්න.අපගේ කණ්ඩායම ඔබේ ගැටළුව විසදා දෙවි. (070 10 850 33)',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: getProportionateScreenWidth(15),
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Divider(),
+                          Divider(),
+                          Container(
+                            color: kPrimaryColor,
+                            padding:
+                                EdgeInsets.all(getProportionateScreenWidth(5)),
+                            child: Text(
+                              '1. app 1 මඟින් day එකක් active කිරීමට නොහැකිව පහත අකාරයේ message එකක් පැමිණියේ නම් ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: getProportionateScreenWidth(15),
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Divider(),
+                          Image.asset(
+                            'assets/images/problems_1_1.jpeg',
+                            fit: BoxFit.fitHeight,
+                            height: getProportionateScreenHeight(140),
+                            width: double.infinity,
+                          ),
+                          SizedBox(
+                            height: getProportionateScreenHeight(14),
+                          ),
+                          Text(
+                            'ඔබ සිටින ප්‍රදේශය තුල ඇති signal ගැටළු නිසා මේ ගැටළුව පැමිණේ.පහත පියවර අනුගමනය කරන්න.',
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'පියවර 01',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'පළමුව මෙම සේවාවෙන් unsubscribe වන්න. ඒ සඳහා ඔබ subscribe වීමේදී ලබා දුන් දුරකථන අංකයෙන් unreg mrenglish ලෙස type කර 77177 ට message එකක් දමන්න. ',
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          //  Image.asset(
+                          //   mcqQ[_qIndex].imageUrl,
+                          //   fit: BoxFit.fitHeight,
+                          //   height: getProportionateScreenHeight(140),
+                          //   width: double.infinity,
+                          // ),
+                          Text(
+                            'පියවර 02',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'දැන් ප්‍රධාන screen වෙත ගොස් එහි වම් පැත්තේ උද කෙලවරේ ඇති menu button 1 (ඉරි ලකුණු තුන) මත click කර එම menu එකේ පහළ ඇති logout මත click කරන්න.',
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Image.asset(
+                            'assets/images/problems_1_2.jpeg',
+                            fit: BoxFit.fitHeight,
+                            height: getProportionateScreenHeight(350),
+                            width: double.infinity,
+                          ),
+                          Image.asset(
+                            'assets/images/problems_1_3.jpeg',
+                            fit: BoxFit.fitHeight,
+                            height: getProportionateScreenHeight(350),
+                            width: double.infinity,
+                          ),
+                          Text(
+                            'පියවර 03',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'ඉන්පසු යලිත් ඔබේ ජාතික හැඳුනුම්පත් අංකය හා password එක ඇතුලත් කර login මත click කරන්න.',
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Image.asset(
+                            'assets/images/problems_1_4.jpeg',
+                            fit: BoxFit.fitHeight,
+                            height: getProportionateScreenHeight(350),
+                            width: double.infinity,
+                          ),
+                          Text(
+                            'පියවර 04',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'ඔබ කළින් අනුගමනය කළ පියවර අනුගමනය කරමින් දැන් යළිත් සේවාවට subscribe කරන්න.',
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'පියවර 05',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'ඔබේ ගැටළුව තවමත් පවතීනම් පැය කිහිපයකින් නැවත ඉහත පියවර අනුගමනය කරන්න.දැන් යළිත් සේවාවට subscribe කරන්න.',
+                            style: TextStyle(
+                              fontSize: getProportionateScreenWidth(15),
+                              color: Colors.black,
+                            ),
+                          ),
                         ],
                       ),
                     ),

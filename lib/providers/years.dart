@@ -20,11 +20,11 @@ class Years with ChangeNotifier {
 
     try {
       final response1 = await http.get(
-        url1,
+        Uri.parse(url1),
         headers: {HttpHeaders.authorizationHeader: "Bearer $authToken"},
       );
       final response2 = await http.get(
-        url2,
+        Uri.parse(url2),
         headers: {HttpHeaders.authorizationHeader: "Bearer $authToken"},
       );
 

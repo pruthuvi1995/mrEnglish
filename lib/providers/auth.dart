@@ -48,7 +48,7 @@ class Auth with ChangeNotifier {
 
     try {
       final http.Response response = await http.post(
-        url,
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -98,7 +98,7 @@ class Auth with ChangeNotifier {
     const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     try {
       final response = await http.post(
-        url,
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -126,7 +126,7 @@ class Auth with ChangeNotifier {
       noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
 
       final response1 = await http.post(
-        url1,
+        Uri.parse(url1),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -140,10 +140,10 @@ class Auth with ChangeNotifier {
       final response1Data = json.decode(response1.body);
       final data = response1Data['data']['subscriptionStatus'];
 
-      if (data == 'UNREGISTERED') {
-        isSubscribed = false;
-      } else {
+      if (data == 'REGISTERED') {
         isSubscribed = true;
+      } else {
+        isSubscribed = false;
       }
       _autoLogout();
       notifyListeners();
@@ -196,7 +196,7 @@ class Auth with ChangeNotifier {
     noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
 
     final response1 = await http.post(
-      url1,
+      Uri.parse(url1),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -210,10 +210,10 @@ class Auth with ChangeNotifier {
     final response1Data = json.decode(response1.body);
     final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'UNREGISTERED') {
-      isSubscribed = false;
-    } else {
+    if (data == 'REGISTERED') {
       isSubscribed = true;
+    } else {
+      isSubscribed = false;
     }
 
     notifyListeners();
@@ -254,7 +254,7 @@ class Auth with ChangeNotifier {
     extractedUserData['isSubscribed'] = isSubscribed;
 
     final response1 = await http.post(
-      url1,
+      Uri.parse(url1),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -268,10 +268,10 @@ class Auth with ChangeNotifier {
     final response1Data = json.decode(response1.body);
     final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'UNREGISTERED') {
-      isSubscribed = false;
-    } else {
+    if (data == 'REGISTERED') {
       isSubscribed = true;
+    } else {
+      isSubscribed = false;
     }
 
     final userData = json.encode(
@@ -329,7 +329,7 @@ class Auth with ChangeNotifier {
 
     extractedUserData['mark'] = mark;
     final response1 = await http.post(
-      url1,
+      Uri.parse(url1),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -343,10 +343,10 @@ class Auth with ChangeNotifier {
     final response1Data = json.decode(response1.body);
     final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'UNREGISTERED') {
-      isSubscribed = false;
-    } else {
+    if (data == 'REGISTERED') {
       isSubscribed = true;
+    } else {
+      isSubscribed = false;
     }
 
     final userData = json.encode(
@@ -376,7 +376,7 @@ class Auth with ChangeNotifier {
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
     final response1 = await http.post(
-      url1,
+      Uri.parse(url1),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -390,10 +390,10 @@ class Auth with ChangeNotifier {
     final response1Data = json.decode(response1.body);
     final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'UNREGISTERED') {
-      isSubscribed = false;
-    } else {
+    if (data == 'REGISTERED') {
       isSubscribed = true;
+    } else {
+      isSubscribed = false;
     }
 
     _token = extractedUserData['token'];
@@ -448,7 +448,7 @@ class Auth with ChangeNotifier {
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
     final response1 = await http.post(
-      url1,
+      Uri.parse(url1),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -462,10 +462,10 @@ class Auth with ChangeNotifier {
     final response1Data = json.decode(response1.body);
     final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'UNREGISTERED') {
-      isSubscribed = false;
-    } else {
+    if (data == 'REGISTERED') {
       isSubscribed = true;
+    } else {
+      isSubscribed = false;
     }
 
     // int count = int.parse(extractedUserData['noOfFinishedLessons'].toString());

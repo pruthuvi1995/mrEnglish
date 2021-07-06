@@ -1,3 +1,5 @@
+import 'package:mr_english/screens/sample_essay_question_screen.dart';
+
 import '../constants.dart';
 import '../providers/lessons.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class DayLessonScreen extends StatelessWidget {
     final loadedLesson =
         Provider.of<Lessons>(context, listen: false).findByID(dayId[1]);
     Widget dayLesson = DayLessonText(loadedLesson.lesson);
-
+    final int dayNo = dayId[4];
     final height = MediaQuery.of(context).size.height -
         appBar.preferredSize.height -
         MediaQuery.of(context).padding.top;
@@ -78,10 +80,17 @@ class DayLessonScreen extends StatelessWidget {
             height: height * .1,
             child: GestureDetector(
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(
-                  DayLessonQuestionScreen.routeName,
-                  arguments: dayId,
-                );
+                if (dayNo <= 40 || dayNo >= 35) {
+                  Navigator.of(context).pushReplacementNamed(
+                    SampleEssayQuestionScreen.routeName,
+                    arguments: dayId,
+                  );
+                } else {
+                  Navigator.of(context).pushReplacementNamed(
+                    DayLessonQuestionScreen.routeName,
+                    arguments: dayId,
+                  );
+                }
               },
               child: Container(
                 margin: EdgeInsets.all(getProportionateScreenHeight(10)),
