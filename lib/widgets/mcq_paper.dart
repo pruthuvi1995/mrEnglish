@@ -48,7 +48,6 @@ class _McqPaperState extends State<McqPaper> {
 
   void _clickNext() {
     setState(() {
-      print(_qIndex);
       _qIndex = _qIndex + 1;
       _showAnswer = false;
     });
@@ -245,8 +244,8 @@ class _McqPaperState extends State<McqPaper> {
       }
       totalDayMark = roundDouble(totalDayMark, 2);
 
-      Provider.of<Days>(context, listen: false)
-          .findByDetailsIdAndUpdateL3(loadedDay.dayDetailsId, mark, totalMark);
+      Provider.of<Days>(context, listen: false).findByDetailsIdAndUpdateL3(
+          loadedDay.dayDetailsId, mark, totalDayMark);
 
       Provider.of<Auth>(context, listen: false).updateMark(totalDayMark);
 
