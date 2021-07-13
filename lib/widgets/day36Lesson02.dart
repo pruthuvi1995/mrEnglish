@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class Day29Lesson02 extends StatelessWidget {
+class Day36Lesson02 extends StatelessWidget {
   double titleSize = getProportionateScreenHeight(20);
   double size = getProportionateScreenHeight(18);
   @override

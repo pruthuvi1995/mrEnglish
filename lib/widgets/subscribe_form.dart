@@ -31,7 +31,11 @@ class _SubscribeFormState extends State<SubscribeForm> {
   String _referenceNo;
   String _telNo;
 
-  Map<String, String> _subscribeData = {"phoneNo": "", "pinNo": ""};
+  Map<String, String> _subscribeData = {
+    "phoneNo": "",
+    "pinNo": "",
+    "serviceProvider": "",
+  };
   // String nICNo;
   // String password;
 
@@ -68,7 +72,8 @@ class _SubscribeFormState extends State<SubscribeForm> {
 
     try {
       if (_subscribeMode == SubscribeMode.PinVerify) {
-        bool verifyPin = await _verifyPin(_subscribeData['pinNo']);
+        bool verifyPin = await _verifyPin(
+            _subscribeData['pinNo'], _subscribeData['serviceProvider']);
         if (verifyPin) {
           // Provider.of<Auth>(context, listen: false).updateSubscription();
           setState(() {});
@@ -83,12 +88,13 @@ class _SubscribeFormState extends State<SubscribeForm> {
               {
                 'isSubscribed': true,
                 'phoneNo': _telNo,
+                'serviceProvider': _subscribeData['serviceProvider'],
               },
             ),
           );
 
           await Provider.of<Auth>(context, listen: false)
-              .updatePhoneNumber(_telNo);
+              .updatePhoneNumber(_telNo, _subscribeData['serviceProvider']);
           setState(() {});
           // await http.put(
           //   url,
@@ -103,7 +109,8 @@ class _SubscribeFormState extends State<SubscribeForm> {
         }
       } else if (_subscribeMode == SubscribeMode.PhoneNo) {
         print(_subscribeMode);
-        await _requestPin(_subscribeData['phoneNo']);
+        await _requestPin(
+            _subscribeData['phoneNo'], _subscribeData['serviceProvider']);
         // await Provider.of<Auth>(context, listen: false)
         //     .updatePhoneNumber(_subscribeData['phoneNo']);
         // setState(() {});
@@ -155,7 +162,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
     }
   }
 
-  Future<void> _requestPin(String phoneNumber) async {
+  Future<void> _requestPin(String phoneNumber, String serviceProvider) async {
     // if (!_formKey.currentState.validate()) {
     //   // Invalid!
     //   return;
@@ -165,7 +172,10 @@ class _SubscribeFormState extends State<SubscribeForm> {
     //   _isLoading = true;
     // });
     const url = 'https://mrenglish.tk/api/v1/dayDetails/getOtp';
-    Map<String, String> data = {"phoneNo": phoneNumber};
+    Map<String, String> data = {
+      "phoneNo": phoneNumber,
+      "serviceProvider": serviceProvider,
+    };
     String body = jsonEncode(data);
     try {
       final http.Response response = await http.post(
@@ -196,7 +206,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
     }
   }
 
-  Future<bool> _verifyPin(String pin) async {
+  Future<bool> _verifyPin(String pin, String serviceProvider) async {
     // if (!_formKey.currentState.validate()) {
     //   // Invalid!
     //   return;
@@ -216,6 +226,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
     Map<String, String> data = {
       "referenceNo": _referenceNo,
       "otp": pin,
+      "serviceProvider": serviceProvider,
     };
     String body = jsonEncode(data);
     try {
@@ -288,7 +299,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
               if (_subscribeMode == SubscribeMode.PhoneNo)
                 Container(
                   child: Text(
-                      'ඔබ ළඟ දැනට ඇති Dialog, Hutch හෝ Airtel දුරකථන අංකයක් පමණක් ඇතුළත් කරන්න. වෙනත් දුරකථන ජාල වලංගු නොවේ. 07xxxxxxxx ආකාරයට අංකය ඇතුළත් කිරීම අනිවාර්ය වේ. මේ සඳහා කිසිදු දෛනික ගාස්තුවක් අය නොකරේ. නමුත් ඔබ ලබා ගන්නා පාඩම අනුව ඔබ කැමතිනම් පමණක් rs.5 + බදු මුදලක් හෝ ඊට වඩා වැඩි මුදලක් ඔබෙන් අය කර ගනු ලැබේ.'),
+                      'ඔබ ළඟ දැනට ඇති Dialog, Hutch, Etisalat හෝ Airtel දුරකථන අංකයක් පමණක් ඇතුළත් කරන්න. වෙනත් දුරකථන ජාල වලංගු නොවේ. 07xxxxxxxx ආකාරයට අංකය ඇතුළත් කිරීම අනිවාර්ය වේ. මේ සඳහා කිසිදු දෛනික ගාස්තුවක් අය නොකරේ. නමුත් ඔබ ලබා ගන්නා පාඩම අනුව ඔබ කැමතිනම් පමණක් rs.5 + බදු මුදලක් හෝ ඊට වඩා වැඩි මුදලක් ඔබෙන් අය කර ගනු ලැබේ.'),
                 ),
               if (_subscribeMode == SubscribeMode.PinVerify)
                 Container(
@@ -335,11 +346,16 @@ class _SubscribeFormState extends State<SubscribeForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: (value) {
-        if (value.isEmpty || value.length < 10 || value[0] != '0') {
-          return 'Input the phone number';
+        if (value.isEmpty ||
+            value.length < 10 ||
+            value[0] != '0' ||
+            value[1] != '7') {
+          return 'Input the phone number correctly';
         }
-        if (value[1] != '7' || value[2] == '1' || value[2] == '0') {
-          return 'Input a Dialog, Hutch or Airtel phone number';
+        if (value[2] == '1' || value[2] == '0') {
+          _subscribeData['serviceProvider'] = "Mobitel";
+        } else {
+          _subscribeData['serviceProvider'] = "Dialog";
         }
       },
     );

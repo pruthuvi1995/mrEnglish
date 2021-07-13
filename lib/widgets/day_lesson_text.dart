@@ -37,19 +37,25 @@ import 'day24Lesson01.dart';
 import 'day25Lesson01.dart';
 import 'day25Lesson02.dart';
 import 'day26Lesson01.dart';
+import 'day26Lesson02.dart';
 import 'day27Lesson01.dart';
+import 'day27Lesson02.dart';
 import 'day28Lesson01.dart';
+import 'day28Lesson02.dart';
 import 'day29Lesson01.dart';
-import 'day29Lesson02.dart';
+
 import 'day30Lesson01.dart';
 import 'day31Lesson01.dart';
-import 'day31Lesson02.dart';
+
 import 'day32Lesson01.dart';
 import 'day32Lesson02.dart';
 import 'day33Lesson01.dart';
 import 'day34Lesson01.dart';
+import 'day34Lesson02.dart';
 import 'day35Lesson01.dart';
+import 'day35Lesson02.dart';
 import 'day36Lesson01.dart';
+import 'day36Lesson02.dart';
 import 'day37Lesson01.dart';
 import 'day37Lesson02.dart';
 import 'day38Lesson01.dart';
@@ -136,20 +142,22 @@ class DayLessonText extends StatelessWidget {
       return Day25Lesson02();
     else if (lesson == 'day26Lesson01')
       return Day26Lesson01();
+    else if (lesson == 'day26Lesson02')
+      return Day26Lesson02();
     else if (lesson == 'day27Lesson01')
       return Day27Lesson01();
+    else if (lesson == 'day27Lesson02')
+      return Day27Lesson02();
     else if (lesson == 'day28Lesson01')
       return Day28Lesson01();
+    else if (lesson == 'day28Lesson02')
+      return Day28Lesson02();
     else if (lesson == 'day29Lesson01')
       return Day29Lesson01();
-    else if (lesson == 'day29Lesson02')
-      return Day29Lesson02();
     else if (lesson == 'day30Lesson01')
       return Day30Lesson01();
     else if (lesson == 'day31Lesson01')
       return Day31Lesson01();
-    else if (lesson == 'day31Lesson02')
-      return Day31Lesson02();
     else if (lesson == 'day32Lesson01')
       return Day32Lesson01();
     else if (lesson == 'day32Lesson02')
@@ -158,10 +166,16 @@ class DayLessonText extends StatelessWidget {
       return Day33Lesson01();
     else if (lesson == 'day34Lesson01')
       return Day34Lesson01();
+    else if (lesson == 'day34Lesson02')
+      return Day34Lesson02();
     else if (lesson == 'day35Lesson01')
       return Day35Lesson01();
+    else if (lesson == 'day35Lesson02')
+      return Day35Lesson02();
     else if (lesson == 'day36Lesson01')
       return Day36Lesson01();
+    else if (lesson == 'day36Lesson02')
+      return Day36Lesson02();
     else if (lesson == 'day37Lesson01')
       return Day37Lesson01();
     else if (lesson == 'day37Lesson02')

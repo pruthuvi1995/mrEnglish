@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,6 +20,7 @@ class Auth with ChangeNotifier {
   double mark;
   int noOfFinishedLessons;
   Timer _authTimer;
+  String serviceProvider;
 
   bool get isAuth {
     return token != null;
@@ -70,6 +72,7 @@ class Auth with ChangeNotifier {
       nicNo = responseData['user']['NICNo'];
       mark = double.parse(responseData['user']['mark'].toString());
       noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
+      serviceProvider = responseData['user']['serviceProvider'];
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
@@ -85,6 +88,7 @@ class Auth with ChangeNotifier {
           'nicNo': nicNo,
           'mark': mark,
           'noOfFinishedLessons': noOfFinishedLessons,
+          'serviceProvider': serviceProvider,
         },
       );
       prefs.setString('userData', userData);
@@ -124,6 +128,7 @@ class Auth with ChangeNotifier {
       nicNo = responseData['user']['NICNo'];
       mark = double.parse(responseData['user']['mark'].toString());
       noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
+      serviceProvider = responseData['user']['serviceProvider'];
 
       final response1 = await http.post(
         Uri.parse(url1),
@@ -133,6 +138,7 @@ class Auth with ChangeNotifier {
         body: jsonEncode(
           {
             'phoneNo': phoneNo,
+            'serviceProvider': serviceProvider,
           },
         ),
       );
@@ -160,6 +166,7 @@ class Auth with ChangeNotifier {
           'nicNo': nicNo,
           'mark': mark,
           'noOfFinishedLessons': noOfFinishedLessons,
+          'serviceProvider': serviceProvider,
         },
       );
       prefs.setString('userData', userData);
@@ -194,6 +201,7 @@ class Auth with ChangeNotifier {
     nicNo = extractedUserData['nicNo'];
     mark = extractedUserData['mark'];
     noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
+    serviceProvider = extractedUserData['serviceProvider'];
 
     final response1 = await http.post(
       Uri.parse(url1),
@@ -203,6 +211,7 @@ class Auth with ChangeNotifier {
       body: jsonEncode(
         {
           'phoneNo': phoneNo,
+          'serviceProvider': serviceProvider,
         },
       ),
     );
@@ -242,7 +251,8 @@ class Auth with ChangeNotifier {
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
 
-  Future<void> updatePhoneNumber(String phoneNoNew) async {
+  Future<void> updatePhoneNumber(
+      String phoneNoNew, String serviceProvider) async {
     const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     isSubscribed = !isSubscribed;
     final prefs = await SharedPreferences.getInstance();
@@ -252,6 +262,7 @@ class Auth with ChangeNotifier {
 
     extractedUserData['phoneNo'] = phoneNoNew;
     extractedUserData['isSubscribed'] = isSubscribed;
+    extractedUserData['serviceProvider'] = serviceProvider;
 
     final response1 = await http.post(
       Uri.parse(url1),
@@ -261,6 +272,7 @@ class Auth with ChangeNotifier {
       body: jsonEncode(
         {
           'phoneNo': phoneNoNew,
+          'serviceProvider': serviceProvider,
         },
       ),
     );
@@ -286,6 +298,7 @@ class Auth with ChangeNotifier {
         'nicNo': extractedUserData['nicNo'],
         'mark': extractedUserData['mark'],
         'noOfFinishedLessons': extractedUserData['noOfFinishedLessons'],
+        'serviceProvider': extractedUserData['serviceProvider'],
       },
     );
     prefs.setString('userData', userData);
@@ -336,6 +349,7 @@ class Auth with ChangeNotifier {
       body: jsonEncode(
         {
           'phoneNo': extractedUserData['phoneNo'],
+          'serviceProvider': extractedUserData['serviceProvider'],
         },
       ),
     );
@@ -361,6 +375,7 @@ class Auth with ChangeNotifier {
         'nicNo': extractedUserData['nicNo'],
         'mark': extractedUserData['mark'],
         'noOfFinishedLessons': extractedUserData['noOfFinishedLessons'],
+        'serviceProvider': extractedUserData['serviceProvider'],
       },
     );
     prefs.setString('userData', userData);
@@ -383,6 +398,7 @@ class Auth with ChangeNotifier {
       body: jsonEncode(
         {
           'phoneNo': extractedUserData['phoneNo'],
+          'serviceProvider': extractedUserData['serviceProvider'],
         },
       ),
     );
@@ -405,6 +421,8 @@ class Auth with ChangeNotifier {
     nicNo = extractedUserData['nicNo'];
     mark = extractedUserData['mark'];
     noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
+    serviceProvider = extractedUserData['serviceProvider'];
+
     notifyListeners();
   }
 
@@ -433,6 +451,7 @@ class Auth with ChangeNotifier {
         'nicNo': extractedUserData['nicNo'],
         'mark': extractedUserData['mark'],
         'noOfFinishedLessons': extractedUserData['noOfFinishedLessons'],
+        'serviceProvider': extractedUserData['serviceProvider'],
       },
     );
     prefs.setString('userData', userData);
@@ -455,6 +474,7 @@ class Auth with ChangeNotifier {
       body: jsonEncode(
         {
           'phoneNo': extractedUserData['phoneNo'],
+          'serviceProvider': extractedUserData['serviceProvider'],
         },
       ),
     );
@@ -483,6 +503,7 @@ class Auth with ChangeNotifier {
         'nicNo': extractedUserData['nicNo'],
         'mark': extractedUserData['mark'],
         'noOfFinishedLessons': extractedUserData['noOfFinishedLessons'],
+        'serviceProvider': extractedUserData['serviceProvider'],
       },
     );
     prefs.setString('userData', userData);

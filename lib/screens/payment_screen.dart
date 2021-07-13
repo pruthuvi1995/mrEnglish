@@ -59,15 +59,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
   // }
 
   Future<void> updateDay(
-      context,
-      String id,
-      String token,
-      String userId,
-      String routeName,
-      String dayDetailsId,
-      Day day,
-      String amount,
-      String phoneNo) async {
+    context,
+    String id,
+    String token,
+    String userId,
+    String routeName,
+    String dayDetailsId,
+    Day day,
+    String amount,
+    String phoneNo,
+    String serviceProvider,
+  ) async {
     String data;
     setState(() {
       _isLoading = true;
@@ -83,6 +85,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           {
             'phoneNo': phoneNo,
             'amount': amount,
+            'serviceProvider': serviceProvider,
           },
         ),
       );
@@ -159,15 +162,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Future<void> updateYear(
-      context,
-      String id,
-      String token,
-      String userId,
-      String routeName,
-      String yearDetailsId,
-      Year year,
-      String amount,
-      String phoneNo) async {
+    context,
+    String id,
+    String token,
+    String userId,
+    String routeName,
+    String yearDetailsId,
+    Year year,
+    String amount,
+    String phoneNo,
+    String serviceProvider,
+  ) async {
     String data;
     setState(() {
       _isLoading = true;
@@ -183,6 +188,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           {
             'phoneNo': phoneNo,
             'amount': amount,
+            'serviceProvider': serviceProvider,
           },
         ),
       );
@@ -310,6 +316,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     final userId = Provider.of<Auth>(context, listen: false).userId;
     final phoneNo = Provider.of<Auth>(context, listen: false).phoneNo;
+    final serviceProvider =
+        Provider.of<Auth>(context, listen: false).serviceProvider;
 
     if (items[1] == 'day') {
       loadedDay = Provider.of<Days>(context, listen: false).findByID(id);
@@ -457,15 +465,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               onTap: () {
                                 if (items[1] == 'day') {
                                   updateDay(
-                                      context,
-                                      id,
-                                      loadedDay.authToken,
-                                      userId,
-                                      DaysOverviewScreen.routeName,
-                                      loadedDay.dayDetailsId,
-                                      loadedDay,
-                                      amount,
-                                      phoneNo);
+                                    context,
+                                    id,
+                                    loadedDay.authToken,
+                                    userId,
+                                    DaysOverviewScreen.routeName,
+                                    loadedDay.dayDetailsId,
+                                    loadedDay,
+                                    amount,
+                                    phoneNo,
+                                    serviceProvider,
+                                  );
                                 } else
                                   updateYear(
                                     context,
@@ -477,6 +487,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     loadedYear,
                                     amount,
                                     phoneNo,
+                                    serviceProvider,
                                   );
                               },
                               child: Container(
