@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:mr_english/providers/seminar.dart';
+import 'package:mr_english/providers/seminars.dart';
+
 import '../providers/auth.dart';
 import '../providers/day.dart';
 import '../providers/year.dart';
@@ -15,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../size_config.dart';
+import 'seminars_overview_screen.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const routeName = '/payment_screen';
@@ -161,6 +165,111 @@ class _PaymentScreenState extends State<PaymentScreen> {
     });
   }
 
+  Future<void> updateSeminar(
+    context,
+    String id,
+    String token,
+    String userId,
+    String routeName,
+    String seminarDetailsId,
+    Seminar seminar,
+    String amount,
+    String phoneNo,
+    String serviceProvider,
+  ) async {
+    String data;
+    setState(() {
+      _isLoading = true;
+    });
+    final url = 'https://mrenglish.tk/api/v1/dayDetails/pay';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          {
+            'phoneNo': phoneNo,
+            'amount': amount,
+            'serviceProvider': serviceProvider,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+      data = responseData['data']['statusDetail'];
+    } catch (error) {
+      print(error);
+      throw (error);
+    }
+
+    if (data == "Request was successfully processed." &&
+        seminarDetailsId == null) {
+      final url1 = 'https://mrenglish.tk/api/v1/seminarDetails/$userId/$id';
+
+      var today = new DateTime.now();
+      var activeSeminar =
+          today.add(new Duration(days: 7)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.post(
+          Uri.parse(url1),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeSeminar': activeSeminar,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else if (data == "Request was successfully processed." &&
+        seminarDetailsId != null) {
+      final url1 =
+          'https://mrenglish.tk/api/v1/seminarDetails/$seminarDetailsId';
+
+      var today = new DateTime.now();
+      var activeSeminar =
+          today.add(new Duration(days: 7)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.put(
+          Uri.parse(url1),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeSeminar': activeSeminar,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else {
+      _showErrorDialog(data);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   Future<void> updateYear(
     context,
     String id,
@@ -206,7 +315,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       var today = new DateTime.now();
       var activeYear =
           today.add(new Duration(days: 21)).toString().substring(0, 10);
-      print(activeYear);
+      // print(activeYear);
 
       try {
         await http.post(
@@ -312,6 +421,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     String id = items[0];
     Day loadedDay;
     Year loadedYear;
+    Seminar loadedSeminar;
     String dayCount;
 
     final userId = Provider.of<Auth>(context, listen: false).userId;
@@ -322,6 +432,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
     if (items[1] == 'day') {
       loadedDay = Provider.of<Days>(context, listen: false).findByID(id);
       amount = loadedDay.amount;
+      dayCount = '7';
+    } else if (items[1] == 'seminar') {
+      loadedSeminar =
+          Provider.of<Seminars>(context, listen: false).findByID(id);
+      amount = loadedSeminar.amount;
       dayCount = '7';
     } else {
       loadedYear = Provider.of<Years>(context, listen: false).findByID(id);
@@ -428,6 +543,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 if (items[1] == 'day') {
                                   Navigator.of(context).popAndPushNamed(
                                       DaysOverviewScreen.routeName);
+                                } else if (items[1] == 'seminar') {
+                                  Navigator.of(context).popAndPushNamed(
+                                      SeminarsOverviewScreen.routeName);
                                 } else
                                   Navigator.of(context).popAndPushNamed(
                                       YearsOverviewScreen.routeName);
@@ -472,6 +590,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     DaysOverviewScreen.routeName,
                                     loadedDay.dayDetailsId,
                                     loadedDay,
+                                    amount,
+                                    phoneNo,
+                                    serviceProvider,
+                                  );
+                                } else if (items[1] == 'seminar') {
+                                  updateSeminar(
+                                    context,
+                                    id,
+                                    loadedSeminar.authToken,
+                                    userId,
+                                    SeminarsOverviewScreen.routeName,
+                                    loadedSeminar.seminarDetailsId,
+                                    loadedSeminar,
                                     amount,
                                     phoneNo,
                                     serviceProvider,

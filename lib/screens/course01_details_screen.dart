@@ -22,6 +22,7 @@ import '../providers/message.dart';
 import '../size_config.dart';
 import 'instructions_screen.dart';
 import 'notification_screeen.dart';
+import 'seminars_overview_screen.dart';
 
 class Course01DetailsScreen extends StatefulWidget {
   static const String routeName = '/course01-details';
@@ -286,6 +287,8 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
       navigationScreen = YearsOverviewScreen.routeName;
     if (title == 'Basic English within 40 Days')
       navigationScreen = DaysOverviewScreen.routeName;
+    if (title == 'Seminars')
+      navigationScreen = SeminarsOverviewScreen.routeName;
 
     return Scaffold(
       appBar: AppBar(

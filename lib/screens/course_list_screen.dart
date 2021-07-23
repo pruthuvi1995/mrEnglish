@@ -27,6 +27,7 @@ import 'course01_details_screen.dart';
 import 'instructions_screen.dart';
 import 'issue_certificate_screen.dart';
 import 'notification_screeen.dart';
+import 'seminars_overview_screen.dart';
 
 class CourseListScreen extends StatefulWidget {
   static const String routeName = '/course-list';
@@ -390,6 +391,13 @@ class _CourseListScreenState extends State<CourseListScreen> {
                             loadedCourses.items[0].title,
                             loadedCourses.items[0].description,
                             YearsOverviewScreen.routeName,
+                            token,
+                            'URL for course 02',
+                          ),
+                          buildLessonCard(
+                            loadedCourses.items[2].title,
+                            loadedCourses.items[2].description,
+                            SeminarsOverviewScreen.routeName,
                             token,
                             'URL for course 02',
                           ),

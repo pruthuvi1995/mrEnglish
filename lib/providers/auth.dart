@@ -130,27 +130,32 @@ class Auth with ChangeNotifier {
       noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
       serviceProvider = responseData['user']['serviceProvider'];
 
-      final response1 = await http.post(
-        Uri.parse(url1),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(
-          {
-            'phoneNo': phoneNo,
-            'serviceProvider': serviceProvider,
+      if (serviceProvider != " ") {
+        final response1 = await http.post(
+          Uri.parse(url1),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
           },
-        ),
-      );
+          body: jsonEncode(
+            {
+              'phoneNo': phoneNo,
+              'serviceProvider': serviceProvider,
+            },
+          ),
+        );
 
-      final response1Data = json.decode(response1.body);
-      final data = response1Data['data']['subscriptionStatus'];
+        final response1Data = json.decode(response1.body);
+        final data = response1Data['data']['subscriptionStatus'];
 
-      if (data == 'REGISTERED') {
-        isSubscribed = true;
+        if (data == 'REGISTERED') {
+          isSubscribed = true;
+        } else {
+          isSubscribed = false;
+        }
       } else {
         isSubscribed = false;
       }
+
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
@@ -203,24 +208,28 @@ class Auth with ChangeNotifier {
     noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
     serviceProvider = extractedUserData['serviceProvider'];
 
-    final response1 = await http.post(
-      Uri.parse(url1),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-        {
-          'phoneNo': phoneNo,
-          'serviceProvider': serviceProvider,
+    if (serviceProvider != " ") {
+      final response1 = await http.post(
+        Uri.parse(url1),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-      ),
-    );
+        body: jsonEncode(
+          {
+            'phoneNo': phoneNo,
+            'serviceProvider': serviceProvider,
+          },
+        ),
+      );
 
-    final response1Data = json.decode(response1.body);
-    final data = response1Data['data']['subscriptionStatus'];
+      final response1Data = json.decode(response1.body);
+      final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'REGISTERED') {
-      isSubscribed = true;
+      if (data == 'REGISTERED') {
+        isSubscribed = true;
+      } else {
+        isSubscribed = false;
+      }
     } else {
       isSubscribed = false;
     }
@@ -264,24 +273,31 @@ class Auth with ChangeNotifier {
     extractedUserData['isSubscribed'] = isSubscribed;
     extractedUserData['serviceProvider'] = serviceProvider;
 
-    final response1 = await http.post(
-      Uri.parse(url1),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-        {
-          'phoneNo': phoneNoNew,
-          'serviceProvider': serviceProvider,
+    print('ccccccccccccccc');
+    print(phoneNoNew);
+
+    if (serviceProvider != " ") {
+      final response1 = await http.post(
+        Uri.parse(url1),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-      ),
-    );
+        body: jsonEncode(
+          {
+            'phoneNo': phoneNoNew,
+            'serviceProvider': serviceProvider,
+          },
+        ),
+      );
 
-    final response1Data = json.decode(response1.body);
-    final data = response1Data['data']['subscriptionStatus'];
+      final response1Data = json.decode(response1.body);
+      final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'REGISTERED') {
-      isSubscribed = true;
+      if (data == 'REGISTERED') {
+        isSubscribed = true;
+      } else {
+        isSubscribed = false;
+      }
     } else {
       isSubscribed = false;
     }
@@ -341,24 +357,28 @@ class Auth with ChangeNotifier {
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
     extractedUserData['mark'] = mark;
-    final response1 = await http.post(
-      Uri.parse(url1),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-        {
-          'phoneNo': extractedUserData['phoneNo'],
-          'serviceProvider': extractedUserData['serviceProvider'],
+    if (extractedUserData['serviceProvider'] != " ") {
+      final response1 = await http.post(
+        Uri.parse(url1),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-      ),
-    );
+        body: jsonEncode(
+          {
+            'phoneNo': extractedUserData['phoneNo'],
+            'serviceProvider': extractedUserData['serviceProvider'],
+          },
+        ),
+      );
 
-    final response1Data = json.decode(response1.body);
-    final data = response1Data['data']['subscriptionStatus'];
+      final response1Data = json.decode(response1.body);
+      final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'REGISTERED') {
-      isSubscribed = true;
+      if (data == 'REGISTERED') {
+        isSubscribed = true;
+      } else {
+        isSubscribed = false;
+      }
     } else {
       isSubscribed = false;
     }
@@ -390,24 +410,28 @@ class Auth with ChangeNotifier {
     final extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
-    final response1 = await http.post(
-      Uri.parse(url1),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-        {
-          'phoneNo': extractedUserData['phoneNo'],
-          'serviceProvider': extractedUserData['serviceProvider'],
+    if (extractedUserData['serviceProvider'] != " ") {
+      final response1 = await http.post(
+        Uri.parse(url1),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-      ),
-    );
+        body: jsonEncode(
+          {
+            'phoneNo': extractedUserData['phoneNo'],
+            'serviceProvider': extractedUserData['serviceProvider'],
+          },
+        ),
+      );
 
-    final response1Data = json.decode(response1.body);
-    final data = response1Data['data']['subscriptionStatus'];
+      final response1Data = json.decode(response1.body);
+      final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'REGISTERED') {
-      isSubscribed = true;
+      if (data == 'REGISTERED') {
+        isSubscribed = true;
+      } else {
+        isSubscribed = false;
+      }
     } else {
       isSubscribed = false;
     }
@@ -466,24 +490,28 @@ class Auth with ChangeNotifier {
     var extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
-    final response1 = await http.post(
-      Uri.parse(url1),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-        {
-          'phoneNo': extractedUserData['phoneNo'],
-          'serviceProvider': extractedUserData['serviceProvider'],
+    if (extractedUserData['serviceProvider'] != " ") {
+      final response1 = await http.post(
+        Uri.parse(url1),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-      ),
-    );
+        body: jsonEncode(
+          {
+            'phoneNo': extractedUserData['phoneNo'],
+            'serviceProvider': extractedUserData['serviceProvider'],
+          },
+        ),
+      );
 
-    final response1Data = json.decode(response1.body);
-    final data = response1Data['data']['subscriptionStatus'];
+      final response1Data = json.decode(response1.body);
+      final data = response1Data['data']['subscriptionStatus'];
 
-    if (data == 'REGISTERED') {
-      isSubscribed = true;
+      if (data == 'REGISTERED') {
+        isSubscribed = true;
+      } else {
+        isSubscribed = false;
+      }
     } else {
       isSubscribed = false;
     }

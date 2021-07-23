@@ -26,9 +26,13 @@ import './screens/years_overview_screen.dart';
 
 import './screens/sign_in_screen.dart';
 import './screens/splash_screen.dart';
+import 'providers/seminars.dart';
 import 'screens/before_trail_paper_screen.dart';
 import 'screens/course01_details_screen.dart';
 import 'screens/course_list_screen.dart';
+import 'screens/seminar_screen.dart';
+import 'screens/seminar_video_screen.dart';
+import 'screens/seminars_overview_screen.dart';
 import 'theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -76,6 +80,13 @@ class MyApp extends StatelessWidget {
             update: (ctx, auth, previousYears) => Years(auth.token, auth.userId,
                 previousYears == null ? [] : previousYears.items),
           ),
+          ChangeNotifierProxyProvider<Auth, Seminars>(
+            create: (ctx) => Seminars('', '', []),
+            update: (ctx, auth, previousSeminars) => Seminars(
+                auth.token,
+                auth.userId,
+                previousSeminars == null ? [] : previousSeminars.items),
+          ),
           ChangeNotifierProxyProvider<Auth, Lessons>(
             create: (ctx) => Lessons('', []),
             update: (ctx, auth, previousLessons) => Lessons(auth.token,
@@ -113,6 +124,8 @@ class MyApp extends StatelessWidget {
               Course01DetailsScreen.routeName: (ctx) => Course01DetailsScreen(),
               DaysOverviewScreen.routeName: (ctx) => DaysOverviewScreen(),
               YearsOverviewScreen.routeName: (ctx) => YearsOverviewScreen(),
+              SeminarsOverviewScreen.routeName: (ctx) =>
+                  SeminarsOverviewScreen(),
               DayDetailsScreen.routeName: (ctx) => DayDetailsScreen(),
               TrailPaperScreen.routeName: (ctx) => TrailPaperScreen(),
               DayLessonScreen.routeName: (ctx) => DayLessonScreen(),
@@ -128,7 +141,9 @@ class MyApp extends StatelessWidget {
               SelectCourseScreen.routeName: (ctx) => SelectCourseScreen(),
               PaymentScreen.routeName: (ctx) => PaymentScreen(),
               PaperScreen.routeName: (ctx) => PaperScreen(),
+              SeminarScreen.routeName: (ctx) => SeminarScreen(),
               PaperVideoScreen.routeName: (ctx) => PaperVideoScreen(),
+              SeminarVideoScreen.routeName: (ctx) => SeminarVideoScreen(),
               SubscribeScreen.routeName: (ctx) => SubscribeScreen(),
               UnsubscribeScreen.routeName: (ctx) => UnsubscribeScreen(),
               IssueCertificateScreen.routeName: (ctx) =>

@@ -42,7 +42,6 @@ class DayItem extends StatelessWidget {
                   arguments: [day.id, 'day'],
                 );
         },
-
         child: Container(
           margin: EdgeInsets.only(right: 5, left: 5),
           height: getProportionateScreenWidth(200),
@@ -270,79 +269,6 @@ class DayItem extends StatelessWidget {
             elevation: 5,
           ),
         ),
-
-        // child: GridTile(
-        //   child: Stack(children: [
-        //     Container(
-        //       width: double.infinity,
-        //       decoration: BoxDecoration(
-        //         border: Border.all(color: kPrimaryColor),
-        //         // gradient: LinearGradient(
-        //         //     begin: Alignment.bottomCenter,
-        //         //     end: Alignment.topCenter,
-        //         //     colors: [
-        //         //       kPrimaryColor,
-        //         //       Colors.blue,
-        //         //     ]),
-        //       ),
-        //       // color: Color(Random().nextInt(0xffffffff)),
-        //       child: Column(
-        //         children: [
-        //           Text(
-        //             'Day',
-        //             style: TextStyle(
-        //               fontSize: getProportionateScreenHeight(20),
-        //               fontWeight: FontWeight.bold,
-        //               // backgroundColor: Colors.amber[50],
-        //             ),
-        //           ),
-        //           Text(
-        //             day.dayNo.toString(),
-        //             style: TextStyle(
-        //               fontSize: getProportionateScreenHeight(40),
-        //               fontWeight: FontWeight.bold,
-        //               // backgroundColor: Colors.amber[50],
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //     if (!day.isActive)
-        //       Container(
-        //         child: Icon(
-        //           Icons.lock,
-        //           size: getProportionateScreenHeight(40),
-        //           color: kPrimaryColor,
-        //         ),
-        //       ),
-        //   ]),
-        //   footer: GridTileBar(
-        //     backgroundColor: kPrimaryColor,
-        //     leading: Text(
-        //       '${roundDouble(day.totalMark, 1) * 100}%',
-        //       textAlign: TextAlign.left,
-        //       style: TextStyle(
-        //           color: Colors.white,
-        //           fontSize: getProportionateScreenHeight(15),
-        //           fontWeight: FontWeight.bold),
-        //     ),
-        //     trailing: day.isCompletedDay
-        //         ? Text(
-        //             'Completed',
-        //             style: TextStyle(
-        //                 color: Colors.green,
-        //                 fontSize: getProportionateScreenHeight(12),
-        //                 fontWeight: FontWeight.bold),
-        //           )
-        //         : Text(
-        //             'Not Completd',
-        //             style: TextStyle(
-        //                 color: Colors.red,
-        //                 fontSize: getProportionateScreenHeight(12),
-        //                 fontWeight: FontWeight.bold),
-        //           ),
-        //   ),
-        // ),
       ),
     );
   }

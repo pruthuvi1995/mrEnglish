@@ -1,0 +1,140 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+
+import './seminar.dart';
+
+class Seminars with ChangeNotifier {
+  List<Seminar> _items = [];
+
+  final String authToken;
+  final String userId;
+
+  Seminars(this.authToken, this.userId, this._items);
+
+  Future<void> fetchAndSetSeminars() async {
+    const url1 = 'https://mrenglish.tk/api/v1/seminars';
+    final url2 = 'https://mrenglish.tk/api/v1/seminarDetails/$userId';
+
+    try {
+      final response1 = await http.get(
+        Uri.parse(url1),
+        headers: {HttpHeaders.authorizationHeader: "Bearer $authToken"},
+      );
+      final response2 = await http.get(
+        Uri.parse(url2),
+        headers: {HttpHeaders.authorizationHeader: "Bearer $authToken"},
+      );
+
+      final extractedData1 =
+          json.decode(response1.body) as Map<String, dynamic>;
+      final extractedData2 =
+          json.decode(response2.body) as Map<String, dynamic>;
+      final Data = extractedData1['data'] as List<dynamic>;
+      final DataDetails = extractedData2['data'] as List<dynamic>;
+
+      final List<Seminar> loadedSeminars = [];
+      Data.forEach((seminarData) {
+        bool n = false;
+        DataDetails.forEach((seminarDataDetails) {
+          if (seminarData['title'] == seminarDataDetails['seminar']['title']) {
+            n = true;
+            bool isActive = false;
+            var now = new DateTime.now();
+            var parsedDate =
+                DateTime.parse(seminarDataDetails['activeSeminar']);
+
+            if (now.isBefore(parsedDate)) {
+              isActive = true;
+            }
+            loadedSeminars.add(Seminar(
+              id: seminarDataDetails['seminar']['_id'],
+              seminarDetailsId: seminarDataDetails['_id'],
+              title: seminarDataDetails['seminar']['title'],
+              description: seminarDataDetails['seminar']['description'],
+              videoList: seminarDataDetails['seminar']['videoList'],
+              amount: seminarDataDetails['seminar']['amount'],
+              isActive: isActive,
+              authToken: authToken,
+            ));
+          }
+        });
+        if (!n) {
+          // bool isActive = false;
+          // var now = new DateTime.now();
+          // var parsedDate = DateTime.parse(
+          //     yearData['_id'] == '5fbe66a26a8aeb05882966cc'
+          //         ? '2050-12-01'
+          //         : '2020-12-01');
+          // if (now.isBefore(parsedDate)) {
+          //   isActive = true;
+          // }
+
+          loadedSeminars.add(Seminar(
+            id: seminarData['_id'],
+            title: seminarData['title'],
+            description: seminarData['description'],
+            videoList: seminarData['videoList'],
+            amount: seminarData['amount'],
+            authToken: authToken,
+          ));
+        }
+      });
+
+      _items = loadedSeminars;
+
+      _items.sort((a, b) => a.title.compareTo(b.title));
+      _items = _items.reversed.toList();
+
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw (error);
+    }
+  }
+
+  List<Seminar> get activeSeminars {
+    return _items.where((seminarItem) => seminarItem.isActive).toList();
+  }
+
+  List<Seminar> get items {
+    return [..._items];
+  }
+
+  Seminar findByID(String id) {
+    return _items.firstWhere((seminar) => seminar.id == id);
+  }
+
+  // Year findByDetailsIdAndUpdateL1(String id, double mark, double totalMark) {
+  //   Day findedDay = _items.firstWhere((day) => day.dayDetailsId == id);
+  //   findedDay.lesson1Mark = mark;
+  //   findedDay.isCompletedLesson1 = true;
+  //   findedDay.totalMark = totalMark;
+  //   notifyListeners();
+  // }
+
+  // Day findByDetailsIdAndUpdateL2(String id, double mark, double totalMark) {
+  //   Day findedDay = _items.firstWhere((day) => day.dayDetailsId == id);
+  //   findedDay.lesson2Mark = mark;
+  //   findedDay.isCompletedLesson2 = true;
+  //   findedDay.totalMark = totalMark;
+  //   notifyListeners();
+  // }
+
+  // Day findByDetailsIdAndUpdateL3(String id, double mark, double totalMark) {
+  //   Day findedDay = _items.firstWhere((day) => day.dayDetailsId == id);
+  //   findedDay.lesson3Mark = mark;
+  //   findedDay.isCompletedLesson3 = true;
+  //   findedDay.totalMark = totalMark;
+  //   notifyListeners();
+  // }
+
+  // Day findByDetailsIdAndUpdateCDay(String id) {
+  //   Day findedDay = _items.firstWhere((day) => day.dayDetailsId == id);
+  //   findedDay.isCompletedDay = true;
+
+  //   notifyListeners();
+  // }
+}

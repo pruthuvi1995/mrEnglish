@@ -77,6 +77,8 @@ class _SubscribeFormState extends State<SubscribeForm> {
         if (verifyPin) {
           // Provider.of<Auth>(context, listen: false).updateSubscription();
           setState(() {});
+          print('aaaaaaaaaaaaaaaa');
+          print(_telNo);
           final url = 'https://mrenglish.tk/api/v1/auth/updateDetails';
           await http.put(
             Uri.parse(url),
@@ -216,7 +218,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
     //   _isLoading = true;
     // });
     const url = 'https://mrenglish.tk/api/v1/dayDetails/verify';
-    const url2 = 'https://mrenglish.tk/api/v1/auth/updateDetails';
+    // const url2 = 'https://mrenglish.tk/api/v1/auth/updateDetails';
 
     final prefs = await SharedPreferences.getInstance();
     final extractedUserData =
