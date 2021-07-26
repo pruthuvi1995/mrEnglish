@@ -399,20 +399,29 @@ class _CourseListScreenState extends State<CourseListScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'Hi...........',
+                          'Basic English within 40 Days පාඨමාලාව ',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: height * .05,
+                              fontSize: height * .02,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          'Have a nice day!',
+                          'සම්පුර්ණ කරන ඔබට වටිනා සහතිකයක් නිවසටම ',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: height * .05,
+                              fontSize: height * .0175,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: height * .01,
+                        ),
+                        Image.asset(
+                          'assets/images/certificate.jpeg',
+                          fit: BoxFit.fitHeight,
+                          height: height * .15,
+                          // width: double.infinity,
                         ),
                       ],
                     )),
