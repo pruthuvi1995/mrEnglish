@@ -4,6 +4,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mr_english/providers/classStudents.dart';
+import 'package:mr_english/screens/add_student_screen.dart';
 import 'package:mr_english/screens/subscribe_screen.dart';
 import 'package:mr_english/screens/unsubscribe_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -84,8 +86,12 @@ class _CourseListScreenState extends State<CourseListScreen> {
       });
 
       Provider.of<Courses>(context).fetchAndSetCourses().then((_) {
-        setState(() {
-          _isLoading = false;
+        Provider.of<ClassStudents>(context, listen: false)
+            .fetchAndSetClassStudents()
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
         });
       });
 
@@ -95,8 +101,10 @@ class _CourseListScreenState extends State<CourseListScreen> {
     super.didChangeDependencies();
   }
 
-  Future<void> _refreshCourses(BuildContext context) async {
+  Future<void> _refreshCourses(BuildContext context, String nICNo) async {
     await Provider.of<Courses>(context, listen: false).fetchAndSetCourses();
+    await Provider.of<ClassStudents>(context, listen: false)
+        .fetchAndSetClassStudents();
   }
 
   // Future<void> subscribeOnTap(
@@ -174,52 +182,103 @@ class _CourseListScreenState extends State<CourseListScreen> {
             left: getProportionateScreenWidth(25),
             right: getProportionateScreenWidth(25),
             top: getProportionateScreenWidth(10)),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(getProportionateScreenWidth(10)),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: getProportionateScreenWidth(15),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context)
-                    .pushNamed(Course01DetailsScreen.routeName, arguments: [
-                  title,
-                  description,
-                  uTubeUrl,
-                ]);
-
-                // subscribeOnTap(navigation, isSubscribed, token);
-              },
-              child: Container(
-                // margin: EdgeInsets.only(
-                //   left: getProportionateScreenHeight(5),
-                //   right: getProportionateScreenHeight(5),
-                //   bottom: getProportionateScreenHeight(5),
-                // ),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(getProportionateScreenHeight(15)),
-                  color: kPrimaryColor,
-                ),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: kPrimaryColor),
+            borderRadius:
+                BorderRadius.circular(getProportionateScreenWidth(20)),
+          ),
+          child: Column(
+            children: [
+              Padding(
                 padding: EdgeInsets.all(getProportionateScreenWidth(10)),
                 child: Text(
-                  'වැඩි විස්තර සඳහා',
+                  title,
                   style: TextStyle(
-                      fontSize: getProportionateScreenWidth(15),
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
+                    fontSize: getProportionateScreenWidth(15),
+                  ),
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(Course01DetailsScreen.routeName, arguments: [
+                    title,
+                    description,
+                    uTubeUrl,
+                  ]);
+
+                  // subscribeOnTap(navigation, isSubscribed, token);
+                },
+                child: Container(
+                  // margin: EdgeInsets.only(
+                  //   left: getProportionateScreenHeight(5),
+                  //   right: getProportionateScreenHeight(5),
+                  //   bottom: getProportionateScreenHeight(5),
+                  // ),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(getProportionateScreenHeight(15)),
+                    color: kPrimaryColor,
+                  ),
+                  padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+                  child: Text(
+                    'වැඩි විස්තර සඳහා',
+                    style: TextStyle(
+                        fontSize: getProportionateScreenWidth(15),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+
+  Card buildAddStudentCard() {
+    return Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(getProportionateScreenWidth(20)),
+        ),
+        elevation: 6,
+        margin: EdgeInsets.only(
+            left: getProportionateScreenWidth(25),
+            right: getProportionateScreenWidth(25),
+            top: getProportionateScreenWidth(10),
+            bottom: getProportionateScreenWidth(10)),
+        child: Container(
+          // height: getProportionateScreenHeight(100),
+          decoration: BoxDecoration(
+            border: Border.all(color: kPrimaryColor),
+            borderRadius:
+                BorderRadius.circular(getProportionateScreenWidth(20)),
+          ),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(AddStudentScreen.routeName);
+            },
+            child: Container(
+              height: getProportionateScreenHeight(100),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(getProportionateScreenHeight(15)),
+                color: kPrimaryColor,
+              ),
+              padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+              child: Text(
+                'Add Students',
+                style: TextStyle(
+                    fontSize: getProportionateScreenWidth(25),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
             ),
-          ],
+          ),
         ));
   }
 
@@ -252,6 +311,8 @@ class _CourseListScreenState extends State<CourseListScreen> {
     mark = roundDouble(mark, 2);
     getToken();
     final loadedCourses = Provider.of<Courses>(context, listen: false);
+    final loadedClassStudents =
+        Provider.of<ClassStudents>(context, listen: false).items;
     final token = Provider.of<Auth>(context, listen: false).token;
 
     final height = MediaQuery.of(context).size.height -
@@ -323,7 +384,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
               ),
             )
           : RefreshIndicator(
-              onRefresh: () => _refreshCourses(context),
+              onRefresh: () => _refreshCourses(context, nicNo),
               child: Column(children: <Widget>[
                 Container(
                     height: height * .25,
@@ -399,8 +460,21 @@ class _CourseListScreenState extends State<CourseListScreen> {
                             loadedCourses.items[2].description,
                             SeminarsOverviewScreen.routeName,
                             token,
-                            'URL for course 02',
+                            'URL for course 03',
                           ),
+                          ...(loadedClassStudents as List).map(
+                            (classStudent) {
+                              return buildLessonCard(
+                                classStudent.title,
+                                classStudent.description,
+                                SeminarsOverviewScreen.routeName,
+                                token,
+                                'URL for course 04',
+                              );
+                            },
+                          ).toList(),
+                          if (nicNo == '951062219v' || nicNo == '881770644v')
+                            buildAddStudentCard(),
                         ],
                       ),
                     ),

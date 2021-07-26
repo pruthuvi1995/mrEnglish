@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:mr_english/providers/classStudents.dart';
+import 'package:mr_english/screens/add_student_screen.dart';
 import './screens/instructions_screen.dart';
 import './screens/notification_screeen.dart';
 import './screens/sample_essay_question_screen.dart';
@@ -26,8 +28,12 @@ import './screens/years_overview_screen.dart';
 
 import './screens/sign_in_screen.dart';
 import './screens/splash_screen.dart';
+import 'providers/classes.dart';
 import 'providers/seminars.dart';
+
 import 'screens/before_trail_paper_screen.dart';
+import 'screens/class_video_screen.dart';
+import 'screens/classes_screen.dart';
 import 'screens/course01_details_screen.dart';
 import 'screens/course_list_screen.dart';
 import 'screens/seminar_screen.dart';
@@ -87,6 +93,23 @@ class MyApp extends StatelessWidget {
                 auth.userId,
                 previousSeminars == null ? [] : previousSeminars.items),
           ),
+          ChangeNotifierProxyProvider<Auth, ClassStudents>(
+            create: (ctx) => ClassStudents('', '', [], ''),
+            update: (ctx, auth, previousClassStudents) => ClassStudents(
+                auth.token,
+                auth.userId,
+                previousClassStudents == null
+                    ? []
+                    : previousClassStudents.items,
+                auth.nicNo),
+          ),
+          ChangeNotifierProxyProvider<Auth, Classes>(
+            create: (ctx) => Classes('', '', []),
+            update: (ctx, auth, previousClasses) => Classes(
+                auth.token,
+                auth.userId,
+                previousClasses == null ? [] : previousClasses.items),
+          ),
           ChangeNotifierProxyProvider<Auth, Lessons>(
             create: (ctx) => Lessons('', []),
             update: (ctx, auth, previousLessons) => Lessons(auth.token,
@@ -142,8 +165,10 @@ class MyApp extends StatelessWidget {
               PaymentScreen.routeName: (ctx) => PaymentScreen(),
               PaperScreen.routeName: (ctx) => PaperScreen(),
               SeminarScreen.routeName: (ctx) => SeminarScreen(),
+              // ClassesScreen.routeName: (ctx) => ClassesScreen(),
               PaperVideoScreen.routeName: (ctx) => PaperVideoScreen(),
               SeminarVideoScreen.routeName: (ctx) => SeminarVideoScreen(),
+              ClassVideoScreen.routeName: (ctx) => ClassVideoScreen(),
               SubscribeScreen.routeName: (ctx) => SubscribeScreen(),
               UnsubscribeScreen.routeName: (ctx) => UnsubscribeScreen(),
               IssueCertificateScreen.routeName: (ctx) =>
@@ -154,6 +179,7 @@ class MyApp extends StatelessWidget {
               NotificationScreen.routeName: (ctx) => NotificationScreen(),
               SampleEssayQuestionScreen.routeName: (ctx) =>
                   SampleEssayQuestionScreen(),
+              AddStudentScreen.routeName: (ctx) => AddStudentScreen(),
             },
           ),
         ));

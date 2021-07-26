@@ -20,6 +20,7 @@ import '../constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../providers/message.dart';
 import '../size_config.dart';
+import 'classes_screen.dart';
 import 'instructions_screen.dart';
 import 'notification_screeen.dart';
 import 'seminars_overview_screen.dart';
@@ -84,8 +85,18 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
   //   }
   // }
 
-  Future<void> joinClassButton(String navigation) async {
-    Navigator.of(context).pushNamed(navigation);
+  Future<void> joinClassButton(String navigation, String title) async {
+    print(title);
+    if (title == 'O/L Paper Discussion' ||
+        title == 'Basic English within 40 Days' ||
+        title == 'Seminars')
+      Navigator.of(context).pushNamed(navigation, arguments: title);
+    else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ClassesScreen(title)),
+      );
+    }
   }
 
   Card buildLessonCard(String title, String description, String navigation,
@@ -201,7 +212,7 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
                     fit: FlexFit.tight,
                     child: GestureDetector(
                       onTap: () {
-                        joinClassButton(navigation);
+                        joinClassButton(navigation, title);
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -285,10 +296,12 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
     final token = Provider.of<Auth>(context, listen: false).token;
     if (title == 'O/L Paper Discussion')
       navigationScreen = YearsOverviewScreen.routeName;
-    if (title == 'Basic English within 40 Days')
+    else if (title == 'Basic English within 40 Days')
       navigationScreen = DaysOverviewScreen.routeName;
-    if (title == 'Seminars')
+    else if (title == 'Seminars')
       navigationScreen = SeminarsOverviewScreen.routeName;
+    else
+      navigationScreen = ClassesScreen.routeName;
 
     return Scaffold(
       appBar: AppBar(

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:mr_english/providers/class.dart';
+import 'package:mr_english/providers/classes.dart';
 import 'package:mr_english/providers/seminar.dart';
 import 'package:mr_english/providers/seminars.dart';
 
@@ -18,6 +20,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../size_config.dart';
+import 'classes_screen.dart';
 import 'seminars_overview_screen.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -270,6 +273,108 @@ class _PaymentScreenState extends State<PaymentScreen> {
     });
   }
 
+  Future<void> updateClass(
+    context,
+    String id,
+    String token,
+    String userId,
+    String routeName,
+    String classDetailsId,
+    Class oneClass,
+    String amount,
+    String phoneNo,
+    String serviceProvider,
+  ) async {
+    String data;
+    setState(() {
+      _isLoading = true;
+    });
+    final url = 'https://mrenglish.tk/api/v1/dayDetails/pay';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          {
+            'phoneNo': phoneNo,
+            'amount': amount,
+            'serviceProvider': serviceProvider,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+      data = responseData['data']['statusDetail'];
+    } catch (error) {
+      print(error);
+      throw (error);
+    }
+
+    if (data == "Request was successfully processed." &&
+        classDetailsId == null) {
+      final url1 = 'https://mrenglish.tk/api/v1/classDetails/$userId/$id';
+
+      var today = new DateTime.now();
+      var activeClass =
+          today.add(new Duration(days: 3)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.post(
+          Uri.parse(url1),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {'activeClass': activeClass},
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else if (data == "Request was successfully processed." &&
+        classDetailsId != null) {
+      final url1 = 'https://mrenglish.tk/api/v1/classDetails/$classDetailsId';
+
+      var today = new DateTime.now();
+      var activeClass =
+          today.add(new Duration(days: 3)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.put(
+          Uri.parse(url1),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeClass': activeClass,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else {
+      _showErrorDialog(data);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   Future<void> updateYear(
     context,
     String id,
@@ -422,6 +527,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Day loadedDay;
     Year loadedYear;
     Seminar loadedSeminar;
+    Class loadedClass;
     String dayCount;
 
     final userId = Provider.of<Auth>(context, listen: false).userId;
@@ -438,6 +544,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
           Provider.of<Seminars>(context, listen: false).findByID(id);
       amount = loadedSeminar.amount;
       dayCount = '7';
+    } else if (items[1] == 'class') {
+      loadedClass = Provider.of<Classes>(context, listen: false).findByID(id);
+      amount = loadedClass.amount;
+      dayCount = '3';
     } else {
       loadedYear = Provider.of<Years>(context, listen: false).findByID(id);
       amount = loadedYear.amount;
@@ -546,6 +656,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 } else if (items[1] == 'seminar') {
                                   Navigator.of(context).popAndPushNamed(
                                       SeminarsOverviewScreen.routeName);
+                                } else if (items[1] == 'class') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ClassesScreen(
+                                            loadedClass.className)),
+                                  );
                                 } else
                                   Navigator.of(context).popAndPushNamed(
                                       YearsOverviewScreen.routeName);
@@ -590,6 +707,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     DaysOverviewScreen.routeName,
                                     loadedDay.dayDetailsId,
                                     loadedDay,
+                                    amount,
+                                    phoneNo,
+                                    serviceProvider,
+                                  );
+                                } else if (items[1] == 'class') {
+                                  updateClass(
+                                    context,
+                                    id,
+                                    loadedClass.authToken,
+                                    userId,
+                                    '',
+                                    loadedClass.classDetailsId,
+                                    loadedClass,
                                     amount,
                                     phoneNo,
                                     serviceProvider,

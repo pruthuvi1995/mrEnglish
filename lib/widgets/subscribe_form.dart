@@ -351,7 +351,9 @@ class _SubscribeFormState extends State<SubscribeForm> {
         if (value.isEmpty ||
             value.length < 10 ||
             value[0] != '0' ||
-            value[1] != '7') {
+            value[1] != '7' ||
+            value[2] == '1' ||
+            value[2] == '0') {
           return 'Input the phone number correctly';
         }
         if (value[2] == '1' || value[2] == '0') {

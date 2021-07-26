@@ -1,3 +1,5 @@
+import 'package:mr_english/providers/seminars.dart';
+
 import '../providers/papers.dart';
 import './paper_video_screen.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +41,7 @@ class _SeminarScreenState extends State<SeminarScreen> {
         _isLoading = true;
       });
 
-      Provider.of<Papers>(context).fetchAndSetPapers().then((_) {
+      Provider.of<Seminars>(context).fetchAndSetSeminars().then((_) {
         setState(() {
           _isLoading = false;
         });
