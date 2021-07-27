@@ -118,7 +118,7 @@ class _SeminarScreenState extends State<SeminarScreen> {
                     child: Text(
                       name,
                       style: TextStyle(
-                        fontSize: getProportionateScreenHeight(20),
+                        fontSize: getProportionateScreenHeight(15),
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
                       ),

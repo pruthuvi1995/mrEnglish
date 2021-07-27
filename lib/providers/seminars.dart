@@ -46,6 +46,7 @@ class Seminars with ChangeNotifier {
             var parsedDate =
                 DateTime.parse(seminarDataDetails['activeSeminar']);
 
+            print(seminarDataDetails['seminar']['title']);
             if (now.isBefore(parsedDate)) {
               isActive = true;
             }

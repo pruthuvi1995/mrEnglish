@@ -41,11 +41,8 @@ class ClassItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         oneClass.isActive
-            ? Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ClassesScreen(oneClass.className)),
-              )
+            ? Navigator.of(context).popAndPushNamed(ClassVideoScreen.routeName,
+                arguments: [oneClass.title, oneClass.videoURL])
             : Navigator.of(context).popAndPushNamed(
                 PaymentScreen.routeName,
                 arguments: [oneClass.id, 'class'],
