@@ -141,9 +141,18 @@ class SeminarItem extends StatelessWidget {
                         child: Container(
                           padding:
                               EdgeInsets.only(right: 5, left: 5, bottom: 5),
-                          child: Text(
-                            seminar.description,
-                            textAlign: TextAlign.center,
+                          child: Column(
+                            children: [
+                              Text(
+                                seminar.description,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                '( Rs. ${seminar.amount} + tax )',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                         )),
                   ],

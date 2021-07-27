@@ -57,7 +57,7 @@ class YearItem extends StatelessWidget {
                   Text(
                     'Year',
                     style: TextStyle(
-                      fontSize: getProportionateScreenHeight(20),
+                      fontSize: getProportionateScreenHeight(15),
                       fontWeight: FontWeight.bold,
                       // backgroundColor: Colors.amber[50],
                     ),
@@ -65,7 +65,15 @@ class YearItem extends StatelessWidget {
                   Text(
                     year.year,
                     style: TextStyle(
-                      fontSize: getProportionateScreenHeight(37),
+                      fontSize: getProportionateScreenHeight(30),
+                      fontWeight: FontWeight.bold,
+                      // backgroundColor: Colors.amber[50],
+                    ),
+                  ),
+                  Text(
+                    'Rs. ${year.amount} + tax',
+                    style: TextStyle(
+                      fontSize: getProportionateScreenHeight(15),
                       fontWeight: FontWeight.bold,
                       // backgroundColor: Colors.amber[50],
                     ),

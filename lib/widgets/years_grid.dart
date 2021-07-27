@@ -40,7 +40,7 @@ class YearsGrid extends StatelessWidget {
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 4 / 3,
+        childAspectRatio: 5 / 4,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),

@@ -32,12 +32,12 @@ class ClassItem extends StatelessWidget {
     return Container(
         width: double.infinity,
         // height: height * .4,
-        child: buildGestureDetector(
-            context, oneClass, oneClass.title, oneClass.videoURL));
+        child: buildGestureDetector(context, oneClass, oneClass.title,
+            oneClass.videoURL, oneClass.amount));
   }
 
-  GestureDetector buildGestureDetector(
-      BuildContext context, Class oneClass, String name, String videoURL) {
+  GestureDetector buildGestureDetector(BuildContext context, Class oneClass,
+      String name, String videoURL, String amount) {
     return GestureDetector(
       onTap: () {
         oneClass.isActive
@@ -143,17 +143,18 @@ class ClassItem extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Let\'s see the video.',
+                          'Let\'s see the video. ( වීඩියෝව බලමු. )',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: getProportionateScreenHeight(15),
                           ),
                         ),
                         Text(
-                          '( වීඩියෝව බලමු. )',
+                          '( Rs. $amount + tax )',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: getProportionateScreenHeight(15),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
