@@ -102,6 +102,8 @@ class _AddStudentFormState extends State<AddStudentForm> {
           course = '60fc40f36f9bb458d36ac5b6';
         } else if (_addStudentData['className'] == 'Revision Class') {
           course = '60fc40f36f9bb458d36ac5b7';
+        } else if (_addStudentData['className'] == 'Job Exam Class') {
+          course = '61017d3f491783e913d3f2f6';
         }
 
         var today = new DateTime.now();
@@ -280,7 +282,8 @@ class _AddStudentFormState extends State<AddStudentForm> {
     "Grade 10 Class",
     "Grade 11 Class",
     "Paper Class",
-    "Revision Class"
+    "Revision Class",
+    'Job Exam Class'
   ];
 
   FormField buildGradeFormField() {
