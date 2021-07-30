@@ -336,7 +336,7 @@ class Day23Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  If you advice, he follows them.',
+            '  If you advise, he follows them.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -414,7 +414,7 @@ class Day23Lesson01 extends StatelessWidget {
           ),
 
           Text(
-            '1. If clauses මුලට යෙදේනම් එය අවසානයේ , යෙදිය යුතුය.',
+            '1. If clauses මුලට යෙදේනම් එය අවසානයේ comma (,) යෙදිය යුතුය.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

@@ -89,7 +89,7 @@ class Day30Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'Object + be verb + being + verb + by + subject + past participle',
+            'Object + be verb + being + verb past participle + by + subject',
             style: TextStyle(
               fontSize: size,
               color: Colors.green,

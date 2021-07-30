@@ -54,7 +54,7 @@ class Day28Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            '  1. This is Samntha, whose brother went to the party with us yesteray.',
+            '  1. This is Samntha, whose brother went to the party with us yesterday.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,

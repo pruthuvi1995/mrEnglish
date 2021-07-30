@@ -381,7 +381,7 @@ class Day28Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  (මෙහි අරුත වන්නේ \'නාට්‍ය තරඟයේදී පළමු තනාගත් කොල්ලා ඉන්නේ මගේ සහෝදරියගේ පන්තියේ.\')',
+            '  (මෙහි අරුත වන්නේ \'නාට්‍ය තරඟයේදී පළමු තැනගත් කොල්ලා ඉන්නේ මගේ සහෝදරියගේ පන්තියේ.\')',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

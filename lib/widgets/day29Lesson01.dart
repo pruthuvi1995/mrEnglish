@@ -316,7 +316,7 @@ class Day29Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'Passive voice වල වැදගත්ම කාරනාව වන්නේ tense වල කාලය වීම be verb මත තීරණය වීමයි. ',
+            'Passive voice වල වැදගත්ම කාරනාව වන්නේ tense වල කාලය be verb මත තීරණය වීමයි. ',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

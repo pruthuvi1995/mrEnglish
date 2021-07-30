@@ -67,26 +67,7 @@ class Day35Lesson01 extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Image.asset(
-            'assets/images/day35Lesson01_001.jpg',
-            fit: BoxFit.fitHeight,
-            height: getProportionateScreenHeight(140),
-            width: double.infinity,
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
+
           Image.asset(
             'assets/images/day35Lesson01.JPG',
             fit: BoxFit.fitHeight,

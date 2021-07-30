@@ -25,13 +25,7 @@ class Day25Lesson02 extends StatelessWidget {
           ),
           Divider(),
           //para
-          Text(
-            'මෙම පාඩම් අනෙකුත් පාඩම් සේ දීර්ඝ නොවුනද වර්තමානයේදී බොහෝවිට English ඉගෙනගන්න සිසුන් අතර බහුලව දැකිය හැකි දුර්වල කොටසකි.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
+
           Text(
             '',
             style: TextStyle(

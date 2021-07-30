@@ -131,7 +131,7 @@ class Day31Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  Active: They will have my uncle.',
+            '  Active: They will have met my uncle.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -397,7 +397,7 @@ class Day31Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '  The lifestyle of people must be uplift by the people.',
+            '  The lifestyle of people must be uplifted by the people.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
