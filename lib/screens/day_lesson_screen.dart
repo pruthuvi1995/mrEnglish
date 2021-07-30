@@ -27,6 +27,7 @@ class DayLessonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dayId = ModalRoute.of(context).settings.arguments as List;
+    print(dayId);
     final loadedLesson =
         Provider.of<Lessons>(context, listen: false).findByID(dayId[1]);
     Widget dayLesson = DayLessonText(loadedLesson.lesson);
@@ -80,7 +81,7 @@ class DayLessonScreen extends StatelessWidget {
             height: height * .1,
             child: GestureDetector(
               onTap: () {
-                if (dayNo <= 40 || dayNo >= 35) {
+                if (dayNo <= 40 && dayNo >= 35) {
                   Navigator.of(context).pushReplacementNamed(
                     SampleEssayQuestionScreen.routeName,
                     arguments: dayId,

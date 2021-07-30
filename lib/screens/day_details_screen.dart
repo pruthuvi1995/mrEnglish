@@ -355,7 +355,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                   fit: FlexFit.tight,
                   child: GestureDetector(
                     onTap: () {
-                      if (dayNo <= 40 || dayNo >= 35)
+                      if (dayNo <= 40 && dayNo >= 35)
                         Navigator.of(context).pushNamed(
                           DayLessonScreen.routeName,
                           arguments: [
@@ -374,6 +374,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
                             lessonId,
                             lessonIndex,
                             lessonNo,
+                            dayNo,
                           ],
                         );
                     },
