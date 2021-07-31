@@ -62,6 +62,7 @@ import 'day38Lesson01.dart';
 import 'day38Lesson02.dart';
 import 'day39Lesson01.dart';
 import 'day40Lesson01.dart';
+import 'day40Lesson02.dart';
 
 class DayLessonText extends StatelessWidget {
   final String lesson;
@@ -186,6 +187,8 @@ class DayLessonText extends StatelessWidget {
       return Day38Lesson02();
     else if (lesson == 'day39Lesson01')
       return Day39Lesson01();
-    else if (lesson == 'day40Lesson01') return Day40Lesson01();
+    else if (lesson == 'day40Lesson01')
+      return Day40Lesson01();
+    else if (lesson == 'day40Lesson02') return Day40Lesson02();
   }
 }

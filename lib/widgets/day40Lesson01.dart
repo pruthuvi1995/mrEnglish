@@ -14,8 +14,9 @@ class Day40Lesson01 extends StatelessWidget {
         padding: EdgeInsets.all(getProportionateScreenHeight(15)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Divider(),
+          //main titles
           Text(
-            'Note writing',
+            'Introduction',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: titleSize,
@@ -24,30 +25,22 @@ class Day40Lesson01 extends StatelessWidget {
             ),
           ),
           Divider(),
-          //para
           Text(
-            'English writing වලදී note writing යනු ඉතාමත් සරලම සටහනය.',
+            'Story writing O/L එකේදී ඉතාමත් වැදගත් ප්‍රශ්නයකි.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            'බොහෝවිට exam papers වලදී නිතරම දැකිය හැකිය. එමනිසා මෙම පාඩමේදී පිළිබඳව ඉතා සරලව ඉදිරිපත් කර ඇත.',
+            'ඉතාමත් පහසු ප්‍රශ්නයක් වුවද බොහෝ පිරිසක් මෙය ලිවීමට මැලි වන්නේ එහි techniques නොදන්නා බැවිනි.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'note writing වලදී දැනගත යුතු පළමු කාරණාව වන්නේ template (ආකෘතිය) වේ.',
+            'ඒ නිසා මෙම පාඩමේදී ඉතා සරලව story writing ගැන පැහැදිලි කරදී ඇත.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -61,34 +54,14 @@ class Day40Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'note වලදී පහත template සැලකිල්ලට ගන්න.',
+            'Story writing වලදී folk stories (ජනකතා) ඉතා ජනප්‍රිය වේ. ',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Image.asset(
-            'assets/images/day35Lesson01.JPG',
-            fit: BoxFit.fitHeight,
-            height: getProportionateScreenHeight(200),
-            width: double.infinity,
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'මෙහිදී දිනය සඳහන් කිරීම අත්‍යවශ්‍ය නොවේ.',
+            'ඒ හැරුණු කොටගෙන අතීතයේ සිදුවීමක් මුල්කරගෙන ද stories බිහි වේ.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -102,7 +75,7 @@ class Day40Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'body of the note ගැන සැලකීමේදී සාමාන්‍යයෙන් එය ආරම්භ කරන ආකාර කිහිපයකි.',
+            'Story writing වලදී පහත techniques අනුගමනය කරන්න.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -116,7 +89,56 @@ class Day40Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'සතුටක් ගැන ප්‍රකාශ කිරීමේදී ',
+            '1. බොහෝවිට story writing යෙදෙන්නේ simple past tense සමඟය.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '2. කතාව කුතුහලය දනවන්නක් විය යුතුය. රසවත් විය යුතුය. නිර්මාණශීලි විය යුතුය.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '3. කතාවේ මැදට dialogue කිහිපයක් එකතු කිරීම අත්‍යවශ්‍ය වේ.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'එවිට කතාවේ active ගතිය වැඩි වේ.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Folk story start කිරීම ',
             style: TextStyle(
                 fontSize: size,
                 color: Colors.black,
@@ -130,31 +152,17 @@ class Day40Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '1. I am happy to hear that ........',
+            ' 1. Once upon a time, there was a man called Andare.',
             style: TextStyle(
               fontSize: size,
-              color: Colors.black,
+              color: Colors.blue,
             ),
           ),
           Text(
-            '2. I am glad to hear that ........',
+            '  (එකමත් එක කාලෙක අන්දරේ කියලා මනුස්සයෙක් හිටියා.)',
             style: TextStyle(
               fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '3. I am happy to tell you that ........',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '4. I am glad to inform you that ........',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
+              color: Colors.blue,
             ),
           ),
           Text(
@@ -165,7 +173,7 @@ class Day40Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            'දුකක් හෝ කණගාටුවක් ගැන ප්‍රකාශ කිරීමේදී',
+            'වෙනත් කතාවක් ආරම්භ කරනවිට ඒ අවස්තාව, දිනය ආදිය පිළිබඳව විස්තර කිරීමක් සිදු කරන්න.',
             style: TextStyle(
                 fontSize: size,
                 color: Colors.black,
@@ -179,21 +187,42 @@ class Day40Lesson01 extends StatelessWidget {
             ),
           ),
           Text(
-            '1. I am sorry to inform you that .........',
+            ' It was a Sunday evening. I was in my bedroom reading a book. Suddenly I heard a big noise. I thought it was an accident. Then I saw some people were rushing on the road. \'A bomb, A bomb\' People were screaming. I was stick for a moment. .............................',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            '2. I am sad to inform you that .........',
+            'බලන්න. මේ ආකාරයට කතාවක් ලිවීමේදී curiosity ඇති නිසා කියවන්නා ආකර්ෂණය කර තබා ගත හැකිය.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            '3. I am sorry to tell you that .........',
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'story writing වලදී එය සත්‍ය කතාවක් හෝ imagination එකක් විය හැකිය. නමුත් අර්ථවත් වීම ඉතා වැදගත්ය.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

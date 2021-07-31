@@ -13,7 +13,18 @@ class Day35Lesson02 extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.all(getProportionateScreenHeight(15)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-         
+          Divider(),
+          //main titles
+          Text(
+            'Update your Mr English app',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: titleSize,
+              color: Colors.black,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+          Divider(),
         ]),
       ),
     );

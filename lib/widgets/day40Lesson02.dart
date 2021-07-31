@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class Day36Lesson02 extends StatelessWidget {
+class Day40Lesson02 extends StatelessWidget {
   double titleSize = getProportionateScreenHeight(20);
   double size = getProportionateScreenHeight(18);
   @override
@@ -26,63 +26,21 @@ class Day36Lesson02 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'Formal letters යනු රාජකාරි ලිපි වේ.',
+            'Speech writing විශේෂයෙන්ම O/L exam ලියන සිසුන් සඳහා වැදගත් වේ. ',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            'Formal letters විවිධ ස්වරුපයෙන් පැවතිය හැකිය.',
+            'මෙහිදී සමහර සිසුන් සිතන්නේ speech එකක් article හෝ essay ලිවීම හා සමාන බවයි.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '1. Inquiry letters',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '2. Order letters',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '3. Letters of complaint',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '4. Reply to a letter of complaint ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '5. Promotion letters',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '6. Sales letters',
+            'නමුත් පැහැදිලිවම මේවායේ විශාල වෙනස්කම් ඇත.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -96,14 +54,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'විවිධාකාරයේ formal letters පැවතුනද බොහෝවිට ඒවායේ template (ආකෘතිය) එකිනෙකට පොදු වේ.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'මෙම පාඩම් මාලාවේදී අදාළ ආකෘතිය පිළිබඳව පැහැදිලි කරන අතර එක් එක් letter type වලට අදාළ samples එකතු කර ඇත.',
+            'Speech ලිවීමේදී ඔබ දැනගත යුතු වැදගත්ම කාරණාව වන්නේ එහි ප්‍රධාන කොටස් තුනක් ඇති බවයි.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -117,49 +68,21 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'Template of the formal letters',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Image.asset(
-            'assets/images/day36Lesson02.JPG',
-            fit: BoxFit.fitHeight,
-            height: getProportionateScreenHeight(400),
-            width: double.infinity,
-          ),
-          Text(
-            '',
+            ' 1. Start',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            'Informal letter එකක පරිදිම formal letter එකකද ප්‍රධාන කොටස් තුනකි.',
+            ' 2. Body of the speech',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            '  1. ආරම්භය',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  2. විස්තරය ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  3. අවසානය ',
+            ' 3. Ending',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -173,121 +96,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'ඔබ මතක තබා යුතු අනෙක් කාරණය වන්නේ informal letters මෙන් නොව formal letters වලදී අත්‍යවශ්‍ය කාරණය පමණක් පැවසීමට වගබලා ගත යුතුය.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'ඔබ topic තේරීමේදී එය කෙටි විය යුතුය. පැහැදිලි විය යුතුය. ලියුමේ අන්තර්ගතය අවබෝධ විය යුතුය.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'අපි දැන් formal letter එකක් ආරම්භ කල හැකි ක්‍රම කිහිපයක් ගැන කතා කරමු.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'Complain එකක් කරන අවස්තාවකදී ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            ' 1. I am writing this letter to inform you that Dengue fever has been spread in our area rapidly.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '2. I am writing this letter to complain about a meal we had in your restaurant yesterday.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'Complain එකක් සඳහා reply කිරීමේදී ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '1. With reference to your letter dated on ............',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'Advertisement එකකට අදාලව',
+            'Start',
             style: TextStyle(
                 fontSize: size,
                 color: Colors.black,
@@ -301,7 +110,56 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            '1. I am writing this letter with reference to your advertisement date on 05 July 2021 in Dailymirror.',
+            'සිංහලෙන් අපි කතාවක් ආරම්භ කලත් පළමුව අවසර ගැනීමක් සිදු වේ.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'එසේම speech writing වලදී අවසර ගැනීමක් සඳහන් කල යුතුය.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Speech writing වලදී තමා එම speech එක සිදු කරමින් සිටින බව imagine කලයුතුය.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Starting ways කිහිපයක් සලකමු.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '1. Principal sir, dear teachers, and my dear friends. Today is a red-letter day for me. Because I am going to talk about ................',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '(විදුහල්පතිතුමා, ගුරුභවතුන් සහ මාගේ මිතුරනි. අද දවස ඉතාමත් වැදගත් මොකද මම කතා කරන්න යන්නේ ...................)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -315,21 +173,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'Formal letter එකක අවසානය කතා කිරීමේදී එයද ආකාර කිහිපයකින් දැක්විය හැකිය.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '1. I would be much obliged if you can get immediate action.',
+            '2. Venerable Thero (ගෞරවනීය ස්වාමීන් වහන්ස), principal sir, dear teachers, and my dear friends.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -343,7 +187,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            '2. Please be kind enough to get immediate action and solve this problem.',
+            '3. Venerable Thero, honorable minister of education Mr. Sameera Aththanayake (ගෞරවනීය අධ්‍යාපන ඇමතිතුමා)',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -357,7 +201,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            '3. We are looking forward to hearing from you.',
+            '4. Dear principal sir, dear teachers, parents, and students.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -371,21 +215,119 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'අවසානයේදී අත්සන සහ ලියුම ලියන්නාගේ නම සඳහන් කිරීමට ප්‍රථමයෙන්',
+            'ඒ ඒ අවස්තාව අනුව ආරම්භය වෙනස් වේ.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
             ),
           ),
           Text(
-            '  Yours faithfully හෝ Your sincerely',
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Body of the speech',
+            style: TextStyle(
+                fontSize: size,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'අපි උදාහරණයක් ලෙස covid 19 ගැටලුව ගැන කතා කරන අවස්තාවක් සිතමු. ',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'මෙහිදී විඩෙන් විඩේ \'සහෝදරවරුනි, හිතවතුනි ඔබ දන්නවා.\' පරිදි පිරිස ආමන්ත්‍රණය කෙරේ.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'ඒ පරිද්දෙන් අපි English speech ලිවීමේදීද සිදු කල යුතුය.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '1. Dear students, You know the present situation of covid 19 in Sri Lanka.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
             ),
           ),
           Text(
-            'ලෙස සඳහන් කල යුතුය.',
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '2. Friends, I have one question for you.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            '3. If it is so, everybody should understand the responsibility.',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.blue,
+            ),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'End',
+            style: TextStyle(
+                fontSize: size,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
+          ),
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: size,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            'Speech අවසන් කිරීමේදී කතාවේ summery එකක් ඉදිරිපත් කිරීම වැදගත් වේ.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
@@ -399,59 +341,17 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'උදාහරණයක් ලෙස ',
+            ' Now I am going to wind up my speech. But before that let\'s summarize the points. .................................',
             style: TextStyle(
               fontSize: size,
-              color: Colors.black,
+              color: Colors.blue,
             ),
           ),
           Text(
-            '  Your sincerely,',
+            ' Have a great day. Thank you very much.',
             style: TextStyle(
               fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  (signature)',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '  Kamani Sayurangi',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'Formal letters වලදී punctuation marks ගැන සැලකිලිමත් වන්න. ',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            '',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
-            ),
-          ),
-          Text(
-            'පාඩම අවසානයේ ලබාදෙන sample letters උදාහරණයට ගන්න.',
-            style: TextStyle(
-              fontSize: size,
-              color: Colors.black,
+              color: Colors.blue,
             ),
           ),
           Text(
