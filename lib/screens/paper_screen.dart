@@ -182,7 +182,7 @@ class _PaperScreenState extends State<PaperScreen> {
                             '15'),
                         buildGestureDetector(
                             context,
-                            loadedPaper.question15,
+                            loadedPaper.question16,
                             loadedPaper.descriptionQ16,
                             '2nd paper - 8th question',
                             '16'),

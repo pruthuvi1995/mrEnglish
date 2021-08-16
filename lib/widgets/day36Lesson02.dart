@@ -230,7 +230,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            ' 1. I am writing this letter to inform you that Dengue fever has been spread in our area rapidly.',
+            ' 1. I am writing this letter to inform you that Dengue fever has been spreaded in our area rapidly.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -301,7 +301,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            '1. I am writing this letter with reference to your advertisement date on 05 July 2021 in Dailymirror.',
+            '1. I am writing this letter with reference to your advertisement dated on 05 July 2021 in Dailymirror.',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -378,7 +378,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            '  Yours faithfully හෝ Your sincerely',
+            '  Yours faithfully හෝ Yours sincerely',
             style: TextStyle(
               fontSize: size,
               color: Colors.blue,
@@ -406,7 +406,7 @@ class Day36Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            '  Your sincerely,',
+            '  Yours sincerely,',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

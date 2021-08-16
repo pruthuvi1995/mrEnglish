@@ -426,12 +426,12 @@ class _CourseListScreenState extends State<CourseListScreen> {
                       ],
                     )),
                 Container(
-                  height: height * .15,
+                  height: height * .125,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       buildCircle('Our Courses', height),
-                      buildCircle('උපදෙස්', height),
+                      // buildCircle('උපදෙස්', height),
                       buildCircle('My Profile', height),
                       buildCircle('ගැටළු', height),
                     ],
@@ -444,7 +444,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                       child: Column(
                         children: [
                           Text(
-                            'ලබා ගත හැකි පාඨමාලා',
+                            'ඔබට අවශ්‍ය පාඨමාලාව තෝරන්න.',
                             style: TextStyle(
                                 fontSize: getProportionateScreenWidth(15),
                                 fontWeight: FontWeight.bold),
@@ -721,7 +721,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                             padding:
                                 EdgeInsets.all(getProportionateScreenWidth(5)),
                             child: Text(
-                              'app එක  කිරීමේදී මතුවන ගැටළු පහත පියවර අනුගමනය කරමින් විසදා ගන්න. එකේ නොහැකිනම් පහත අංකයට whatsapp ඔස්සේ අප වෙත එවන්න.අපගේ කණ්ඩායම ඔබේ ගැටළුව විසදා දෙවි. (070 10 850 33)',
+                              'app එක  කිරීමේදී මතුවන ගැටළු පහත පියවර අනුගමනය කරමින් විසදා ගන්න. එසේ නොහැකිනම් පහත අංකයට whatsapp ඔස්සේ අප වෙත එවන්න.අපගේ කණ්ඩායම ඔබේ ගැටළුව විසදා දෙවි. (070 10 850 33)',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: getProportionateScreenWidth(15),

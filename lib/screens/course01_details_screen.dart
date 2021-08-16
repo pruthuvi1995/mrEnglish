@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mr_english/screens/subscribe_screen.dart';
 import 'package:mr_english/screens/unsubscribe_screen.dart';
@@ -90,7 +92,7 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
     if (title == 'O/L Paper Discussion' ||
         title == 'Basic English within 40 Days' ||
         title == 'Seminars')
-      Navigator.of(context).pushNamed(navigation, arguments: title);
+      Navigator.of(context).popAndPushNamed(navigation, arguments: title);
     else {
       Navigator.push(
         context,
@@ -294,14 +296,28 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
     String navigationScreen;
     var isSubscribed = Provider.of<Auth>(context, listen: true).isSubscribed;
     final token = Provider.of<Auth>(context, listen: false).token;
-    if (title == 'O/L Paper Discussion')
+    String url;
+    if (title == 'O/L Paper Discussion') {
       navigationScreen = YearsOverviewScreen.routeName;
-    else if (title == 'Basic English within 40 Days')
+      url = 'KeQPyg_t0ks';
+    } else if (title == 'Basic English within 40 Days') {
       navigationScreen = DaysOverviewScreen.routeName;
-    else if (title == 'Seminars')
+      url = 'y5Ss7N3J5bo';
+    } else if (title == 'Seminars') {
       navigationScreen = SeminarsOverviewScreen.routeName;
-    else
+      url = 'u52UL2QAlvI';
+    } else {
       navigationScreen = ClassesScreen.routeName;
+      url = 'J3Q20vZkJzI';
+    }
+
+    YoutubePlayerController _controller = YoutubePlayerController(
+      initialVideoId: url,
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -338,6 +354,21 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Container(
+                        padding:
+                            EdgeInsets.all(getProportionateScreenWidth(20)),
+                        child: YoutubePlayer(
+                          controller: _controller,
+                          bottomActions: [
+                            CurrentPosition(),
+                            ProgressBar(isExpanded: true),
+                            PlayPauseButton(),
+                            // FullScreenButton(),
+                          ],
+                          showVideoProgressIndicator: true,
+                          progressIndicatorColor: Colors.redAccent,
+                        ),
+                      ),
                       buildLessonCard(
                         title,
                         description,

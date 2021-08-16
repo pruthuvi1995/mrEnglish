@@ -229,7 +229,7 @@ class Day32Lesson02 extends StatelessWidget {
             ),
           ),
           Text(
-            'said ඇති නිසා අදාළ පිළිබඳව දැඩි සේ සැලකිල්ලක් දක්වන්න.',
+            'said ඇති නිසා අදාළ tenses පිළිබඳව දැඩි සේ සැලකිල්ලක් දක්වන්න.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,

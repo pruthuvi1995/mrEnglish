@@ -220,7 +220,7 @@ class Day24Lesson01 extends StatelessWidget {
           ),
           Divider(),
           Text(
-            'මෙහිදී සිදු වන්නේ if clause, past perfect tense වලින් යෙදෙනවිට main clause හෝ could have ලෙස යෙදීමයි.',
+            'මෙහිදී සිදු වන්නේ if clause, past perfect tense වලින් යෙදෙනවිට main clause, would have හෝ could have ලෙස යෙදීමයි.',
             style: TextStyle(
               fontSize: size,
               color: Colors.black,
