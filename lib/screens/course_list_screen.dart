@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mr_english/api/notification_api.dart';
 import 'package:mr_english/providers/classStudents.dart';
 import 'package:mr_english/screens/add_student_screen.dart';
 import 'package:mr_english/screens/subscribe_screen.dart';
@@ -49,31 +50,15 @@ class _CourseListScreenState extends State<CourseListScreen> {
   void initState() {
     notificationPermission();
     super.initState();
-    // _firebaseMessaging.configure(
-    //   onMessage: (Map<String, dynamic> message) async {
-    //     print("onMessage: $message");
-    //     final notification = message['notification'];
-    //     setState(() {
-    //       messages.add(Message(
-    //           title: notification['title'], body: notification['body']));
-    //     });
-    //   },
-    //   onLaunch: (Map<String, dynamic> message) async {
-    //     print("onLaunch: $message");
-
-    //     final notification = message['data'];
-    //     setState(() {
-    //       messages.add(Message(
-    //           title: notification['title'], body: notification['body']));
-    //     });
-    //   },
-    //   onResume: (Map<String, dynamic> message) async {
-    //     print("onResume: $message");
-    //   },
-    // );
-    // _firebaseMessaging.requestNotificationPermissions(
-    //     const IosNotificationSettings(sound: true, badge: true, alert: true));
+    NotificationApi.init();
+    listenNotifications();
   }
+
+  void listenNotifications() =>
+      NotificationApi.onNotifications.stream.listen(onClickedNotification);
+
+  void onClickedNotification(String payload) =>
+      Navigator.of(context).pushNamed(payload);
 
   void getToken() async {
     print(await messaging.getToken());
