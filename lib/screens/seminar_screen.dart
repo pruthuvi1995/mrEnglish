@@ -115,10 +115,11 @@ class _SeminarScreenState extends State<SeminarScreen> {
                 Expanded(
                   flex: 1,
                   child: Container(
+                    padding: EdgeInsets.all(getProportionateScreenWidth(5)),
                     child: Text(
                       name,
                       style: TextStyle(
-                        fontSize: getProportionateScreenHeight(15),
+                        fontSize: getProportionateScreenHeight(17.5),
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
                       ),

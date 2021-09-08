@@ -130,7 +130,7 @@ class Auth with ChangeNotifier {
       noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
       serviceProvider = responseData['user']['serviceProvider'];
 
-      if (serviceProvider != " ") {
+      if (serviceProvider == "Dialog" || serviceProvider == "Mobitel") {
         final response1 = await http.post(
           Uri.parse(url1),
           headers: <String, String>{
@@ -152,8 +152,10 @@ class Auth with ChangeNotifier {
         } else {
           isSubscribed = false;
         }
-      } else {
+      } else if (serviceProvider == " ") {
         isSubscribed = false;
+      } else {
+        isSubscribed = true;
       }
 
       _autoLogout();
@@ -208,7 +210,7 @@ class Auth with ChangeNotifier {
     noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
     serviceProvider = extractedUserData['serviceProvider'];
 
-    if (serviceProvider != " ") {
+    if (serviceProvider == "Dialog" || serviceProvider == "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -230,8 +232,10 @@ class Auth with ChangeNotifier {
       } else {
         isSubscribed = false;
       }
-    } else {
+    } else if (serviceProvider == " ") {
       isSubscribed = false;
+    } else {
+      isSubscribed = true;
     }
 
     notifyListeners();
@@ -276,7 +280,7 @@ class Auth with ChangeNotifier {
     print('ccccccccccccccc');
     print(phoneNoNew);
 
-    if (serviceProvider != " ") {
+    if (serviceProvider == "Dialog" || serviceProvider == "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -298,8 +302,10 @@ class Auth with ChangeNotifier {
       } else {
         isSubscribed = false;
       }
-    } else {
+    } else if (serviceProvider == " ") {
       isSubscribed = false;
+    } else {
+      isSubscribed = true;
     }
 
     final userData = json.encode(
@@ -357,7 +363,8 @@ class Auth with ChangeNotifier {
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
     extractedUserData['mark'] = mark;
-    if (extractedUserData['serviceProvider'] != " ") {
+    if (extractedUserData['serviceProvider'] != "Dialog" ||
+        extractedUserData['serviceProvider'] != "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -379,8 +386,10 @@ class Auth with ChangeNotifier {
       } else {
         isSubscribed = false;
       }
-    } else {
+    } else if (extractedUserData['serviceProvider'] == " ") {
       isSubscribed = false;
+    } else {
+      isSubscribed = true;
     }
 
     final userData = json.encode(
@@ -410,7 +419,8 @@ class Auth with ChangeNotifier {
     final extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
-    if (extractedUserData['serviceProvider'] != " ") {
+    if (extractedUserData['serviceProvider'] != "Dialog" ||
+        extractedUserData['serviceProvider'] != "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -432,8 +442,10 @@ class Auth with ChangeNotifier {
       } else {
         isSubscribed = false;
       }
-    } else {
+    } else if (extractedUserData['serviceProvider'] == " ") {
       isSubscribed = false;
+    } else {
+      isSubscribed = true;
     }
 
     _token = extractedUserData['token'];
@@ -490,7 +502,8 @@ class Auth with ChangeNotifier {
     var extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
-    if (extractedUserData['serviceProvider'] != " ") {
+    if (extractedUserData['serviceProvider'] != "Dialog" ||
+        extractedUserData['serviceProvider'] != "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -512,8 +525,10 @@ class Auth with ChangeNotifier {
       } else {
         isSubscribed = false;
       }
-    } else {
+    } else if (extractedUserData['serviceProvider'] == " ") {
       isSubscribed = false;
+    } else {
+      isSubscribed = true;
     }
 
     // int count = int.parse(extractedUserData['noOfFinishedLessons'].toString());

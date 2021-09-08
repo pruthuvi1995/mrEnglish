@@ -25,6 +25,7 @@ import '../size_config.dart';
 import 'classes_screen.dart';
 import 'instructions_screen.dart';
 import 'notification_screeen.dart';
+import 'presentation_skills_overview_screen.dart';
 import 'seminars_overview_screen.dart';
 
 class Course01DetailsScreen extends StatefulWidget {
@@ -91,9 +92,11 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
     print(title);
     if (title == 'O/L Paper Discussion' ||
         title == 'Basic English within 40 Days' ||
-        title == 'Seminars')
+        title == 'Seminars' ||
+        title == 'Presentation Skills')
       Navigator.of(context).popAndPushNamed(navigation, arguments: title);
     else {
+      Navigator.of(context).pop();
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ClassesScreen(title)),
@@ -258,6 +261,7 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
                               navigation,
                               isSubscribed,
                               token,
+                              title,
                             ]);
                         // subscribeOnTap(navigation, isSubscribed, token);
                       },
@@ -295,6 +299,53 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
     final uTubeUrl = loadedCourse[2];
     String navigationScreen;
     var isSubscribed = Provider.of<Auth>(context, listen: true).isSubscribed;
+    var serviceProvider =
+        Provider.of<Auth>(context, listen: true).serviceProvider;
+    List<String> details = [];
+    String type = ' ';
+    String course = ' ';
+    String date = ' ';
+    if (serviceProvider != 'Dialog' &&
+        serviceProvider != 'Mobitel' &&
+        isSubscribed) {
+      details = serviceProvider.split(" ");
+
+      course = details[0];
+      date = details[1];
+
+      bool isActive = false;
+      var now = new DateTime.now();
+      var parsedDate = DateTime.parse(date);
+
+      if (now.isBefore(parsedDate)) {
+        isActive = true;
+      }
+
+      if ((course == '1' ||
+              course == '12' ||
+              course == '13' ||
+              course == '123') &&
+          title == 'Basic English within 40 Days' &&
+          isActive)
+        isSubscribed = true;
+      else if ((course == '2' ||
+              course == '12' ||
+              course == '23' ||
+              course == '123') &&
+          title == 'O/L Paper Discussion' &&
+          isActive)
+        isSubscribed = true;
+      else if ((course == '3' ||
+              course == '13' ||
+              course == '23' ||
+              course == '123') &&
+          title == 'Presentation Skills' &&
+          isActive)
+        isSubscribed = true;
+      else
+        isSubscribed = false;
+    }
+
     final token = Provider.of<Auth>(context, listen: false).token;
     String url;
     if (title == 'O/L Paper Discussion') {
@@ -306,6 +357,9 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
     } else if (title == 'Seminars') {
       navigationScreen = SeminarsOverviewScreen.routeName;
       url = 'u52UL2QAlvI';
+    } else if (title == 'Presentation Skills') {
+      navigationScreen = PresentationSkillsOverviewScreen.routeName;
+      url = 'u52UL2QAlvI';
     } else {
       navigationScreen = ClassesScreen.routeName;
       url = 'J3Q20vZkJzI';
@@ -316,6 +370,7 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
       flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
+        forceHD: false,
       ),
     );
 

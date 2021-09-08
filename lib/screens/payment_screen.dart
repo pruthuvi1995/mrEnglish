@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:mr_english/providers/chapter.dart';
+import 'package:mr_english/providers/chapters.dart';
 import 'package:mr_english/providers/class.dart';
 import 'package:mr_english/providers/classes.dart';
 import 'package:mr_english/providers/seminar.dart';
@@ -21,6 +23,7 @@ import 'package:http/http.dart' as http;
 
 import '../size_config.dart';
 import 'classes_screen.dart';
+import 'presentation_skills_overview_screen.dart';
 import 'seminars_overview_screen.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -109,7 +112,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       var today = new DateTime.now();
       var activeDay =
           today.add(new Duration(days: 7)).toString().substring(0, 10);
-      // print(activeYear);
+      print(activeDay);
 
       try {
         await http.post(
@@ -138,7 +141,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       var today = new DateTime.now();
       var activeDay =
           today.add(new Duration(days: 7)).toString().substring(0, 10);
-      // print(activeYear);
+      print(activeDay);
 
       try {
         await http.put(
@@ -255,6 +258,111 @@ class _PaymentScreenState extends State<PaymentScreen> {
           body: jsonEncode(
             {
               'activeSeminar': activeSeminar,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else {
+      _showErrorDialog(data);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  Future<void> updateChapter(
+    context,
+    String id,
+    String token,
+    String userId,
+    String routeName,
+    String chapterDetailsId,
+    Chapter chapter,
+    String amount,
+    String phoneNo,
+    String serviceProvider,
+  ) async {
+    String data;
+    setState(() {
+      _isLoading = true;
+    });
+    final url = 'https://mrenglish.tk/api/v1/dayDetails/pay';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          {
+            'phoneNo': phoneNo,
+            'amount': amount,
+            'serviceProvider': serviceProvider,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+      data = responseData['data']['statusDetail'];
+    } catch (error) {
+      print(error);
+      throw (error);
+    }
+
+    if (data == "Request was successfully processed." &&
+        chapterDetailsId == null) {
+      final url1 = 'https://mrenglish.tk/api/v1/chapterDetails/$userId/$id';
+
+      var today = new DateTime.now();
+      var activeChapter =
+          today.add(new Duration(days: 3)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.post(
+          Uri.parse(url1),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeChapter': activeChapter,
+            },
+          ),
+        );
+      } catch (error) {
+        print(error);
+
+        // throw (error);
+      }
+
+      Navigator.of(context).popAndPushNamed(routeName);
+    } else if (data == "Request was successfully processed." &&
+        chapterDetailsId != null) {
+      final url1 =
+          'https://mrenglish.tk/api/v1/chapterDetails/$chapterDetailsId';
+
+      var today = new DateTime.now();
+      var activeChapter =
+          today.add(new Duration(days: 3)).toString().substring(0, 10);
+      // print(activeYear);
+
+      try {
+        await http.put(
+          Uri.parse(url1),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            HttpHeaders.authorizationHeader: "Bearer $token",
+          },
+          body: jsonEncode(
+            {
+              'activeChapter': activeChapter,
             },
           ),
         );
@@ -527,6 +635,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Day loadedDay;
     Year loadedYear;
     Seminar loadedSeminar;
+    Chapter loadedChapter;
     Class loadedClass;
     String dayCount;
 
@@ -547,6 +656,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
     } else if (items[1] == 'class') {
       loadedClass = Provider.of<Classes>(context, listen: false).findByID(id);
       amount = loadedClass.amount;
+      dayCount = '3';
+    } else if (items[1] == 'chapter') {
+      loadedChapter =
+          Provider.of<Chapters>(context, listen: false).findByID(id);
+      amount = loadedChapter.amount;
       dayCount = '3';
     } else {
       loadedYear = Provider.of<Years>(context, listen: false).findByID(id);
@@ -656,6 +770,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 } else if (items[1] == 'seminar') {
                                   Navigator.of(context).popAndPushNamed(
                                       SeminarsOverviewScreen.routeName);
+                                } else if (items[1] == 'chapter') {
+                                  Navigator.of(context).popAndPushNamed(
+                                      PresentationSkillsOverviewScreen
+                                          .routeName);
                                 } else if (items[1] == 'class') {
                                   Navigator.push(
                                     context,
@@ -733,6 +851,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     SeminarsOverviewScreen.routeName,
                                     loadedSeminar.seminarDetailsId,
                                     loadedSeminar,
+                                    amount,
+                                    phoneNo,
+                                    serviceProvider,
+                                  );
+                                } else if (items[1] == 'chapter') {
+                                  updateChapter(
+                                    context,
+                                    id,
+                                    loadedChapter.authToken,
+                                    userId,
+                                    PresentationSkillsOverviewScreen.routeName,
+                                    loadedChapter.chapterDetailsId,
+                                    loadedChapter,
                                     amount,
                                     phoneNo,
                                     serviceProvider,

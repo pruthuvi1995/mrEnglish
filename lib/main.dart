@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:mr_english/providers/classStudents.dart';
 import 'package:mr_english/screens/add_student_screen.dart';
+import 'package:mr_english/screens/bank_details_screen.dart';
 import './screens/instructions_screen.dart';
 import './screens/notification_screeen.dart';
 import './screens/sample_essay_question_screen.dart';
@@ -28,14 +30,17 @@ import './screens/years_overview_screen.dart';
 
 import './screens/sign_in_screen.dart';
 import './screens/splash_screen.dart';
+import 'providers/chapters.dart';
 import 'providers/classes.dart';
 import 'providers/seminars.dart';
 
 import 'screens/before_trail_paper_screen.dart';
+import 'screens/chapter_video_list_screen.dart';
 import 'screens/class_video_screen.dart';
 import 'screens/classes_screen.dart';
 import 'screens/course01_details_screen.dart';
 import 'screens/course_list_screen.dart';
+import 'screens/presentation_skills_overview_screen.dart';
 import 'screens/seminar_screen.dart';
 import 'screens/seminar_video_screen.dart';
 import 'screens/seminars_overview_screen.dart';
@@ -61,6 +66,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   runApp(MyApp());
 }
 
@@ -70,7 +76,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
     ]);
+
     return MultiProvider(
         providers: [
           ChangeNotifierProvider.value(
@@ -125,6 +133,13 @@ class MyApp extends StatelessWidget {
             update: (ctx, auth, previousCourses) => Courses(auth.token,
                 previousCourses == null ? [] : previousCourses.items),
           ),
+          ChangeNotifierProxyProvider<Auth, Chapters>(
+            create: (ctx) => Chapters('', '', []),
+            update: (ctx, auth, previousChapters) => Chapters(
+                auth.token,
+                auth.userId,
+                previousChapters == null ? [] : previousChapters.items),
+          ),
         ],
         child: Consumer<Auth>(
           builder: (ctx, auth, _) => MaterialApp(
@@ -149,6 +164,8 @@ class MyApp extends StatelessWidget {
               YearsOverviewScreen.routeName: (ctx) => YearsOverviewScreen(),
               SeminarsOverviewScreen.routeName: (ctx) =>
                   SeminarsOverviewScreen(),
+              PresentationSkillsOverviewScreen.routeName: (ctx) =>
+                  PresentationSkillsOverviewScreen(),
               DayDetailsScreen.routeName: (ctx) => DayDetailsScreen(),
               TrailPaperScreen.routeName: (ctx) => TrailPaperScreen(),
               DayLessonScreen.routeName: (ctx) => DayLessonScreen(),
@@ -164,6 +181,8 @@ class MyApp extends StatelessWidget {
               SelectCourseScreen.routeName: (ctx) => SelectCourseScreen(),
               PaymentScreen.routeName: (ctx) => PaymentScreen(),
               PaperScreen.routeName: (ctx) => PaperScreen(),
+              ChapterVideoListScreen.routeName: (ctx) =>
+                  ChapterVideoListScreen(),
               SeminarScreen.routeName: (ctx) => SeminarScreen(),
               // ClassesScreen.routeName: (ctx) => ClassesScreen(),
               PaperVideoScreen.routeName: (ctx) => PaperVideoScreen(),
@@ -180,6 +199,7 @@ class MyApp extends StatelessWidget {
               SampleEssayQuestionScreen.routeName: (ctx) =>
                   SampleEssayQuestionScreen(),
               AddStudentScreen.routeName: (ctx) => AddStudentScreen(),
+              BankDetailsScreen.routeName: (ctx) => BankDetailsScreen(),
             },
           ),
         ));

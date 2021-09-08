@@ -20,30 +20,32 @@ class BodySubscribeScreen extends StatelessWidget {
             horizontal: getProportionateScreenWidth(20),
           ),
           child: SingleChildScrollView(
-            child: Column(children: <Widget>[
-              SizedBox(height: SizeConfig.screenHeight * 0.05),
-              Text(
-                'Subscribe',
-                style: TextStyle(
-                  color: kPrimaryColor,
-                  fontSize: getProportionateScreenWidth(28),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'ඔබේ දුරකථන අංකය ඇතුළත් කර subscribe වන්න.',
-                style: TextStyle(
-                  color: kPrimaryColor,
-                  fontSize: getProportionateScreenWidth(17),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: SizeConfig.screenHeight * 0.08),
-              // SizedBox(height: SizeConfig.screenHeight * 0.08),
-              SubscribeForm(details),
-              SizedBox(height: getProportionateScreenHeight(20)),
-              // NoAccountText()
-            ]),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: SizeConfig.screenHeight * 0.005),
+                  Text(
+                    'Subscribe',
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: getProportionateScreenWidth(28),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'ඔබේ දුරකථන අංකය ඇතුළත් කර subscribe වන්න.',
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: getProportionateScreenWidth(17),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.01),
+                  // SizedBox(height: SizeConfig.screenHeight * 0.08),
+                  SubscribeForm(details),
+                  SizedBox(height: getProportionateScreenHeight(20)),
+                  // NoAccountText()
+                ]),
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../screens/bank_details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/http_exception.dart';
@@ -13,7 +14,9 @@ import '../size_config.dart';
 import 'default_button.dart';
 import 'package:http/http.dart' as http;
 
-enum SubscribeMode { PhoneNo, PinVerify, Final }
+import 'small_button.dart';
+
+enum SubscribeMode { Start, PhoneNo, PinVerify, Final }
 
 class SubscribeForm extends StatefulWidget {
   final List details;
@@ -26,7 +29,9 @@ class _SubscribeFormState extends State<SubscribeForm> {
   final List details;
   _SubscribeFormState(this.details);
   final _formKey = GlobalKey<FormState>();
-  SubscribeMode _subscribeMode = SubscribeMode.PhoneNo;
+
+  SubscribeMode _subscribeMode = SubscribeMode.Start;
+
   var _isLoading = false;
   String _referenceNo;
   String _telNo;
@@ -51,6 +56,25 @@ class _SubscribeFormState extends State<SubscribeForm> {
         actions: <Widget>[
           FlatButton(
               onPressed: () {
+                Navigator.of(ctx).pop();
+                // Navigator.pushNamed(context, SignInScreen.routeName);
+              },
+              child: Text('OK'))
+        ],
+      ),
+    );
+  }
+
+  void _showDialog(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
                 Navigator.of(ctx).pop();
                 // Navigator.pushNamed(context, SignInScreen.routeName);
               },
@@ -279,7 +303,11 @@ class _SubscribeFormState extends State<SubscribeForm> {
   }
 
   void _switchAuthMode() {
-    if (_subscribeMode == SubscribeMode.PhoneNo) {
+    if (_subscribeMode == SubscribeMode.Start) {
+      setState(() {
+        _subscribeMode = SubscribeMode.PhoneNo;
+      });
+    } else if (_subscribeMode == SubscribeMode.PhoneNo) {
       setState(() {
         _subscribeMode = SubscribeMode.PinVerify;
       });
@@ -292,16 +320,91 @@ class _SubscribeFormState extends State<SubscribeForm> {
 
   @override
   Widget build(BuildContext context) {
+    final title = details[3];
+
     return _isLoading
         ? Center(
             child: CircularProgressIndicator(),
           )
         : Column(
             children: [
+              if (_subscribeMode == SubscribeMode.Start)
+                Column(
+                  children: [
+                    Container(
+                      child: Text(
+                          'මේ සඳහා ඔබ ළඟ දැනට ඇති Dialog, Hutch, Etisalat හෝ Airtel දුරකථන අංකයක් පමණක් ඇතුළත් කළ යුතුය. වෙනත් දුරකථන ජාල වලංගු නොවේ.'),
+                    ),
+                    Container(
+                      child: Text('මේ සඳහා කිසිදු දෛනික ගාස්තුවක් අය නොකරේ.'),
+                    ),
+                    Container(
+                      child: Text(
+                          'නමුත් ඔබ ලබා ගන්නා පාඩම අනුව ඔබ කැමතිනම් පමණක් rs.5 + බදු මුදලක් හෝ ඊට වඩා වැඩි මුදලක් ඔබෙන් අය කර ගනු ලැබේ.'),
+                    ),
+                    SizedBox(
+                      height: getProportionateScreenHeight(20),
+                    ),
+                    Container(
+                      child: Text(
+                          'ඉහත අවශ්‍යතාවයන් සම්පුර්ණ කරන දුරකථන අංකයක් ඔබට ලබා දීමට තිබේද?'),
+                    ),
+                    SizedBox(
+                      height: getProportionateScreenHeight(30),
+                    ),
+                    Row(
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          fit: FlexFit.tight,
+                          child: SmallButton(
+                            text: 'නැත',
+                            press: () => {
+                              (title == 'Basic English within 40 Days' ||
+                                      title == 'O/L Paper Discussion' ||
+                                      title == 'Presentation Skills')
+                                  ? Navigator.of(context).pushNamed(
+                                      BankDetailsScreen.routeName,
+                                      arguments: [title])
+                                  : _showDialog(
+                                      'කණගාටුයි. මෙම පාඨමාලාව සඳහා දුරකථන අංකයක් අත්‍යවශ්‍ය වේ.',
+                                      'ඉහත සඳහන් අවශ්‍යතාවයන්ට ගැළපෙන දුරකථන අංකයක් සමඟ පසුව උත්සහා කරන්න.')
+                            },
+                            color: Colors.red,
+                          ),
+                        ),
+                        SizedBox(
+                          width: getProportionateScreenHeight(15),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          fit: FlexFit.tight,
+                          child: SmallButton(
+                            text: 'ඔව්',
+                            press: () => {
+                              (_isLoading)
+                                  ? CircularProgressIndicator()
+                                  : _submit()
+                            },
+                            color: Colors.green,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               if (_subscribeMode == SubscribeMode.PhoneNo)
-                Container(
-                  child: Text(
-                      'ඔබ ළඟ දැනට ඇති Dialog, Hutch, Etisalat හෝ Airtel දුරකථන අංකයක් පමණක් ඇතුළත් කරන්න. වෙනත් දුරකථන ජාල වලංගු නොවේ. 07xxxxxxxx ආකාරයට අංකය ඇතුළත් කිරීම අනිවාර්ය වේ. මේ සඳහා කිසිදු දෛනික ගාස්තුවක් අය නොකරේ. නමුත් ඔබ ලබා ගන්නා පාඩම අනුව ඔබ කැමතිනම් පමණක් rs.5 + බදු මුදලක් හෝ ඊට වඩා වැඩි මුදලක් ඔබෙන් අය කර ගනු ලැබේ.'),
+                Column(
+                  children: [
+                    Container(
+                      child: Text(
+                          'මේ සඳහා ඔබ ළඟ දැනට ඇති Dialog, Hutch, Etisalat හෝ Airtel දුරකථන අංකයක් පමණක් ඇතුළත් කළ යුතුය. වෙනත් දුරකථන ජාල වලංගු නොවේ.'),
+                    ),
+                    Container(
+                      child: Text(
+                          '07xxxxxxxx ආකාරයට අංකය ඇතුළත් කිරීම අනිවාර්ය වේ.'),
+                    ),
+                  ],
                 ),
               if (_subscribeMode == SubscribeMode.PinVerify)
                 Container(
@@ -309,7 +412,7 @@ class _SubscribeFormState extends State<SubscribeForm> {
                       'ඔබ ඇතුළත් කල දුරකථන අංකයට ලැබුණු pin අංකය ඇතුළත් කරන්න.ලැබුණේ නැත්නම් මඳක් රැදී සිටින්න.'),
                 ),
               SizedBox(
-                height: getProportionateScreenHeight(45),
+                height: getProportionateScreenHeight(30),
               ),
               Form(
                   key: _formKey,
@@ -322,14 +425,15 @@ class _SubscribeFormState extends State<SubscribeForm> {
                     if (_subscribeMode == SubscribeMode.PinVerify)
                       buildVerifyPhoneNoFormField(),
                     SizedBox(
-                      height: getProportionateScreenHeight(30),
+                      height: getProportionateScreenHeight(10),
                     ),
-                    DefaultButton(
-                      text: 'Next',
-                      press: () => {
-                        (_isLoading) ? CircularProgressIndicator() : _submit()
-                      },
-                    )
+                    if (_subscribeMode != SubscribeMode.Start)
+                      DefaultButton(
+                        text: 'Next',
+                        press: () => {
+                          (_isLoading) ? CircularProgressIndicator() : _submit()
+                        },
+                      )
                   ])),
             ],
           );

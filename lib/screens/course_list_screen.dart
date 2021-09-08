@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:mr_english/api/notification_api.dart';
 import 'package:mr_english/providers/classStudents.dart';
 import 'package:mr_english/screens/add_student_screen.dart';
@@ -434,6 +435,13 @@ class _CourseListScreenState extends State<CourseListScreen> {
                                 fontSize: getProportionateScreenWidth(15),
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
+                          ),
+                          buildLessonCard(
+                            loadedCourses.items[12].title,
+                            loadedCourses.items[12].description,
+                            DaysOverviewScreen.routeName,
+                            token,
+                            'URL for course 01',
                           ),
                           buildLessonCard(
                             loadedCourses.items[1].title,
