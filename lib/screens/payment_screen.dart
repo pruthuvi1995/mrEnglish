@@ -425,7 +425,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       var today = new DateTime.now();
       var activeClass =
-          today.add(new Duration(days: 3)).toString().substring(0, 10);
+          today.add(new Duration(days: 5)).toString().substring(0, 10);
       // print(activeYear);
 
       try {
@@ -600,8 +600,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text('Error 1ක් තියනවා.'),
-        content: message ==
-                "ඔබ සේවාවෙන් ඉවත් වී ඇත. නැවත සේවාවට subscribe කරන්න."
+        content: (message ==
+                    "ඔබ සේවාවෙන් ඉවත් වී ඇත. නැවත සේවාවට subscribe කරන්න." ||
+                message ==
+                    "ඔබේ දුරකථන අංකයේ ප්‍රමාණවත් මුදලක් නොමැත. ඔබේ ගිණුම recharge කරන්න. ඉන්පසු ශේෂය නැවත පරික්ෂා කොට ප්‍රමාණවත් මුදලක් පවතීනම් නැවත උත්සහ කරන්න.")
             ? Text(message)
             : Text(
                 '$message. ප්‍රධාන screen එක වෙත ගොස් ගැටළු කොටසෙහි දක්වා ඇති පියවර අනුගමනය කරන්න.'),

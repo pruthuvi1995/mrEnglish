@@ -359,7 +359,7 @@ class _Course01DetailsScreenState extends State<Course01DetailsScreen> {
       url = 'u52UL2QAlvI';
     } else if (title == 'Presentation Skills') {
       navigationScreen = PresentationSkillsOverviewScreen.routeName;
-      url = 'u52UL2QAlvI';
+      url = 'FGE4bXQQlnA';
     } else {
       navigationScreen = ClassesScreen.routeName;
       url = 'J3Q20vZkJzI';

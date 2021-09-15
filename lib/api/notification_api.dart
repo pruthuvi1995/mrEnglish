@@ -41,7 +41,9 @@ class NotificationApi {
 
     await _notifications.initialize(
       settings,
-      onSelectNotification: (payload) async {},
+      onSelectNotification: (payload) async {
+        onNotifications.add(payload);
+      },
     );
 
     if (initScheduled) {

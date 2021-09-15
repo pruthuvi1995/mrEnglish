@@ -78,20 +78,22 @@ class _SeminarScreenState extends State<SeminarScreen> {
                 ],
               ),
             )
-          : Container(
-              width: double.infinity,
-              // height: height * .4,
-              child: SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ...(videoList as List).map(
-                        (video) {
-                          return buildGestureDetector(
-                              context, video['name'], video['videoURL']);
-                        },
-                      ).toList()
-                    ]),
+          : Center(
+              child: Container(
+                width: double.infinity,
+                // height: height * .4,
+                child: SingleChildScrollView(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ...(videoList as List).map(
+                          (video) {
+                            return buildGestureDetector(
+                                context, video['name'], video['videoURL']);
+                          },
+                        ).toList()
+                      ]),
+                ),
               ),
             ),
     );
@@ -119,7 +121,7 @@ class _SeminarScreenState extends State<SeminarScreen> {
                     child: Text(
                       name,
                       style: TextStyle(
-                        fontSize: getProportionateScreenHeight(17.5),
+                        fontSize: getProportionateScreenWidth(13),
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
                       ),

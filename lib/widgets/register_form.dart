@@ -48,8 +48,8 @@ class _RegisterFormState extends State<RegisterForm> {
   void listenNotifications() =>
       NotificationApi.onNotifications.stream.listen(onClickedNotification);
 
-  void onClickedNotification(String payload) =>
-      Navigator.of(context).pushNamed(payload);
+  void onClickedNotification(String payload) => {};
+  // Navigator.of(context).pushNamed(payload);
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -107,74 +107,81 @@ class _RegisterFormState extends State<RegisterForm> {
 
     _switchAuthMode();
     if (_registerMode == RegisterMode.Final && errorMessage == null) {
-      notification01();
-      notification02();
-      notification03();
-      notification04();
-      notification05();
-      notification06();
-      notification07();
-      notification08();
-      notification09();
-      notification10();
-      notification11();
-      notification12();
-      notification13();
-      notification14();
-      notification15();
-      notification16();
-      notification17();
-      notification18();
-      notification19();
-      notification20();
-      notification21();
-      notification22();
-      notification23();
-      notification24();
-      notification25();
-      notification26();
-      notification27();
-      notification28();
-      notification29();
-      notification30();
-      notification31();
-      notification32();
-      notification33();
-      notification34();
-      notification35();
-      notification36();
-      notification37();
-      notification38();
-      notification39();
-
-      notification40();
-      notification41();
-      notification42();
-      notification43();
-
-      notification44();
-      notification45();
-      notification46();
-      notification47();
-      notification48();
-      notification49();
-      notification50();
-      notification51();
-      notification52();
-      notification53();
-      notification54();
-      notification55();
-      notification56();
-      notification57();
-      notification58();
-      notification59();
-      notification60();
-
       NotificationApi.showNotification(
         title: 'Welcome to Mr English',
         body: 'Good Luck for your English journey',
         payload: '/',
       );
+      // NotificationApi.showScheduledNotification(
+      //   title: 'A හා An පැටලෙනවාද?',
+      //   body:
+      //       'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 1 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
+      //   payload: '/',
+      //   scheduledDate: DateTime.now().add(Duration(minutes: 1)),
+      // );
+      // // notification01();
+      // notification02();
+      // notification03();
+      // notification04();
+      // notification05();
+      // notification06();
+      // notification07();
+      // notification08();
+      // notification09();
+      // notification10();
+      // notification11();
+      // notification12();
+      // notification13();
+      // notification14();
+      // notification15();
+      // notification16();
+      // notification17();
+      // notification18();
+      // notification19();
+      // notification20();
+      // notification21();
+      // notification22();
+      // notification23();
+      // notification24();
+      // notification25();
+      // notification26();
+      // notification27();
+      // notification28();
+      // notification29();
+      // notification30();
+      // notification31();
+      // notification32();
+      // notification33();
+      // notification34();
+      // notification35();
+      // notification36();
+      // notification37();
+      // notification38();
+      // notification39();
+
+      // notification40();
+      // notification41();
+      // notification42();
+      // notification43();
+
+      // notification44();
+      // notification45();
+      // notification46();
+      // notification47();
+      // notification48();
+      // notification49();
+      // notification50();
+      // notification51();
+      // notification52();
+      // notification53();
+      // notification54();
+      // notification55();
+      // notification56();
+      // notification57();
+      // notification58();
+      // notification59();
+      // notification60();
+
       Navigator.popAndPushNamed(context, '/');
     }
   }
@@ -185,7 +192,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 1 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 1)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 1)),
     );
   }
 
@@ -195,7 +202,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 1 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 2)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 2)),
     );
   }
 
@@ -205,7 +212,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 2 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 3)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 3)),
     );
   }
 
@@ -215,7 +222,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 3 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 4)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 4)),
     );
   }
 
@@ -225,7 +232,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 4 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 5)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 5)),
     );
   }
 
@@ -235,7 +242,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 4 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 6)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 6)),
     );
   }
 
@@ -245,7 +252,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 5 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 7)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 7)),
     );
   }
 
@@ -255,7 +262,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 6 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 8)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 8)),
     );
   }
 
@@ -265,7 +272,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 6 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 9)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 9)),
     );
   }
 
@@ -275,7 +282,7 @@ class _RegisterFormState extends State<RegisterForm> {
       body:
           'එහෙනම් දැන්ම Basic English within 40 Days course එකෙහි 7 වන දවසේ පාඩම් අධ්‍යනය කරන්න.',
       payload: '/',
-      scheduledDate: DateTime.now().add(Duration(days: 10)),
+      scheduledDate: DateTime.now().add(Duration(minutes: 10)),
     );
   }
 

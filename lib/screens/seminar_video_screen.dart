@@ -17,6 +17,7 @@ class SeminarVideoScreen extends StatelessWidget {
       flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
+        forceHD: false,
       ),
     );
 
@@ -40,6 +41,7 @@ class SeminarVideoScreen extends StatelessWidget {
                           CurrentPosition(),
                           ProgressBar(isExpanded: true),
                           PlayPauseButton(),
+
                           // FullScreenButton(),
                         ],
                         showVideoProgressIndicator: true,
