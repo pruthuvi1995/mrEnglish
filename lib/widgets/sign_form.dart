@@ -1,12 +1,11 @@
-import '../models/http_exception.dart';
-import '../providers/auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../size_config.dart';
 import 'default_button.dart';
 import 'form_error.dart';
+import '../models/http_exception.dart';
+import '../providers/auth.dart';
 
 class SignForm extends StatefulWidget {
   @override
@@ -20,8 +19,6 @@ class _SignFormState extends State<SignForm> {
     "nICNo": "",
     "password": "",
   };
-  // String nICNo;
-  // String password;
 
   var _isLoading = false;
 
@@ -29,15 +26,29 @@ class _SignFormState extends State<SignForm> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Error 1ක් තියනවා.'),
-        content: Text(message),
+        title: Text(
+          'Error 1ක් තියනවා.',
+          style: TextStyle(
+            fontSize: getProportionateScreenWidth(17.5),
+          ),
+        ),
+        content: Text(
+          message,
+          style: TextStyle(
+            fontSize: getProportionateScreenWidth(15),
+          ),
+        ),
         actions: <Widget>[
           FlatButton(
               onPressed: () {
                 Navigator.of(ctx).pop();
-                // Navigator.pushNamed(context, SignInScreen.routeName);
               },
-              child: Text('OK'))
+              child: Text(
+                'OK',
+                style: TextStyle(
+                  fontSize: getProportionateScreenWidth(15),
+                ),
+              ))
         ],
       ),
     );
@@ -90,23 +101,9 @@ class _SignFormState extends State<SignForm> {
           ),
           buildPasswordFormField(),
           SizedBox(
-            height: getProportionateScreenHeight(30),
+            height: getProportionateScreenHeight(25),
           ),
-          // GestureDetector(
-          //   onTap: () => {
-          //     Navigator.popAndPushNamed(
-          //         context, ForgotPasswordScreen.routeName),
-          //   },
-          //   child: Text(
-          //     'ForgotPassword',
-          //     style: TextStyle(decoration: TextDecoration.underline),
-          //   ),
-          // ),
-
           FormError(errors: errors),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
           if (_isLoading)
             CircularProgressIndicator()
           else

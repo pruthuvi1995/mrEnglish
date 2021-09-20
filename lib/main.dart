@@ -2,8 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:mr_english/providers/classStudents.dart';
+import 'package:mr_english/providers/freeVideos.dart';
 import 'package:mr_english/screens/add_student_screen.dart';
 import 'package:mr_english/screens/bank_details_screen.dart';
+import 'package:mr_english/screens/free_video_screen.dart';
+import 'package:mr_english/screens/logo_screen.dart';
 import './screens/instructions_screen.dart';
 import './screens/notification_screeen.dart';
 import './screens/sample_essay_question_screen.dart';
@@ -66,7 +69,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
+  SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(MyApp());
 }
 
@@ -140,6 +143,10 @@ class MyApp extends StatelessWidget {
                 auth.userId,
                 previousChapters == null ? [] : previousChapters.items),
           ),
+          ChangeNotifierProxyProvider<Auth, FreeVideos>(
+            create: (ctx) => FreeVideos(''),
+            update: (ctx, auth, previousFreeVideos) => FreeVideos(auth.token),
+          ),
         ],
         child: Consumer<Auth>(
           builder: (ctx, auth, _) => MaterialApp(
@@ -153,7 +160,7 @@ class MyApp extends StatelessWidget {
                     builder: (ctx, authResultSnapshot) =>
                         authResultSnapshot.connectionState ==
                                 ConnectionState.waiting
-                            ? SplashScreen()
+                            ? LogoScreen()
                             : SignInScreen(),
                   ),
 
@@ -200,6 +207,7 @@ class MyApp extends StatelessWidget {
                   SampleEssayQuestionScreen(),
               AddStudentScreen.routeName: (ctx) => AddStudentScreen(),
               BankDetailsScreen.routeName: (ctx) => BankDetailsScreen(),
+              // FreeVideoScreen.routeName: (ctx) => FreeVideoScreen(),
             },
           ),
         ));

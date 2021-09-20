@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:mr_english/api/notification_api.dart';
 import 'package:mr_english/providers/classStudents.dart';
+import 'package:mr_english/providers/freeVideos.dart';
 import 'package:mr_english/screens/add_student_screen.dart';
+import 'package:mr_english/screens/free_video_screen.dart';
 import 'package:mr_english/screens/subscribe_screen.dart';
 import 'package:mr_english/screens/unsubscribe_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -41,6 +44,7 @@ class CourseListScreen extends StatefulWidget {
 }
 
 class _CourseListScreenState extends State<CourseListScreen> {
+  var index = 3;
   var _isInit = true;
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   FlutterLocalNotificationsPlugin fltNotification;
@@ -75,8 +79,12 @@ class _CourseListScreenState extends State<CourseListScreen> {
         Provider.of<ClassStudents>(context, listen: false)
             .fetchAndSetClassStudents()
             .then((_) {
-          setState(() {
-            _isLoading = false;
+          Provider.of<FreeVideos>(context, listen: false)
+              .fetchAndSetVideos()
+              .then((_) {
+            setState(() {
+              _isLoading = false;
+            });
           });
         });
       });
@@ -91,70 +99,11 @@ class _CourseListScreenState extends State<CourseListScreen> {
     await Provider.of<Courses>(context, listen: false).fetchAndSetCourses();
     await Provider.of<ClassStudents>(context, listen: false)
         .fetchAndSetClassStudents();
+    await Provider.of<FreeVideos>(context, listen: false).fetchAndSetVideos();
   }
-
-  // Future<void> subscribeOnTap(
-  //     String navigation, bool isSubscribed, String token) async {
-  //   Provider.of<Auth>(context, listen: false).updateSubscription();
-  //   setState(() {});
-  //   final url = 'https://mrenglish.tk/api/v1/auth/updateDetails';
-  //   try {
-  //     await http.put(
-  //       url,
-  //       headers: <String, String>{
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //         HttpHeaders.authorizationHeader: "Bearer $token",
-  //       },
-  //       body: jsonEncode(
-  //         {'isSubscribed': !isSubscribed},
-  //       ),
-  //     );
-  //   } catch (error) {
-  //     print(error);
-  //     throw (error);
-  //   }
-  // }
 
   Future<void> joinClassButton(String navigation) async {
     Navigator.of(context).pushNamed(navigation);
-  }
-
-  Widget buildCircle(String page, double height) {
-    var iconStyle;
-    if (page == 'Our Courses')
-      iconStyle = Icons.library_books;
-    else if (page == 'උපදෙස්')
-      iconStyle = Icons.support_agent_outlined;
-    else if (page == 'My Profile')
-      iconStyle = Icons.people_outline;
-    else if (page == 'ගැටළු') iconStyle = Icons.help;
-    return Column(
-      children: [
-        Text(page),
-        Container(
-          width: getProportionateScreenWidth(height * .08),
-          height: getProportionateScreenWidth(height * .08),
-          decoration: new BoxDecoration(
-            color: kPrimaryColor,
-            shape: BoxShape.circle,
-          ),
-          padding: EdgeInsets.all(height * .001),
-          margin: EdgeInsets.all(height * .001),
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _page = page;
-              });
-            },
-            child: Icon(
-              iconStyle,
-              size: getProportionateScreenWidth(35),
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
-    );
   }
 
   Card buildLessonCard(String title, String description, String navigation,
@@ -284,6 +233,35 @@ class _CourseListScreenState extends State<CourseListScreen> {
     return ((value * mod).round().toDouble() / mod);
   }
 
+  Widget buildBottomNavigationBar() {
+    return BottomNavyBar(
+      selectedIndex: index,
+      onItemSelected: (index) => setState(() => this.index = index),
+      items: <BottomNavyBarItem>[
+        BottomNavyBarItem(
+            icon: Icon(Icons.help),
+            title: Text('ගැටළු'),
+            inactiveColor: Colors.black,
+            textAlign: TextAlign.center),
+        BottomNavyBarItem(
+            icon: Icon(Icons.people),
+            title: Text('My profile'),
+            inactiveColor: Colors.black,
+            textAlign: TextAlign.center),
+        BottomNavyBarItem(
+            icon: Icon(Icons.video_collection),
+            title: Text('Free Videos'),
+            inactiveColor: Colors.black,
+            textAlign: TextAlign.center),
+        BottomNavyBarItem(
+            icon: Icon(Icons.apps),
+            title: Text('Courses'),
+            inactiveColor: Colors.black,
+            textAlign: TextAlign.center),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final firstName = Provider.of<Auth>(context, listen: false).firstName;
@@ -299,57 +277,40 @@ class _CourseListScreenState extends State<CourseListScreen> {
     final loadedCourses = Provider.of<Courses>(context, listen: false);
     final loadedClassStudents =
         Provider.of<ClassStudents>(context, listen: false).items;
+    final loadedImages =
+        Provider.of<FreeVideos>(context, listen: false).imageList;
     final token = Provider.of<Auth>(context, listen: false).token;
 
     final height = MediaQuery.of(context).size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        MediaQuery.of(context).padding.top -
+        appBar.preferredSize.height;
 
-    YoutubePlayerController _controller1 = YoutubePlayerController(
-      initialVideoId: 'w8LfuX4BrOY',
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-
-    YoutubePlayerController _controller2 = YoutubePlayerController(
-      initialVideoId: 'OD69bEBZzRU',
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-
-    YoutubePlayerController _controller3 = YoutubePlayerController(
-      initialVideoId: 'Sa_4Ruu8cUM',
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-
-    YoutubePlayerController _controller4 = YoutubePlayerController(
-      initialVideoId: 'sEvTMwq9_i4',
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-
-    YoutubePlayerController _controller5 = YoutubePlayerController(
-      initialVideoId: '4mMNb7_-PNQ',
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
+    print(index);
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        iconTheme: IconThemeData(color: Colors.white),
+        centerTitle: true,
+        title: index == 2
+            ? Text(
+                'නොමිලේ ලබාදෙන වීඩියෝ',
+                style: TextStyle(
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: getProportionateScreenWidth(15),
+                ),
+              )
+            : Text(
+                'Hi! $firstName',
+                style: TextStyle(
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: getProportionateScreenWidth(15),
+                ),
+              ),
+        iconTheme: IconThemeData(color: kPrimaryColor),
       ),
+      bottomNavigationBar: buildBottomNavigationBar(),
       drawer: AppDrawer(),
       body: _isLoading
           ? Center(
@@ -369,496 +330,391 @@ class _CourseListScreenState extends State<CourseListScreen> {
                 ],
               ),
             )
-          : RefreshIndicator(
-              onRefresh: () => _refreshCourses(context, nicNo),
-              child: Column(children: <Widget>[
-                Container(
-                    height: height * .25,
-                    width: double.infinity,
-                    decoration: new BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+          : index == 2
+              ? FreeVideoScreen(height)
+              : RefreshIndicator(
+                  onRefresh: () => _refreshCourses(context, nicNo),
+                  child: Column(children: <Widget>[
+                    Container(
+                      decoration: new BoxDecoration(
+                        // color: kPrimaryColor,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
                       ),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Basic English within 40 Days පාඨමාලාව ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: height * .02,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'සම්පුර්ණ කරන ඔබට වටිනා සහතිකයක් නිවසටම ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: height * .0175,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(
-                          height: height * .01,
-                        ),
-                        Image.asset(
-                          'assets/images/certificate.jpeg',
-                          fit: BoxFit.fitHeight,
-                          height: height * .15,
-                          // width: double.infinity,
-                        ),
-                      ],
-                    )),
-                Container(
-                  height: height * .125,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      buildCircle('Our Courses', height),
-                      // buildCircle('උපදෙස්', height),
-                      buildCircle('My Profile', height),
-                      buildCircle('ගැටළු', height),
-                    ],
-                  ),
-                ),
-                if (_page == 'Our Courses')
-                  Container(
-                    height: height * .6,
-                    child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Text(
-                            'ඔබට අවශ්‍ය පාඨමාලාව තෝරන්න.',
-                            style: TextStyle(
-                                fontSize: getProportionateScreenWidth(15),
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                          buildLessonCard(
-                            loadedCourses.items[12].title,
-                            loadedCourses.items[12].description,
-                            DaysOverviewScreen.routeName,
-                            token,
-                            'URL for course 01',
-                          ),
-                          buildLessonCard(
-                            loadedCourses.items[1].title,
-                            loadedCourses.items[1].description,
-                            DaysOverviewScreen.routeName,
-                            token,
-                            'URL for course 01',
-                          ),
-                          buildLessonCard(
-                            loadedCourses.items[0].title,
-                            loadedCourses.items[0].description,
-                            YearsOverviewScreen.routeName,
-                            token,
-                            'URL for course 02',
-                          ),
-                          buildLessonCard(
-                            loadedCourses.items[2].title,
-                            loadedCourses.items[2].description,
-                            SeminarsOverviewScreen.routeName,
-                            token,
-                            'URL for course 03',
-                          ),
-                          ...(loadedClassStudents as List).map(
-                            (classStudent) {
-                              return buildLessonCard(
-                                classStudent.title,
-                                classStudent.description,
-                                SeminarsOverviewScreen.routeName,
-                                token,
-                                'URL for course 04',
-                              );
-                            },
-                          ).toList(),
-                          if (nicNo == '951062219v' || nicNo == '881770644v')
-                            buildAddStudentCard(),
-                        ],
-                      ),
-                    ),
-                  )
-                else if (_page == 'උපදෙස්')
-                  Container(
-                    height: height * .6,
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: SingleChildScrollView(
-                            child: Column(children: <Widget>[
-                              Text(
-                                'App 1 භාවිතා කිරීමට පෙර පහත උපදෙස් හොදින් බලන්න.',
-                                style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(17),
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Divider(),
-                              Text(
-                                'App 1 install කරගන්නේ කොහොමද?',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: getProportionateScreenWidth(15),
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                              Divider(),
-                              YoutubePlayer(
-                                controller: _controller1,
-                                bottomActions: [
-                                  CurrentPosition(),
-                                  ProgressBar(isExpanded: true),
-                                  PlayPauseButton(),
-                                  // FullScreenButton(),
-                                ],
-                                showVideoProgressIndicator: true,
-                                progressIndicatorColor: Colors.redAccent,
-                              ),
-                              Divider(),
-                              Text(
-                                'App 1ට register වන්නේ කොහොමද?',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: getProportionateScreenWidth(15),
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                              Divider(),
-                              YoutubePlayer(
-                                controller: _controller2,
-                                bottomActions: [
-                                  CurrentPosition(),
-                                  ProgressBar(isExpanded: true),
-                                  PlayPauseButton(),
-                                  // FullScreenButton(),
-                                ],
-                                showVideoProgressIndicator: true,
-                                progressIndicatorColor: Colors.redAccent,
-                              ),
-                              Divider(),
-                              Text(
-                                'App 1 subscribe කරන්නේ කොහොමද?',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: getProportionateScreenWidth(15),
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                              Divider(),
-                              YoutubePlayer(
-                                controller: _controller3,
-                                bottomActions: [
-                                  CurrentPosition(),
-                                  ProgressBar(isExpanded: true),
-                                  PlayPauseButton(),
-                                  // FullScreenButton(),
-                                ],
-                                showVideoProgressIndicator: true,
-                                progressIndicatorColor: Colors.redAccent,
-                              ),
-                              Divider(),
-                              Text(
-                                'Past paper course 1 follow කරන්නේ කොහොමද?',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: getProportionateScreenWidth(15),
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                              Divider(),
-                              YoutubePlayer(
-                                controller: _controller4,
-                                bottomActions: [
-                                  CurrentPosition(),
-                                  ProgressBar(isExpanded: true),
-                                  PlayPauseButton(),
-                                  // FullScreenButton(),
-                                ],
-                                showVideoProgressIndicator: true,
-                                progressIndicatorColor: Colors.redAccent,
-                              ),
-                              Divider(),
-                              Text(
-                                'Basic English course 1 follow කරන්නේ කොහොමද?',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: getProportionateScreenWidth(15),
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                              Divider(),
-                              YoutubePlayer(
-                                controller: _controller5,
-                                bottomActions: [
-                                  CurrentPosition(),
-                                  ProgressBar(isExpanded: true),
-                                  PlayPauseButton(),
-                                  // FullScreenButton(),
-                                ],
-                                showVideoProgressIndicator: true,
-                                progressIndicatorColor: Colors.redAccent,
-                              ),
-                            ]),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                else if (_page == 'My Profile')
-                  Container(
-                    height: height * .6,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Text(
-                            'මගේ විස්තර',
-                            style: TextStyle(
-                                fontSize: getProportionateScreenWidth(15),
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
                           Container(
-                              child: Column(children: [
-                            buildDetailsCard('Name', name),
-                            buildDetailsCard('NIC Number', nicNo),
-                            // buildDetailsCard('Phone Number', phoneNo),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                buildBigCard('Total', 'Mark', stringMark),
-                                buildBigCard('Completed', 'Days',
-                                    noOfFinishedLessons.toString()),
-                              ],
-                            ),
-                            if (noOfFinishedLessons == 40)
-                              Container(
-                                margin: EdgeInsets.only(
-                                    top: getProportionateScreenHeight(10),
-                                    left: getProportionateScreenHeight(10),
-                                    right: getProportionateScreenHeight(10)),
-                                child: RaisedButton(
-                                  color: kPrimaryColor,
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                        IssueCertificateScreen.routeName);
-                                  },
+                              height: height * .27,
+                              width: double.infinity,
+                              child: Container(
+                                child: SingleChildScrollView(
                                   child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        alignment: Alignment.center,
-                                        width: double.infinity,
-                                        padding: EdgeInsets.all(15),
+                                      Padding(
+                                        padding: EdgeInsets.all(
+                                            getProportionateScreenWidth(10)),
                                         child: Text(
-                                          'සහතික පත්‍රය ලබා ගැනීමට.',
+                                          'පහත වීඩියෝ දැන් ඔබට නොමිලේ නැරඹිය හැක ',
                                           style: TextStyle(
-                                            fontSize:
-                                                getProportionateScreenHeight(
-                                                    18),
-                                            color: Colors.white,
-                                          ),
+                                              color: Colors.black,
+                                              fontSize:
+                                                  getProportionateScreenWidth(
+                                                      15)),
                                         ),
                                       ),
                                       Container(
-                                        alignment: Alignment.center,
-                                        width: double.infinity,
-                                        padding: EdgeInsets.only(
-                                            bottom:
-                                                getProportionateScreenHeight(
-                                                    15)),
-                                        child: Text(
-                                          'Click here',
-                                          style: TextStyle(
-                                            fontSize:
-                                                getProportionateScreenHeight(
-                                                    18),
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                                        margin: EdgeInsets.only(
+                                          left: 3,
+                                          right: 3,
+                                        ),
+                                        child: SizedBox(
+                                          height: height * .175,
+                                          child: ListView.builder(
+                                            itemCount: loadedImages.length,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) =>
+                                                GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  this.index = 2;
+                                                });
+                                              },
+                                              child: Container(
+                                                margin: EdgeInsets.all(2),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          getProportionateScreenWidth(
+                                                              15)),
+                                                  child: Image.network(
+                                                    loadedImages[index],
+                                                    fit: BoxFit.fitHeight,
+                                                    height: height * .15,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
                                 ),
-                              )
-                          ])),
+                              )),
                         ],
                       ),
                     ),
-                  )
-                else if (_page == 'ගැටළු')
-                  Container(
-                    padding: EdgeInsets.all(getProportionateScreenWidth(10)),
-                    height: height * .6,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Text(
-                            'App 1 භාවිතා කරන විට ඔබට පැමිණි ගැටළුව',
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(17),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Divider(),
-                          Container(
-                            color: Colors.green,
-                            padding:
-                                EdgeInsets.all(getProportionateScreenWidth(5)),
-                            child: Text(
-                              'app එක  කිරීමේදී මතුවන ගැටළු පහත පියවර අනුගමනය කරමින් විසදා ගන්න. එසේ නොහැකිනම් පහත අංකයට whatsapp ඔස්සේ අප වෙත එවන්න.අපගේ කණ්ඩායම ඔබේ ගැටළුව විසදා දෙවි. (070 10 850 33)',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: getProportionateScreenWidth(15),
-                                color: Colors.white,
+                    if (index == 3)
+                      Container(
+                        height: height * .73,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Text(
+                                'ඔබට අවශ්‍ය පාඨමාලාව තෝරන්න.',
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(15),
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
                               ),
-                            ),
-                          ),
-                          Divider(),
-                          Divider(),
-                          Container(
-                            color: kPrimaryColor,
-                            padding:
-                                EdgeInsets.all(getProportionateScreenWidth(5)),
-                            child: Text(
-                              '1. app 1 මඟින් day එකක් active කිරීමට නොහැකිව පහත අකාරයේ message එකක් පැමිණියේ නම් ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: getProportionateScreenWidth(15),
-                                color: Colors.white,
+                              buildLessonCard(
+                                loadedCourses.items[12].title,
+                                loadedCourses.items[12].description,
+                                DaysOverviewScreen.routeName,
+                                token,
+                                'URL for course 01',
                               ),
-                            ),
+                              buildLessonCard(
+                                loadedCourses.items[1].title,
+                                loadedCourses.items[1].description,
+                                DaysOverviewScreen.routeName,
+                                token,
+                                'URL for course 01',
+                              ),
+                              buildLessonCard(
+                                loadedCourses.items[0].title,
+                                loadedCourses.items[0].description,
+                                YearsOverviewScreen.routeName,
+                                token,
+                                'URL for course 02',
+                              ),
+                              buildLessonCard(
+                                loadedCourses.items[2].title,
+                                loadedCourses.items[2].description,
+                                SeminarsOverviewScreen.routeName,
+                                token,
+                                'URL for course 03',
+                              ),
+                              ...(loadedClassStudents as List).map(
+                                (classStudent) {
+                                  return buildLessonCard(
+                                    classStudent.title,
+                                    classStudent.description,
+                                    SeminarsOverviewScreen.routeName,
+                                    token,
+                                    'URL for course 04',
+                                  );
+                                },
+                              ).toList(),
+                              if (nicNo == '951062219v' ||
+                                  nicNo == '881770644v')
+                                buildAddStudentCard(),
+                            ],
                           ),
-                          Divider(),
-                          Image.asset(
-                            'assets/images/problems_1_1.jpeg',
-                            fit: BoxFit.fitHeight,
-                            height: getProportionateScreenHeight(140),
-                            width: double.infinity,
+                        ),
+                      )
+                    else if (index == 1)
+                      Container(
+                        height: height * .73,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Text(
+                                'මගේ විස්තර',
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(15),
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                              Container(
+                                  child: Column(children: [
+                                buildDetailsCard('Name', name),
+                                buildDetailsCard('NIC Number', nicNo),
+                                // buildDetailsCard('Phone Number', phoneNo),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    buildBigCard('Total', 'Mark', stringMark),
+                                    buildBigCard('Completed', 'Days',
+                                        noOfFinishedLessons.toString()),
+                                  ],
+                                ),
+                                if (noOfFinishedLessons == 40)
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        top: getProportionateScreenHeight(10),
+                                        left: getProportionateScreenHeight(10),
+                                        right:
+                                            getProportionateScreenHeight(10)),
+                                    child: RaisedButton(
+                                      color: kPrimaryColor,
+                                      onPressed: () {
+                                        Navigator.of(context).pushNamed(
+                                            IssueCertificateScreen.routeName);
+                                      },
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            width: double.infinity,
+                                            padding: EdgeInsets.all(15),
+                                            child: Text(
+                                              'සහතික පත්‍රය ලබා ගැනීමට.',
+                                              style: TextStyle(
+                                                fontSize:
+                                                    getProportionateScreenHeight(
+                                                        18),
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            width: double.infinity,
+                                            padding: EdgeInsets.only(
+                                                bottom:
+                                                    getProportionateScreenHeight(
+                                                        15)),
+                                            child: Text(
+                                              'Click here',
+                                              style: TextStyle(
+                                                fontSize:
+                                                    getProportionateScreenHeight(
+                                                        18),
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                              ])),
+                            ],
                           ),
-                          SizedBox(
-                            height: getProportionateScreenHeight(14),
+                        ),
+                      )
+                    else if (index == 0)
+                      Container(
+                        padding:
+                            EdgeInsets.all(getProportionateScreenWidth(10)),
+                        height: height * .73,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Text(
+                                'App 1 භාවිතා කරන විට ඔබට පැමිණි ගැටළුව',
+                                style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(15),
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                              Divider(),
+                              Container(
+                                color: Colors.green,
+                                padding: EdgeInsets.all(
+                                    getProportionateScreenWidth(5)),
+                                child: Text(
+                                  'app එක  කිරීමේදී මතුවන ගැටළු පහත අංකයට whatsapp ඔස්සේ අප වෙත එවන්න.අපගේ කණ්ඩායම ඔබේ ගැටළුව විසදා දෙවි. (070 10 850 33)',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: getProportionateScreenWidth(15),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Divider(),
+                              // Divider(),
+                              // Container(
+                              //   color: kPrimaryColor,
+                              //   padding:
+                              //       EdgeInsets.all(getProportionateScreenWidth(5)),
+                              //   child: Text(
+                              //     '1. app 1 මඟින් day එකක් active කිරීමට නොහැකිව පහත අකාරයේ message එකක් පැමිණියේ නම් ',
+                              //     style: TextStyle(
+                              //       fontWeight: FontWeight.bold,
+                              //       fontSize: getProportionateScreenWidth(15),
+                              //       color: Colors.white,
+                              //     ),
+                              //   ),
+                              // ),
+                              // Divider(),
+                              // Image.asset(
+                              //   'assets/images/problems_1_1.jpeg',
+                              //   fit: BoxFit.fitHeight,
+                              //   height: getProportionateScreenHeight(140),
+                              //   width: double.infinity,
+                              // ),
+                              // SizedBox(
+                              //   height: getProportionateScreenHeight(14),
+                              // ),
+                              // Text(
+                              //   'ඔබ සිටින ප්‍රදේශය තුල ඇති signal ගැටළු නිසා මේ ගැටළුව පැමිණේ.පහත පියවර අනුගමනය කරන්න.',
+                              //   style: TextStyle(
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Text(
+                              //   'පියවර 01',
+                              //   style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Text(
+                              //   'පළමුව මෙම සේවාවෙන් unsubscribe වන්න. ඒ සඳහා ඔබ subscribe වීමේදී ලබා දුන් දුරකථන අංකයෙන් unreg mrenglish ලෙස type කර 77177 ට message එකක් දමන්න. ',
+                              //   style: TextStyle(
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // //  Image.asset(
+                              // //   mcqQ[_qIndex].imageUrl,
+                              // //   fit: BoxFit.fitHeight,
+                              // //   height: getProportionateScreenHeight(140),
+                              // //   width: double.infinity,
+                              // // ),
+                              // Text(
+                              //   'පියවර 02',
+                              //   style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Text(
+                              //   'දැන් ප්‍රධාන screen වෙත ගොස් එහි වම් පැත්තේ උද කෙලවරේ ඇති menu button 1 (ඉරි ලකුණු තුන) මත click කර එම menu එකේ පහළ ඇති logout මත click කරන්න.',
+                              //   style: TextStyle(
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Image.asset(
+                              //   'assets/images/problems_1_2.jpeg',
+                              //   fit: BoxFit.fitHeight,
+                              //   height: getProportionateScreenHeight(350),
+                              //   width: double.infinity,
+                              // ),
+                              // Image.asset(
+                              //   'assets/images/problems_1_3.jpeg',
+                              //   fit: BoxFit.fitHeight,
+                              //   height: getProportionateScreenHeight(350),
+                              //   width: double.infinity,
+                              // ),
+                              // Text(
+                              //   'පියවර 03',
+                              //   style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Text(
+                              //   'ඉන්පසු යලිත් ඔබේ ජාතික හැඳුනුම්පත් අංකය හා password එක ඇතුලත් කර login මත click කරන්න.',
+                              //   style: TextStyle(
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Image.asset(
+                              //   'assets/images/problems_1_4.jpeg',
+                              //   fit: BoxFit.fitHeight,
+                              //   height: getProportionateScreenHeight(350),
+                              //   width: double.infinity,
+                              // ),
+                              // Text(
+                              //   'පියවර 04',
+                              //   style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Text(
+                              //   'ඔබ කළින් අනුගමනය කළ පියවර අනුගමනය කරමින් දැන් යළිත් සේවාවට subscribe කරන්න.',
+                              //   style: TextStyle(
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Text(
+                              //   'පියවර 05',
+                              //   style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                              // Text(
+                              //   'ඔබේ ගැටළුව තවමත් පවතීනම් පැය කිහිපයකින් නැවත ඉහත පියවර අනුගමනය කරන්න.දැන් යළිත් සේවාවට subscribe කරන්න.',
+                              //   style: TextStyle(
+                              //     fontSize: getProportionateScreenWidth(15),
+                              //     color: Colors.black,
+                              //   ),
+                              // ),
+                            ],
                           ),
-                          Text(
-                            'ඔබ සිටින ප්‍රදේශය තුල ඇති signal ගැටළු නිසා මේ ගැටළුව පැමිණේ.පහත පියවර අනුගමනය කරන්න.',
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'පියවර 01',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'පළමුව මෙම සේවාවෙන් unsubscribe වන්න. ඒ සඳහා ඔබ subscribe වීමේදී ලබා දුන් දුරකථන අංකයෙන් unreg mrenglish ලෙස type කර 77177 ට message එකක් දමන්න. ',
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          //  Image.asset(
-                          //   mcqQ[_qIndex].imageUrl,
-                          //   fit: BoxFit.fitHeight,
-                          //   height: getProportionateScreenHeight(140),
-                          //   width: double.infinity,
-                          // ),
-                          Text(
-                            'පියවර 02',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'දැන් ප්‍රධාන screen වෙත ගොස් එහි වම් පැත්තේ උද කෙලවරේ ඇති menu button 1 (ඉරි ලකුණු තුන) මත click කර එම menu එකේ පහළ ඇති logout මත click කරන්න.',
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Image.asset(
-                            'assets/images/problems_1_2.jpeg',
-                            fit: BoxFit.fitHeight,
-                            height: getProportionateScreenHeight(350),
-                            width: double.infinity,
-                          ),
-                          Image.asset(
-                            'assets/images/problems_1_3.jpeg',
-                            fit: BoxFit.fitHeight,
-                            height: getProportionateScreenHeight(350),
-                            width: double.infinity,
-                          ),
-                          Text(
-                            'පියවර 03',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'ඉන්පසු යලිත් ඔබේ ජාතික හැඳුනුම්පත් අංකය හා password එක ඇතුලත් කර login මත click කරන්න.',
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Image.asset(
-                            'assets/images/problems_1_4.jpeg',
-                            fit: BoxFit.fitHeight,
-                            height: getProportionateScreenHeight(350),
-                            width: double.infinity,
-                          ),
-                          Text(
-                            'පියවර 04',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'ඔබ කළින් අනුගමනය කළ පියවර අනුගමනය කරමින් දැන් යළිත් සේවාවට subscribe කරන්න.',
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'පියවර 05',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'ඔබේ ගැටළුව තවමත් පවතීනම් පැය කිහිපයකින් නැවත ඉහත පියවර අනුගමනය කරන්න.දැන් යළිත් සේවාවට subscribe කරන්න.',
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(15),
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-              ]),
-            ),
+                        ),
+                      )
+                  ]),
+                ),
     );
   }
 

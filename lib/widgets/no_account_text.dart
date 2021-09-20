@@ -17,18 +17,18 @@ class NoAccountText extends StatelessWidget {
         child: Text(
           'ඔබ Mr English තුළ account එකක් මීට පෙර සදා නැත්ද?නැත්නම් Register මත click කරන්න.',
           softWrap: true,
-          style: TextStyle(fontSize: getProportionateScreenWidth(12.5)),
+          style: TextStyle(fontSize: getProportionateScreenWidth(15)),
         ),
       ),
       SizedBox(
-        height: getProportionateScreenHeight(20),
+        height: getProportionateScreenWidth(25),
       ),
       GestureDetector(
         onTap: () => {Navigator.pushNamed(context, RegisterScreen.routeName)},
         child: Text(
           'Register',
           style: TextStyle(
-            fontSize: getProportionateScreenHeight(25),
+            fontSize: getProportionateScreenWidth(20),
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
           ),

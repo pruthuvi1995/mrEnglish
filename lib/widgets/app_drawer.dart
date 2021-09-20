@@ -25,7 +25,7 @@ class AppDrawer extends StatelessWidget {
             height: getProportionateScreenHeight(200),
             child: ClipRRect(
               child: Image.asset(
-                'assets/images/logo.jpg',
+                'assets/images/logo.JPG',
                 fit: BoxFit.cover,
                 height: getProportionateScreenHeight(250),
                 width: double.infinity,

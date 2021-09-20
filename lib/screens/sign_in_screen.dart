@@ -11,14 +11,14 @@ class SignInScreen extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           'Sign In',
           style: TextStyle(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: getProportionateScreenHeight(20),
+            fontSize: getProportionateScreenWidth(15),
           ),
-          textAlign: TextAlign.center,
         ),
       ),
       body: BodySignInScreen(),

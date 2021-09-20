@@ -8,17 +8,16 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//  String language = 'Sinhala'
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           'Register',
           style: TextStyle(
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: getProportionateScreenHeight(20),
+            fontSize: getProportionateScreenWidth(15),
           ),
-          textAlign: TextAlign.center,
         ),
       ),
       body: BodyRegisterScreen(),

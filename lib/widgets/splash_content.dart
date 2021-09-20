@@ -13,22 +13,7 @@ class SplashContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Spacer(flex: 10),
-      Text(
-        'MR ENGLISH',
-        style: TextStyle(
-          fontSize: getProportionateScreenWidth(30),
-          color: kPrimaryColor,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
       Text(text),
-      Spacer(),
-      Image.network(
-        image,
-        height: getProportionateScreenHeight(300),
-        width: getProportionateScreenWidth(200),
-      ),
     ]);
   }
 }

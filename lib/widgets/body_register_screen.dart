@@ -8,34 +8,36 @@ class BodyRegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-          ),
-          child: SingleChildScrollView(
-            child: Column(children: <Widget>[
-              SizedBox(height: getProportionateScreenHeight(30)),
-              Text(
-                'Welcome',
-                style: TextStyle(
-                  color: kPrimaryColor,
-                  fontSize: getProportionateScreenHeight(40),
-                  fontWeight: FontWeight.bold,
+      child: Center(
+        child: SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(20),
+            ),
+            child: SingleChildScrollView(
+              child: Column(children: <Widget>[
+                Text(
+                  'Welcome',
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                    fontSize: getProportionateScreenWidth(30),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                'ඔබේ දත්ත ඇතුළත් කර register වන්න.',
-                style: TextStyle(
-                  color: kPrimaryColor,
-                  fontSize: getProportionateScreenHeight(20),
+                SizedBox(height: getProportionateScreenWidth(25)),
+                Text(
+                  'ඔබේ දත්ත ඇතුළත් කර Register වන්න.',
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                    fontSize: getProportionateScreenWidth(15),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: getProportionateScreenHeight(70)),
-              RegisterForm(),
-            ]),
+                SizedBox(height: getProportionateScreenWidth(25)),
+                RegisterForm(),
+              ]),
+            ),
           ),
         ),
       ),
