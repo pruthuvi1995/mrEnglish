@@ -46,7 +46,7 @@ class _BodyState extends State<BodySplashScren> {
                   borderRadius:
                       BorderRadius.circular(getProportionateScreenWidth(25)),
                   child: Image.asset(
-                    'assets/images/logo.JPG',
+                    'assets/images/logo.png',
                     fit: BoxFit.fitHeight,
                     height: getProportionateScreenHeight(100),
                     // width: double.infinity,

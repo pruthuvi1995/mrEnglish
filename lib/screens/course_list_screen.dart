@@ -5,7 +5,7 @@ import 'dart:math';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+// import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:mr_english/api/notification_api.dart';
 import 'package:mr_english/providers/classStudents.dart';
 import 'package:mr_english/providers/freeVideos.dart';
@@ -273,7 +273,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
     String name = '$firstName $lastName';
     String stringMark = '${mark.toString()}%';
     mark = roundDouble(mark, 2);
-    getToken();
+    // getToken();
     final loadedCourses = Provider.of<Courses>(context, listen: false);
     final loadedClassStudents =
         Provider.of<ClassStudents>(context, listen: false).items;
@@ -358,7 +358,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                                         padding: EdgeInsets.all(
                                             getProportionateScreenWidth(10)),
                                         child: Text(
-                                          'පහත වීඩියෝ දැන් ඔබට නොමිලේ නැරඹිය හැක ',
+                                          'පහත වීඩියෝ ඔබට නොමිලේ නැරඹිය හැක ',
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize:

@@ -88,7 +88,7 @@ class _AddStudentFormState extends State<AddStudentForm> {
         String body1 = jsonEncode(data1);
 
         var course = ' ';
-        if (_addStudentData['className'] == 'Grade 6 Class') {
+        if (_addStudentData['className'] == 'A/L Class') {
           course = '60fc40f36f9bb458d36ac5b1';
         } else if (_addStudentData['className'] == 'Grade 7 Class') {
           course = '60fc40f36f9bb458d36ac5b2';
@@ -98,9 +98,9 @@ class _AddStudentFormState extends State<AddStudentForm> {
           course = '60fc40f36f9bb458d36ac5b4';
         } else if (_addStudentData['className'] == 'Grade 11 Class') {
           course = '60fc40f36f9bb458d36ac5b5';
-        } else if (_addStudentData['className'] == 'Paper Class') {
+        } else if (_addStudentData['className'] == 'O/L Paper Class') {
           course = '60fc40f36f9bb458d36ac5b6';
-        } else if (_addStudentData['className'] == 'Revision Class') {
+        } else if (_addStudentData['className'] == 'O/L Revision Class') {
           course = '60fc40f36f9bb458d36ac5b7';
         } else if (_addStudentData['className'] == 'Job Exam Class') {
           course = '61017d3f491783e913d3f2f6';
@@ -157,6 +157,20 @@ class _AddStudentFormState extends State<AddStudentForm> {
 
             final response2Data = json.decode(response2.body);
             if (!response2Data['success']) {
+              throw HttpException(
+                  'ඔබව මේ මොහොතේ හඳුනාගත නොහැක. පසුව උත්සහා කරන්න.');
+            }
+
+            final http.Response response3 = await http.post(
+              Uri.parse(url3),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+              },
+              body: body3,
+            );
+
+            final response3Data = json.decode(response3.body);
+            if (!response3Data['success']) {
               throw HttpException(
                   'ඔබව මේ මොහොතේ හඳුනාගත නොහැක. පසුව උත්සහා කරන්න.');
             }
@@ -278,15 +292,15 @@ class _AddStudentFormState extends State<AddStudentForm> {
   }
 
   var _className = [
-    "Grade 6 Class",
     "Grade 7 Class",
+    "Grade 8 Class",
     "Grade 9 Class",
     "Grade 10 Class",
     "Grade 11 Class",
-    "Paper Class",
-    "Revision Class",
+    "O/L Paper Class",
+    "O/L Revision Class",
     "Job Exam Class",
-    "Grade 8 Class"
+    "A/L Class"
   ];
 
   FormField buildGradeFormField() {

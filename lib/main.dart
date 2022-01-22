@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -65,11 +67,22 @@ import 'package:flutter/services.dart';
 
 // import './screens/auth_screen.dart.dart';
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  SystemChrome.setEnabledSystemUIOverlays([]);
+  // SystemChrome.setEnabledSystemUIOverlays([]);
+  print('ariyakulasinghe');
+  HttpOverrides.global = new MyHttpOverrides();
   runApp(MyApp());
 }
 
@@ -165,6 +178,7 @@ class MyApp extends StatelessWidget {
                   ),
 
             routes: {
+              LogoScreen.routeName: (ctx) => LogoScreen(),
               CourseDetailsScreen.routeName: (ctx) => CourseDetailsScreen(),
               Course01DetailsScreen.routeName: (ctx) => Course01DetailsScreen(),
               DaysOverviewScreen.routeName: (ctx) => DaysOverviewScreen(),

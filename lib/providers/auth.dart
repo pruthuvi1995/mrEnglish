@@ -23,6 +23,7 @@ class Auth with ChangeNotifier {
   String serviceProvider;
 
   bool get isAuth {
+    print('123456789');
     return token != null;
   }
 
@@ -30,8 +31,12 @@ class Auth with ChangeNotifier {
     if (_expiryDate != null &&
         _token != null &&
         _expiryDate.isAfter(DateTime.now())) {
+      print('123456');
       return _token;
     }
+    print(_expiryDate);
+    print('_token');
+    print(_token);
     return null;
   }
 
@@ -61,34 +66,36 @@ class Auth with ChangeNotifier {
       if (!responseData['success']) {
         throw HttpException(responseData['error']);
       }
-      _token = responseData['token'];
+      this._token = responseData['token'];
 
-      _expiryDate = DateTime.parse(responseData['options']['expires']);
-      userId = responseData['user']['_id'];
-      isSubscribed = responseData['user']['isSubscribed'];
-      phoneNo = responseData['user']['phoneNo'];
-      firstName = responseData['user']['firstName'];
-      lastName = responseData['user']['lastName'];
-      nicNo = responseData['user']['NICNo'];
-      mark = double.parse(responseData['user']['mark'].toString());
-      noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
-      serviceProvider = responseData['user']['serviceProvider'];
+      this._expiryDate = DateTime.parse(responseData['options']['expires']);
+      this.userId = responseData['user']['_id'];
+      this.isSubscribed = responseData['user']['isSubscribed'];
+      this.phoneNo = responseData['user']['phoneNo'];
+      this.firstName = responseData['user']['firstName'];
+      this.lastName = responseData['user']['lastName'];
+      this.nicNo = responseData['user']['NICNo'];
+      this.mark = double.parse(responseData['user']['mark'].toString());
+      this.noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
+      this.serviceProvider = responseData['user']['serviceProvider'];
+      print('7777777');
+      print(this.serviceProvider);
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode(
         {
-          'token': _token,
-          'userId': userId,
-          'expiryDate': _expiryDate.toIso8601String(),
-          'isSubscribed': isSubscribed,
-          'phoneNo': phoneNo,
-          'firstName': firstName,
-          'lastName': lastName,
-          'nicNo': nicNo,
-          'mark': mark,
-          'noOfFinishedLessons': noOfFinishedLessons,
-          'serviceProvider': serviceProvider,
+          'token': this._token,
+          'userId': this.userId,
+          'expiryDate': this._expiryDate.toIso8601String(),
+          'isSubscribed': this.isSubscribed,
+          'phoneNo': this.phoneNo,
+          'firstName': this.firstName,
+          'lastName': this.lastName,
+          'nicNo': this.nicNo,
+          'mark': this.mark,
+          'noOfFinishedLessons': this.noOfFinishedLessons,
+          'serviceProvider': this.serviceProvider,
         },
       );
       prefs.setString('userData', userData);
@@ -119,18 +126,21 @@ class Auth with ChangeNotifier {
       if (!responseData['success']) {
         throw HttpException(responseData['error']);
       }
-      _token = responseData['token'];
-      _expiryDate = DateTime.parse(responseData['options']['expires']);
-      userId = responseData['user']['_id'];
-      phoneNo = responseData['user']['phoneNo'];
-      firstName = responseData['user']['firstName'];
-      lastName = responseData['user']['lastName'];
-      nicNo = responseData['user']['NICNo'];
-      mark = double.parse(responseData['user']['mark'].toString());
-      noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
-      serviceProvider = responseData['user']['serviceProvider'];
+      this._token = responseData['token'];
+      this._expiryDate = DateTime.parse(responseData['options']['expires']);
+      this.userId = responseData['user']['_id'];
+      this.phoneNo = responseData['user']['phoneNo'];
+      this.firstName = responseData['user']['firstName'];
+      this.lastName = responseData['user']['lastName'];
+      this.nicNo = responseData['user']['NICNo'];
+      this.mark = double.parse(responseData['user']['mark'].toString());
+      this.noOfFinishedLessons = responseData['user']['noOfFinishedLessons'];
+      this.serviceProvider = responseData['user']['serviceProvider'];
+      print('7777777');
+      print(this.serviceProvider);
 
-      if (serviceProvider == "Dialog" || serviceProvider == "Mobitel") {
+      if (this.serviceProvider == "Dialog" ||
+          this.serviceProvider == "Mobitel") {
         final response1 = await http.post(
           Uri.parse(url1),
           headers: <String, String>{
@@ -138,8 +148,8 @@ class Auth with ChangeNotifier {
           },
           body: jsonEncode(
             {
-              'phoneNo': phoneNo,
-              'serviceProvider': serviceProvider,
+              'phoneNo': this.phoneNo,
+              'serviceProvider': this.serviceProvider,
             },
           ),
         );
@@ -148,14 +158,21 @@ class Auth with ChangeNotifier {
         final data = response1Data['data']['subscriptionStatus'];
 
         if (data == 'REGISTERED') {
-          isSubscribed = true;
+          this.isSubscribed = true;
         } else {
-          isSubscribed = false;
+          this.isSubscribed = false;
         }
-      } else if (serviceProvider == " ") {
-        isSubscribed = false;
-      } else {
-        isSubscribed = true;
+        await Future.delayed(Duration(seconds: 1));
+      } else if (this.serviceProvider == " ") {
+        print('thuvi');
+        this.isSubscribed = false;
+        await Future.delayed(Duration(seconds: 3));
+      } else if (this.serviceProvider != "Dialog" &&
+          this.serviceProvider != "Mobitel" &&
+          this.serviceProvider != " ") {
+        print('hasanjana');
+        this.isSubscribed = true;
+        await Future.delayed(Duration(seconds: 3));
       }
 
       _autoLogout();
@@ -163,17 +180,17 @@ class Auth with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode(
         {
-          'token': _token,
-          'userId': userId,
-          'expiryDate': _expiryDate.toIso8601String(),
-          'isSubscribed': isSubscribed,
-          'phoneNo': phoneNo,
-          'firstName': firstName,
-          'lastName': lastName,
-          'nicNo': nicNo,
-          'mark': mark,
-          'noOfFinishedLessons': noOfFinishedLessons,
-          'serviceProvider': serviceProvider,
+          'token': this._token,
+          'userId': this.userId,
+          'expiryDate': this._expiryDate.toIso8601String(),
+          'isSubscribed': this.isSubscribed,
+          'phoneNo': this.phoneNo,
+          'firstName': this.firstName,
+          'lastName': this.lastName,
+          'nicNo': this.nicNo,
+          'mark': this.mark,
+          'noOfFinishedLessons': this.noOfFinishedLessons,
+          'serviceProvider': this.serviceProvider,
         },
       );
       prefs.setString('userData', userData);
@@ -191,26 +208,30 @@ class Auth with ChangeNotifier {
     }
     final extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
-
+    print('99999999999999');
+    print(extractedUserData);
     final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
 
     if (expiryDate.isBefore(DateTime.now())) {
       return false;
     }
 
-    _token = extractedUserData['token'];
-    userId = extractedUserData['userId'];
+    print(extractedUserData['serviceProvider']);
 
-    _expiryDate = expiryDate;
-    phoneNo = extractedUserData['phoneNo'];
-    firstName = extractedUserData['firstName'];
-    lastName = extractedUserData['lastName'];
-    nicNo = extractedUserData['nicNo'];
-    mark = extractedUserData['mark'];
-    noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
-    serviceProvider = extractedUserData['serviceProvider'];
+    this._token = extractedUserData['token'];
+    this.userId = extractedUserData['userId'];
 
-    if (serviceProvider == "Dialog" || serviceProvider == "Mobitel") {
+    this._expiryDate = expiryDate;
+    this.phoneNo = extractedUserData['phoneNo'];
+    this.firstName = extractedUserData['firstName'];
+    this.lastName = extractedUserData['lastName'];
+    this.nicNo = extractedUserData['nicNo'];
+    this.mark = extractedUserData['mark'];
+    this.noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
+    this.serviceProvider = extractedUserData['serviceProvider'];
+
+    if (extractedUserData['serviceProvider'] == "Dialog" ||
+        extractedUserData['serviceProvider'] == "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -218,8 +239,8 @@ class Auth with ChangeNotifier {
         },
         body: jsonEncode(
           {
-            'phoneNo': phoneNo,
-            'serviceProvider': serviceProvider,
+            'phoneNo': this.phoneNo,
+            'serviceProvider': this.serviceProvider,
           },
         ),
       );
@@ -228,14 +249,22 @@ class Auth with ChangeNotifier {
       final data = response1Data['data']['subscriptionStatus'];
 
       if (data == 'REGISTERED') {
-        isSubscribed = true;
+        this.isSubscribed = true;
       } else {
-        isSubscribed = false;
+        this.isSubscribed = false;
       }
-    } else if (serviceProvider == " ") {
-      isSubscribed = false;
-    } else {
-      isSubscribed = true;
+      await Future.delayed(Duration(seconds: 1));
+    } else if (extractedUserData['serviceProvider'] == " ") {
+      await Future.delayed(Duration(seconds: 3));
+      this.isSubscribed = false;
+      print('thuvi');
+    } else if (extractedUserData['serviceProvider'] != "Dialog" &&
+        extractedUserData['serviceProvider'] != "Mobitel" &&
+        extractedUserData['serviceProvider'] != " ") {
+      print(serviceProvider);
+      print('hasanjana');
+      await Future.delayed(Duration(seconds: 3));
+      this.isSubscribed = true;
     }
 
     notifyListeners();
@@ -244,12 +273,12 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> logout() async {
-    _token = null;
-    userId = null;
-    _expiryDate = null;
-    if (_authTimer != null) {
-      _authTimer.cancel();
-      _authTimer = null;
+    this._token = null;
+    this.userId = null;
+    this._expiryDate = null;
+    if (this._authTimer != null) {
+      this._authTimer.cancel();
+      this._authTimer = null;
     }
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
@@ -257,30 +286,30 @@ class Auth with ChangeNotifier {
   }
 
   void _autoLogout() {
-    if (_authTimer != null) {
-      _authTimer.cancel();
+    if (this._authTimer != null) {
+      this._authTimer.cancel();
     }
-    final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
-    _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
+    final timeToExpiry = this._expiryDate.difference(DateTime.now()).inSeconds;
+    this._authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
 
   Future<void> updatePhoneNumber(
       String phoneNoNew, String serviceProvider) async {
     const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
-    isSubscribed = !isSubscribed;
+    this.isSubscribed = !this.isSubscribed;
     final prefs = await SharedPreferences.getInstance();
 
     var extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
     extractedUserData['phoneNo'] = phoneNoNew;
-    extractedUserData['isSubscribed'] = isSubscribed;
+    extractedUserData['isSubscribed'] = this.isSubscribed;
     extractedUserData['serviceProvider'] = serviceProvider;
 
     print('ccccccccccccccc');
     print(phoneNoNew);
 
-    if (serviceProvider == "Dialog" || serviceProvider == "Mobitel") {
+    if (this.serviceProvider == "Dialog" || this.serviceProvider == "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -298,14 +327,20 @@ class Auth with ChangeNotifier {
       final data = response1Data['data']['subscriptionStatus'];
 
       if (data == 'REGISTERED') {
-        isSubscribed = true;
+        this.isSubscribed = true;
       } else {
-        isSubscribed = false;
+        this.isSubscribed = false;
       }
-    } else if (serviceProvider == " ") {
-      isSubscribed = false;
-    } else {
-      isSubscribed = true;
+      await Future.delayed(Duration(seconds: 1));
+    } else if (this.serviceProvider == " ") {
+      this.isSubscribed = false;
+      await Future.delayed(Duration(seconds: 3));
+    } else if (this.serviceProvider != "Dialog" &&
+        this.serviceProvider != "Mobitel" &&
+        this.serviceProvider != " ") {
+      print('hasanjana');
+      this.isSubscribed = true;
+      await Future.delayed(Duration(seconds: 3));
     }
 
     final userData = json.encode(
@@ -324,7 +359,7 @@ class Auth with ChangeNotifier {
       },
     );
     prefs.setString('userData', userData);
-    phoneNo = extractedUserData['phoneNo'];
+    this.phoneNo = extractedUserData['phoneNo'];
     notifyListeners();
   }
 
@@ -355,7 +390,7 @@ class Auth with ChangeNotifier {
   // }
 
   Future<void> updateMark(double mark) async {
-    mark = mark * 2;
+    this.mark = mark * 2;
     const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
     final prefs = await SharedPreferences.getInstance();
 
@@ -363,8 +398,8 @@ class Auth with ChangeNotifier {
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
     extractedUserData['mark'] = mark;
-    if (extractedUserData['serviceProvider'] != "Dialog" ||
-        extractedUserData['serviceProvider'] != "Mobitel") {
+    if (extractedUserData['serviceProvider'] == "Dialog" ||
+        extractedUserData['serviceProvider'] == "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -382,14 +417,20 @@ class Auth with ChangeNotifier {
       final data = response1Data['data']['subscriptionStatus'];
 
       if (data == 'REGISTERED') {
-        isSubscribed = true;
+        this.isSubscribed = true;
       } else {
-        isSubscribed = false;
+        this.isSubscribed = false;
       }
+      await Future.delayed(Duration(seconds: 1));
     } else if (extractedUserData['serviceProvider'] == " ") {
-      isSubscribed = false;
-    } else {
-      isSubscribed = true;
+      this.isSubscribed = false;
+      await Future.delayed(Duration(seconds: 3));
+    } else if (extractedUserData['serviceProvider'] != "Dialog" &&
+        extractedUserData['serviceProvider'] != "Mobitel" &&
+        extractedUserData['serviceProvider'] != " ") {
+      print('hasanjana');
+      this.isSubscribed = true;
+      await Future.delayed(Duration(seconds: 3));
     }
 
     final userData = json.encode(
@@ -419,8 +460,8 @@ class Auth with ChangeNotifier {
     final extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
 
-    if (extractedUserData['serviceProvider'] != "Dialog" ||
-        extractedUserData['serviceProvider'] != "Mobitel") {
+    if (extractedUserData['serviceProvider'] == "Dialog" ||
+        extractedUserData['serviceProvider'] == "Mobitel") {
       final response1 = await http.post(
         Uri.parse(url1),
         headers: <String, String>{
@@ -438,26 +479,32 @@ class Auth with ChangeNotifier {
       final data = response1Data['data']['subscriptionStatus'];
 
       if (data == 'REGISTERED') {
-        isSubscribed = true;
+        this.isSubscribed = true;
       } else {
-        isSubscribed = false;
+        this.isSubscribed = false;
       }
+      await Future.delayed(Duration(seconds: 1));
     } else if (extractedUserData['serviceProvider'] == " ") {
-      isSubscribed = false;
-    } else {
-      isSubscribed = true;
+      this.isSubscribed = false;
+      await Future.delayed(Duration(seconds: 3));
+    } else if (extractedUserData['serviceProvider'] != "Dialog" &&
+        extractedUserData['serviceProvider'] != "Mobitel" &&
+        extractedUserData['serviceProvider'] != " ") {
+      print('hasanjana');
+      this.isSubscribed = true;
+      await Future.delayed(Duration(seconds: 3));
     }
 
-    _token = extractedUserData['token'];
-    userId = extractedUserData['userId'];
-    isSubscribed = isSubscribed;
-    phoneNo = extractedUserData['phoneNo'];
-    firstName = extractedUserData['firstName'];
-    lastName = extractedUserData['lastName'];
-    nicNo = extractedUserData['nicNo'];
-    mark = extractedUserData['mark'];
-    noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
-    serviceProvider = extractedUserData['serviceProvider'];
+    this._token = extractedUserData['token'];
+    this.userId = extractedUserData['userId'];
+    this.isSubscribed = isSubscribed;
+    this.phoneNo = extractedUserData['phoneNo'];
+    this.firstName = extractedUserData['firstName'];
+    this.lastName = extractedUserData['lastName'];
+    this.nicNo = extractedUserData['nicNo'];
+    this.mark = extractedUserData['mark'];
+    this.noOfFinishedLessons = extractedUserData['noOfFinishedLessons'];
+    this.serviceProvider = extractedUserData['serviceProvider'];
 
     notifyListeners();
   }
@@ -495,64 +542,67 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> getSubs() async {
-    const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
-    final prefs = await SharedPreferences.getInstance();
+  // Future<bool> getSubs() async {
+  //   const url1 = 'https://mrenglish.tk/api/v1/dayDetails/getSubs';
+  //   final prefs = await SharedPreferences.getInstance();
 
-    var extractedUserData =
-        json.decode(prefs.getString('userData')) as Map<String, Object>;
+  //   var extractedUserData =
+  //       json.decode(prefs.getString('userData')) as Map<String, Object>;
 
-    if (extractedUserData['serviceProvider'] != "Dialog" ||
-        extractedUserData['serviceProvider'] != "Mobitel") {
-      final response1 = await http.post(
-        Uri.parse(url1),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(
-          {
-            'phoneNo': extractedUserData['phoneNo'],
-            'serviceProvider': extractedUserData['serviceProvider'],
-          },
-        ),
-      );
+  //   if (extractedUserData['serviceProvider'] == "Dialog" ||
+  //       extractedUserData['serviceProvider'] == "Mobitel") {
+  //     final response1 = await http.post(
+  //       Uri.parse(url1),
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //       },
+  //       body: jsonEncode(
+  //         {
+  //           'phoneNo': extractedUserData['phoneNo'],
+  //           'serviceProvider': extractedUserData['serviceProvider'],
+  //         },
+  //       ),
+  //     );
 
-      final response1Data = json.decode(response1.body);
-      final data = response1Data['data']['subscriptionStatus'];
+  //     final response1Data = json.decode(response1.body);
+  //     final data = response1Data['data']['subscriptionStatus'];
 
-      if (data == 'REGISTERED') {
-        isSubscribed = true;
-      } else {
-        isSubscribed = false;
-      }
-    } else if (extractedUserData['serviceProvider'] == " ") {
-      isSubscribed = false;
-    } else {
-      isSubscribed = true;
-    }
+  //     if (data == 'REGISTERED') {
+  //       this.isSubscribed = true;
+  //     } else {
+  //       this.isSubscribed = false;
+  //     }
+  //   } else if (extractedUserData['serviceProvider'] == " ") {
+  //     this.isSubscribed = false;
+  //   } else if (extractedUserData['serviceProvider'] != "Dialog" &&
+  //       extractedUserData['serviceProvider'] != "Mobitel" &&
+  //       extractedUserData['serviceProvider'] != " ") {
+  //     print('hasanjana');
+  //     this.isSubscribed = true;
+  //   }
 
-    // int count = int.parse(extractedUserData['noOfFinishedLessons'].toString());
-    // extractedUserData['noOfFinishedLessons'] = count + 1;
+  //   // int count = int.parse(extractedUserData['noOfFinishedLessons'].toString());
+  //   // extractedUserData['noOfFinishedLessons'] = count + 1;
 
-    final userData = json.encode(
-      {
-        'token': extractedUserData['token'],
-        'userId': extractedUserData['userId'],
-        'expiryDate': extractedUserData['expiryDate'],
-        'isSubscribed': isSubscribed,
-        'phoneNo': extractedUserData['phoneNo'],
-        'firstName': extractedUserData['firstName'],
-        'lastName': extractedUserData['lastName'],
-        'nicNo': extractedUserData['nicNo'],
-        'mark': extractedUserData['mark'],
-        'noOfFinishedLessons': extractedUserData['noOfFinishedLessons'],
-        'serviceProvider': extractedUserData['serviceProvider'],
-      },
-    );
-    prefs.setString('userData', userData);
+  //   final userData = json.encode(
+  //     {
+  //       'token': extractedUserData['token'],
+  //       'userId': extractedUserData['userId'],
+  //       'expiryDate': extractedUserData['expiryDate'],
+  //       'isSubscribed': isSubscribed,
+  //       'phoneNo': extractedUserData['phoneNo'],
+  //       'firstName': extractedUserData['firstName'],
+  //       'lastName': extractedUserData['lastName'],
+  //       'nicNo': extractedUserData['nicNo'],
+  //       'mark': extractedUserData['mark'],
+  //       'noOfFinishedLessons': extractedUserData['noOfFinishedLessons'],
+  //       'serviceProvider': extractedUserData['serviceProvider'],
+  //     },
+  //   );
+  //   prefs.setString('userData', userData);
 
-    notifyListeners();
+  //   notifyListeners();
 
-    return isSubscribed;
-  }
+  //   return this.isSubscribed;
+  // }
 }

@@ -6,6 +6,7 @@ class LogoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    print("logo screen");
 
     return Scaffold(
       body: SafeArea(
@@ -16,7 +17,7 @@ class LogoScreen extends StatelessWidget {
               borderRadius:
                   BorderRadius.circular(getProportionateScreenWidth(25)),
               child: Image.asset(
-                'assets/images/logo.JPG',
+                'assets/images/logo.png',
                 fit: BoxFit.fitHeight,
                 height: getProportionateScreenHeight(150),
                 // width: double.infinity,

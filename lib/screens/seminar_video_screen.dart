@@ -1,4 +1,4 @@
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+// import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
 import '../size_config.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ class SeminarVideoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final videoId = ModalRoute.of(context).settings.arguments as List;
-    FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+    // FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
     YoutubePlayerController _controller = YoutubePlayerController(
       initialVideoId: videoId[1],
       flags: YoutubePlayerFlags(

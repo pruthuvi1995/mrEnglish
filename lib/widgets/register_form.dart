@@ -23,7 +23,6 @@ class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   RegisterMode _registerMode = RegisterMode.Name;
   var _isLoading = false;
-  String _referenceNo;
 
   Map<String, String> _registerData = {
     "firstName": "",
@@ -176,35 +175,30 @@ class _RegisterFormState extends State<RegisterForm> {
                   key: _formKey,
                   child: Column(children: [
                     if (_registerMode == RegisterMode.Name)
-                      buildFirstNameFormField(),
-                    if (_registerMode == RegisterMode.Name)
-                      SizedBox(
-                        height: getProportionateScreenWidth(25),
-                      ),
-                    if (_registerMode == RegisterMode.Name)
-                      buildLastNameFormField(),
-                    if (_registerMode == RegisterMode.Name)
-                      SizedBox(
-                        height: getProportionateScreenWidth(25),
+                      Column(
+                        children: [
+                          buildFirstNameFormField(),
+                          SizedBox(
+                            height: getProportionateScreenWidth(25),
+                          ),
+                          buildLastNameFormField(),
+                        ],
                       ),
                     if (_registerMode == RegisterMode.NICNo)
                       buildNICNoFormField(),
-                    if (_registerMode == RegisterMode.NICNo)
-                      SizedBox(
-                        height: getProportionateScreenWidth(25),
+                    if (_registerMode == RegisterMode.Password)
+                      Column(
+                        children: [
+                          buildPasswordFormField(),
+                          SizedBox(
+                            height: getProportionateScreenWidth(25),
+                          ),
+                          buildConfirmPasswordFormField(),
+                        ],
                       ),
-                    if (_registerMode == RegisterMode.Password)
-                      buildPasswordFormField(),
-                    if (_registerMode == RegisterMode.Password)
-                      SizedBox(
-                        height: getProportionateScreenWidth(25),
-                      ),
-                    if (_registerMode == RegisterMode.Password)
-                      buildConfirmPasswordFormField(),
-                    if (_registerMode == RegisterMode.Password)
-                      SizedBox(
-                        height: getProportionateScreenWidth(25),
-                      ),
+                    SizedBox(
+                      height: getProportionateScreenWidth(25),
+                    ),
                     if (_registerMode != RegisterMode.Final)
                       DefaultButton(
                         text: 'Next',

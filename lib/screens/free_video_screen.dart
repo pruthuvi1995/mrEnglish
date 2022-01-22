@@ -1,4 +1,4 @@
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+// import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:mr_english/providers/freeVideos.dart';
 import 'package:provider/provider.dart';
 
@@ -57,8 +57,8 @@ class _FreeVideoScreenState extends State<FreeVideoScreen> {
   @override
   Widget build(BuildContext context) {
     final playList = Provider.of<FreeVideos>(context, listen: false).playList;
-    FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-    print(videoId);
+    // FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+    // print(videoId);
 
     YoutubePlayerController _controller = YoutubePlayerController(
       initialVideoId: videoId,
